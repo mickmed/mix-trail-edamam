@@ -1,0 +1,15 @@
+body{
+  margin:0;
+  padding:0;
+}
+.App{
+  background:black;
+  height:200vh;
+  .layout{
+    .layout-children{
+      border:3vw solid green;
+    }
+  }
+}
+
+
