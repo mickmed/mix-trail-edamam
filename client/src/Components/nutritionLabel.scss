@@ -1,5 +1,11 @@
 .nutrition-label{
   background:lightyellow;
   min-height:60vh;
+  .nutrient-info{
+    display:flex;
+    div{
+      flex:1;
+    }
+  }
   
 }

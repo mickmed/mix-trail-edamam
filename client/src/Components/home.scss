@@ -3,21 +3,23 @@
 
   height:100%;
   box-sizing: border-box;
-  // width:50%;
   section{
     flex:1;
   }
   .item-info-wrapper{
     background:white;
-    display:flex;
-    flex-direction:column;
+   
     
     
     
     .item-info{
       display:flex;
       font-family:Arial;
-      flex:1;
+      div{
+        flex:1;
+      }
+
+      // flex:1;
     }
   }
   img{

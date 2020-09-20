@@ -43,7 +43,7 @@ function App() {
     //   configHeaders
     // )
 
-    console.log(itemResp.data)
+    // console.log(itemResp.data)
     setCurrentItem(itemResp.data)
     setItems((prevState) => [...prevState, itemResp.data])
     // setNutrients(nutsResp.data)
@@ -79,6 +79,7 @@ function App() {
             nutrients={nutrients}
             currentItem={currentItem}
             items={items}
+            setItems={setItems}
           ></Home>
         </Route>
       </Switch>
