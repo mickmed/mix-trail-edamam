@@ -1,7 +1,21 @@
-.layout{
-  height:100vh;
-  border:1vw yellow solid;
-  .layout-children{
-    // height:100%;
+.layout {
+  height: 100vh;
+  border: 1px yellow solid;
+  width: 90%;
+  margin: 2vh auto;
+
+  .layout-children {
+    display:flex;
+    // justify-content:space-around;
+    height:70%;
+    border: 1px solid green;
+    > div{
+      flex:1;
+      border:1px solid red;
+      padding:1vw;
+      > section{
+        padding:2vw;
+      }
+    }
   }
 }

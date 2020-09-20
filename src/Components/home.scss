@@ -1,9 +1,25 @@
 .home{
   display:flex;
-  flex-direction:column;
-  background:darkgray;
+
   height:100%;
-  width:50%;
+  box-sizing: border-box;
+  // width:50%;
+  section{
+    flex:1;
+  }
+  .item-info-wrapper{
+    background:white;
+    display:flex;
+    flex-direction:column;
+    
+    
+    
+    .item-info{
+      display:flex;
+      font-family:Arial;
+      flex:1;
+    }
+  }
   img{
     width:30%;
   }

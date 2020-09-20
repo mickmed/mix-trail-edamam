@@ -8,6 +8,7 @@ import Nav from "./Components/Nav"
 
 function App() {
   const [search, setSearch] = useState("4 eggs")
+  const [currentItem, setCurrentItem] = useState([])
   const [items, setItems] = useState([])
   const [nutrients, setNutrients] = useState()
   const [loaded, setLoaded] = useState(false)
@@ -25,32 +26,27 @@ function App() {
   }, [])
 
   const getQueryData = async () => {
-    // console.log(search)
+    const appId = process.env.REACT_APP_EDAMAM_NUTRITION_DATA_APP_ID
+    const appKey = process.env.REACT_APP_EDAMAM_NUTRITION_DATA_APP_KEY
+    const url = `https://api.edamam.com/api/nutrition-data?app_id=${appId}&app_key=${appKey}&ingr=${search} `
     // const url = `https://api.edamam.com/api/food-database/v2/parser?ingr=${search}&app_id=c61c44be&app_key=42a6edbcf5fc891ca1ba284f174c545c`
-    // encodeURI(url)
-    // console.log(url)
-    const itemResp = await axios(
-      `https://api.edamam.com/api/food-database/v2/parser?ingr=${search}&app_id=c61c44be&app_key=42a6edbcf5fc891ca1ba284f174c545c`
-    )
-
-    //api.edamam.com/api/food-database/v2/parser?ingr=apple&app_id=c61c44be&app_key=42a6edbcf5fc891ca1ba284f174c545c&health='vegan'
+   
+    const itemResp = await axios(url)
     // const itemResp = await axios(
     //   `https://trackapi.nutritionix.com/v2/search/instant?query=${search}`,
     //   configHeaders
     // )
-
     // const nutsResp = await axios.post(
     //   `https://trackapi.nutritionix.com/v2/natural/nutrients`,
     //   {
     //     query: `${search}`,
     //   },
-
     //   configHeaders
     // )
+
     console.log(itemResp.data)
-    setItems(prevState=>(
-     [...prevState, itemResp.data]
-    ))
+    setCurrentItem(itemResp.data)
+    setItems((prevState) => [...prevState, itemResp.data])
     // setNutrients(nutsResp.data)
     setLoaded(true)
   }
@@ -60,10 +56,8 @@ function App() {
   }
 
   const handleSubmit = (e) => {
-
     e.preventDefault()
     getQueryData()
-    
   }
 
   if (!loaded) {
@@ -72,16 +66,21 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">Mix Trail</header>
-
-      <Nav
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        search={search}
-      />
+      <header className="App-header">
+        <Nav
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          search={search}
+        />
+      </header>
       <Switch>
         <Route path="/">
-          <Home nutrients={nutrients} items={items}></Home>
+          <Home
+            search={search}
+            nutrients={nutrients}
+            currentItem={currentItem}
+            items={items}
+          ></Home>
         </Route>
       </Switch>
     </div>

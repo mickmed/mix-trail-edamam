@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import './footer.scss'
 
 const Footer = () => {
   return(
-    <div>Footer</div>
+    <footer>Footer</footer>
   )
 }
 
