@@ -14,9 +14,9 @@ function App() {
   const [loaded, setLoaded] = useState(false)
   const configHeaders = {
     headers: {
-      "x-app-id": "dac6d1da",
-      "x-app-key": "bbffc1b688370fdc5263dd8179e97016",
-      "x-remote-user-id": 0,
+      "x-app-id": process.env.REACT_APP_NUTRITIONIX_X_APP_ID,
+      "x-app-key": process.env.REACT_APP_NUTRITIONIX_X_APP_KEY,
+      "x-remote-user-id": process.env.REACT_APP_NUTRITIONIX_X_REMOTE_USER_ID,
     },
   }
 
@@ -29,7 +29,6 @@ function App() {
     const appId = process.env.REACT_APP_EDAMAM_NUTRITION_DATA_APP_ID
     const appKey = process.env.REACT_APP_EDAMAM_NUTRITION_DATA_APP_KEY
     const url = `https://api.edamam.com/api/nutrition-data?app_id=${appId}&app_key=${appKey}&ingr=${search} `
-    // const url = `https://api.edamam.com/api/food-database/v2/parser?ingr=${search}&app_id=c61c44be&app_key=42a6edbcf5fc891ca1ba284f174c545c`
    
     const itemResp = await axios(url)
     // const itemResp = await axios(
