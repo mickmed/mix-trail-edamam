@@ -1,67 +1,59 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import "./App.scss"
 import { Route, Switch } from "react-router-dom"
 import axios from "axios"
 import Home from "./Components/Home"
 import Layout from "./Components/Layout"
 import Nav from "./Components/Nav"
+import { getItem } from "./Components/ApiHelper"
 
 function App() {
-  const [search, setSearch] = useState("4 eggs")
+  const [suggestions, setSuggestions] = useState("")
+  const [search, setSearch] = useState("")
   const [currentItem, setCurrentItem] = useState([])
   const [items, setItems] = useState([])
   const [nutrients, setNutrients] = useState()
   const [loaded, setLoaded] = useState(false)
-  const configHeaders = {
-    headers: {
-      "x-app-id": process.env.REACT_APP_NUTRITIONIX_X_APP_ID,
-      "x-app-key": process.env.REACT_APP_NUTRITIONIX_X_APP_KEY,
-      "x-remote-user-id": process.env.REACT_APP_NUTRITIONIX_X_REMOTE_USER_ID,
-    },
-  }
 
   useEffect(() => {
     console.log("use")
-    getQueryData()
+    setSearch("")
   }, [])
 
   const getQueryData = async () => {
-    const appId = process.env.REACT_APP_EDAMAM_NUTRITION_DATA_APP_ID
-    const appKey = process.env.REACT_APP_EDAMAM_NUTRITION_DATA_APP_KEY
-    const url = `https://api.edamam.com/api/nutrition-data?app_id=${appId}&app_key=${appKey}&ingr=${search} `
-   
-    const itemResp = await axios(url)
-    // const itemResp = await axios(
-    //   `https://trackapi.nutritionix.com/v2/search/instant?query=${search}`,
-    //   configHeaders
-    // )
-    // const nutsResp = await axios.post(
-    //   `https://trackapi.nutritionix.com/v2/natural/nutrients`,
-    //   {
-    //     query: `${search}`,
-    //   },
-    //   configHeaders
-    // )
-
-    // console.log(itemResp.data)
-    setCurrentItem(itemResp.data)
-    setItems((prevState) => [...prevState, itemResp.data])
+    let itemResp = await getItem(search, 1)
+    setItems((prevState) => [...prevState, itemResp])
     // setNutrients(nutsResp.data)
-    setLoaded(true)
+    // setLoaded(true)
   }
-
+  const getSuggestions = () => {
+    const suggestions = getItem(search, 20)
+    setSuggestions(suggestions)
+  }
   const handleChange = (e) => {
     setSearch(e.target.value)
+    e.target.value.length > 3 && getSuggestions(e.target.value)
+  }
+
+  const handleUpdate = async (id, value) => {
+
+    let resp = await getItem(value, 1)
+    items.splice(id, 1, resp)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
     getQueryData()
   }
 
-  if (!loaded) {
-    return <h1>Loading...</h1>
+  const handleClick = (search) => {
+    getQueryData(search)
   }
+
+  // if (!loaded) {
+  //   return <h1>Loading...</h1>
+  // }
 
   return (
     <div className="App">
@@ -69,7 +61,9 @@ function App() {
         <Nav
           handleChange={handleChange}
           handleSubmit={handleSubmit}
+          handleClick={handleClick}
           search={search}
+          suggestions={suggestions}
         />
       </header>
       <Switch>
@@ -80,6 +74,10 @@ function App() {
             currentItem={currentItem}
             items={items}
             setItems={setItems}
+            suggestions={suggestions}
+            handleSubmit={handleSubmit}
+            handleChange={handleChange}
+            handleUpdate={handleUpdate}
           ></Home>
         </Route>
       </Switch>

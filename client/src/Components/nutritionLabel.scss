@@ -1,11 +1,24 @@
-.nutrition-label{
-  background:lightyellow;
-  min-height:60vh;
-  .nutrient-info{
-    display:flex;
-    div{
-      flex:1;
+.nutrition-label {
+  background: rgb(233, 233, 218);
+  overflow-y: scroll;
+  min-height: 60vh;
+  .nutrient-info {
+    display: flex;
+    font-size:2vw;
+    div {
+      flex: 1;
+    }
+    :nth-child(2) {
+      text-align: right;
     }
   }
-  
+}
+
+.nutrition-label::-webkit-scrollbar {
+  display: none;
+}
+
+.nutrition-label {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
