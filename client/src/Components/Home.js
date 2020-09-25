@@ -5,106 +5,120 @@ import NutritionLabel from "./NutritionLabel"
 import { getItem } from "./ApiHelper"
 
 const Home = (props) => {
-  const {
-    items,
-
-    setItems,
-
-    handleSubmit,
-    handleChange,
-    handleUpdate,
-  } = props
-  const [nutrientVals, setNutrientVals] = useState({})
+  const [currentItem, setCurrentItem] = useState()
+  const [nutrientVals, setNutrientVals] = useState([])
   const [input, setInput] = useState({})
   const [selectedId, setSelectedId] = useState(null)
+  const [addNutrients, setAddNutrients] = useState([])
+  const [removed, setRemoved] = useState({})
+  const [action, setAction] = useState("")
+  const [newFood, setNewFood] = useState("")
+  const [search, setSearch] = useState("")
+  const [items, setItems] = useState([])
+  const [suggestions, setSuggestions] = useState("")
+
   const inputElement = useRef(null)
 
   useEffect(() => {
-    inputElement.current.focus()
-    setSelectedId(items.length)
+    console.log("usef")
+    // items.length === 1 && setNutrientVals(currentItem)
 
-    console.log(items)
-    items.map((item, idx) => {
-      return (
-        <div>
-          {item.foods[0].description}
-          {item.foods.forEach((el) => (
-            <div>{el}</div>
-          ))}
-        </div>
-      )
+    const addItem = () => {
 
-      //   console.log(item)
-      //   calories += item.calories
-      //   for (let obj in item.totalNutrients) {
-      //     tots[obj] = {
-      //       ...item.totalNutrients[obj],
-      //       quantity:
-      //         tots[obj] !== undefined
-      //           ? tots[obj].quantity + item.totalNutrients[obj].quantity
-      //           : item.totalNutrients[obj].quantity,
-      //     }
-      //   }
-      //   setInput({
-      //     ...input,
-      //     [`ingr${idx}`]: item.ingredients[0].text,
-      //   })
-      //   setInput({ ingr0: currentItem.ingredients[0].text })
-      // })
+      // console.log(nutrientVals, currentItem)
 
-      // setNutrientVals((prevState) => {
-      //   console.log(Object.keys(prevState))
-      //   return {
-      //     ...prevState,
-      //     calories: calories,
-      //     totalNutrients: tots,
-      //   }
-      // })
+      nutrientVals.length === 0 && currentItem && setNutrientVals(currentItem)
+      nutrientVals.length !== 0 &&
+        setNutrientVals((prevState) => {
+          return [
+            ...prevState.map((item, index) => {
+              // console.log(item.value, currentItem[index].value)
+              return { ...item, value: item.value + currentItem[index].value }
+            }),
+          ]
+        })
+    }
+    addItem()
+  }, [currentItem])
 
-      //   let cur = currentItem.totalNutrients
-
-      //   setNutrientVals((prevState) => {
-      //     let totalNutrients = {}
-      //     for (let obj in prevState.totalNutrients) {
-      //       totalNutrients[obj] = {
-      //         ...prevState[obj],
-      //         quantity:
-      //           prevState.totalNutrients[obj].quantity + cur[obj].quantity,
-      //       }
-      //     }
-      //     return {
-      //       ...prevState,
-      //       calories: prevState.calories + currentItem.calories,
-      //       totalNutrients: totalNutrients,
-      //     }
+  useEffect(() => {
+    console.log('removed')
+    nutrientVals.length !== 0 &&
+    setNutrientVals((prevState) => {
+      return [
+        ...prevState.map((item, index) => {
+          // console.log(item.value, currentItem[index].value)
+          return { ...item, value: item.value - currentItem[index].value }
+        }),
+      ]
     })
-  }, [items])
+  },[removed])
 
+  const getQueryData = async () => {
+    return await getItem(search, 1)
+    // setItems((prevState) => [...prevState, itemResp])
+    // setNutrients(nutsResp.data)
+    // setLoaded(true)
+  }
+
+  const handleChange = (e) => {
+    setSearch(e.target.value)
+    e.target.value.length > 3 && getSuggestions(e.target.value)
+  }
+
+  const getSuggestions = () => {
+    const suggestions = getItem(search, 20)
+    setSuggestions(suggestions)
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const resp = await getQueryData(search, 1)
+    setCurrentItem(resp.foods[0].foodNutrients)
+
+    setItems((prevState) => [...prevState, resp])
+  }
+
+ 
   const removeItem = (index) => {
     console.log(index)
+    let removedItem = {}
     setItems((prevState) => {
-      let newState = [...prevState.splice(index, 1)]
-      console.log([...prevState])
+      removedItem = [...prevState.splice(index, 1)]
       return [...prevState]
     })
+    setRemoved(removedItem)
   }
 
-  const getNutrients = () => {
-    if (nutrientVals.totalNutrients !== undefined) {
-      return Object.keys(nutrientVals.totalNutrients).map((key, index) => (
-        <div className="nutrient-info" key={index}>
-          <div>{nutrientVals.totalNutrients[key].label}</div>
-          <div>{nutrientVals.totalNutrients[key].quantity.toFixed(2)}</div>
-        </div>
-      ))
-    }
-  }
   const handleUpdateIndex = async (e) => {
     e.preventDefault()
 
-    await handleUpdate(selectedId, input[selectedId])
+    // await handleUpdate(selectedId, input[selectedId])
+    // await setSelectedId(items.length)
+    let resp = await getItem(input[selectedId], 1)
+
+    await setItems((prevState) => {
+      setRemoved([...prevState.splice(selectedId, 1, resp)])
+      return [...prevState]
+    })
+    await setNutrientVals((prevState) => {
+      return prevState.length !== 0
+        ? prevState.map((item, id) => {
+            // action === "newFood"
+            console.log(removed.foods[0].foodNutrients[id].value, resp)
+
+            return {
+              ...item,
+              value: item.value - removed[0].foods[0].foodNutrients[id].value,
+            }
+          })
+        : currentItem
+    })
+
     await setSelectedId(items.length)
+
+    setNewFood(resp)
   }
+
   const handleUpdateChange = (e) => {
     const { name, value } = e.target
     setInput({
@@ -112,20 +126,6 @@ const Home = (props) => {
       [name]: value,
     })
   }
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault()
-
-  //   let resp = await getItem(input[`ingr${selectedId}`])
-  //   console.log(resp)
-  //   setItems((prevState) => {
-  //     console.log(selectedId)
-  //     let a = [...prevState]
-  //     let x = a.splice(selectedId, 1, resp)
-  //     console.log(a)
-
-  //     return a
-  //   })
-  // }
   return (
     <Layout>
       <div className="home">
@@ -149,8 +149,11 @@ const Home = (props) => {
                       <button type="submit">></button>
                     </div>
                   ) : (
-                    <div type="text" onClick={() => setSelectedId(idx)}>
-                      {item.foods[0].description}
+                    <div>
+                      {/* <div>value{item.foods[0].foodNutrients[0].value}</div> */}
+                      <div type="text" onClick={() => setSelectedId(idx)}>
+                        {item.foods[0].description}
+                      </div>
                     </div>
                   )}
                 </form>
@@ -186,7 +189,7 @@ const Home = (props) => {
         <p>Protein:{food.nutrients.PROCNT}</p> */}
         <NutritionLabel>
           <div>Cals:{nutrientVals.calories}</div>
-          {getNutrients()}
+          {/* {getNutrients()} */}
         </NutritionLabel>
       </div>
     </Layout>
