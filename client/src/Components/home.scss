@@ -8,21 +8,20 @@
   }
   .item-info-wrapper {
     background: white;
-    Maitre
-    .item-info {
-      display: flex;
-      font-family: Roboto;
-      
-      color:green;
-      font-size:3vw;
-      div {
-        flex: 1;
-      }
-      :nth-child(3){
-        flex:.25;
-      }
 
-      // flex:1;
+    .item-input {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding:1vw;
+      margin-bottom:1vh;
+      box-sizing: border-box;
+      // margin-top:2vh;
+      input{
+        padding:1vw;
+        width:80%;
+      }
+     
     }
   }
   img {

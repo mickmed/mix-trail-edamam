@@ -1,7 +1,7 @@
 .layout {
   height: 100vh;
   border: 1px yellow solid;
-  width: 90%;
+  width: 95%;
   margin: 2vh auto;
 
   .layout-children {
@@ -9,9 +9,9 @@
     height:70%;
     > div{
       flex:1;
-      padding:1vw;
+      // padding:1vw;
       > section{
-        padding:2vw;
+        padding:1vw;
       }
     }
   }

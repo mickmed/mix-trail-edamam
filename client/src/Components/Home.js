@@ -5,14 +5,9 @@ import NutritionLabel from "./NutritionLabel"
 import { getItem } from "./ApiHelper"
 
 const Home = (props) => {
-  const [currentItem, setCurrentItem] = useState()
   const [nutrientVals, setNutrientVals] = useState([])
   const [input, setInput] = useState({})
   const [selectedId, setSelectedId] = useState(null)
-  const [addNutrients, setAddNutrients] = useState([])
-  const [removed, setRemoved] = useState({})
-  const [action, setAction] = useState("")
-  const [newFood, setNewFood] = useState("")
   const [search, setSearch] = useState("")
   const [items, setItems] = useState([])
   const [suggestions, setSuggestions] = useState("")
@@ -20,45 +15,11 @@ const Home = (props) => {
   const inputElement = useRef(null)
 
   useEffect(() => {
-    console.log("usef")
-    // items.length === 1 && setNutrientVals(currentItem)
-
-    const addItem = () => {
-
-      // console.log(nutrientVals, currentItem)
-
-      nutrientVals.length === 0 && currentItem && setNutrientVals(currentItem)
-      nutrientVals.length !== 0 &&
-        setNutrientVals((prevState) => {
-          return [
-            ...prevState.map((item, index) => {
-              // console.log(item.value, currentItem[index].value)
-              return { ...item, value: item.value + currentItem[index].value }
-            }),
-          ]
-        })
-    }
-    addItem()
-  }, [currentItem])
-
-  useEffect(() => {
-    console.log('removed')
-    nutrientVals.length !== 0 &&
-    setNutrientVals((prevState) => {
-      return [
-        ...prevState.map((item, index) => {
-          // console.log(item.value, currentItem[index].value)
-          return { ...item, value: item.value - currentItem[index].value }
-        }),
-      ]
-    })
-  },[removed])
+    inputElement.current.focus()
+  }, [nutrientVals])
 
   const getQueryData = async () => {
     return await getItem(search, 1)
-    // setItems((prevState) => [...prevState, itemResp])
-    // setNutrients(nutsResp.data)
-    // setLoaded(true)
   }
 
   const handleChange = (e) => {
@@ -73,50 +34,65 @@ const Home = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const resp = await getQueryData(search, 1)
-    setCurrentItem(resp.foods[0].foodNutrients)
-
-    setItems((prevState) => [...prevState, resp])
+    console.log(resp)
+    if (resp.foods.length !== 0) {
+      let currentItem = resp.foods[0].foodNutrients
+      nutrientVals.length === 0 && setNutrientVals(currentItem)
+      nutrientVals.length !== 0 &&
+        setNutrientVals((prevState) => {
+          return [
+            ...prevState.map((item, index) => {
+              return { ...item, value: item.value + currentItem[index].value }
+            }),
+          ]
+        })
+      setItems((prevState) => [...prevState, resp])
+      setSelectedId(selectedId + 1)
+    }
   }
 
- 
-  const removeItem = (index) => {
-    console.log(index)
-    let removedItem = {}
-    setItems((prevState) => {
-      removedItem = [...prevState.splice(index, 1)]
-      return [...prevState]
-    })
-    setRemoved(removedItem)
+  const removeItem = async (index) => {
+    let newItems = [...items]
+    let removed = newItems.splice(index, 1)
+
+    nutrientVals.length !== 0 &&
+      setNutrientVals((prevState) => {
+        return [
+          ...prevState.map((item, index) => {
+            return {
+              ...item,
+              value:
+                item.value - removed[0].foods[0].foodNutrients[index].value,
+            }
+          }),
+        ]
+      })
+    setItems(newItems)
   }
 
   const handleUpdateIndex = async (e) => {
     e.preventDefault()
-
-    // await handleUpdate(selectedId, input[selectedId])
-    // await setSelectedId(items.length)
+    // console.log(e.target, selectedId)
     let resp = await getItem(input[selectedId], 1)
+    console.log(resp)
+    let newItems = [...items]
+    let removed = newItems.splice(selectedId, 1, resp)
 
-    await setItems((prevState) => {
-      setRemoved([...prevState.splice(selectedId, 1, resp)])
-      return [...prevState]
-    })
-    await setNutrientVals((prevState) => {
-      return prevState.length !== 0
-        ? prevState.map((item, id) => {
-            // action === "newFood"
-            console.log(removed.foods[0].foodNutrients[id].value, resp)
-
+    nutrientVals.length !== 0 &&
+      setNutrientVals((prevState) => {
+        return [
+          ...prevState.map((item, index) => {
             return {
               ...item,
-              value: item.value - removed[0].foods[0].foodNutrients[id].value,
+              value:
+                item.value -
+                removed[0].foods[0].foodNutrients[index].value +
+                resp.foods[0].foodNutrients[index].value,
             }
-          })
-        : currentItem
-    })
-
-    await setSelectedId(items.length)
-
-    setNewFood(resp)
+          }),
+        ]
+      })
+    setItems(newItems)
   }
 
   const handleUpdateChange = (e) => {
@@ -134,59 +110,49 @@ const Home = (props) => {
             // console.log(input && input[`input` + idx])
             // console.log(item.foods[0].description)
             return (
-              <section key={idx} className="item-info">
-                <form className="item-input" onSubmit={handleUpdateIndex}>
-                  {selectedId === idx ? (
-                    <div>
-                      <input
-                        type="text"
-                        value={input[idx] || item.foods[0].description}
-                        onChange={handleUpdateChange}
-                        onClick={() => setSelectedId(idx)}
-                        name={idx}
-                        id={idx}
-                      />
-                      <button type="submit">></button>
-                    </div>
-                  ) : (
-                    <div>
-                      {/* <div>value{item.foods[0].foodNutrients[0].value}</div> */}
-                      <div type="text" onClick={() => setSelectedId(idx)}>
-                        {item.foods[0].description}
-                      </div>
-                    </div>
-                  )}
-                </form>
-
-                <div>{item.calories}</div>
+              <form
+                key={idx}
+               
+                className="item-input"
+                onSubmit={handleUpdateIndex}
+              >
+                {selectedId === idx ? (
+                  <div>
+                    <input
+                      type="text"
+                      value={input[idx] || item.foods[0].description}
+                      onChange={handleUpdateChange}
+                      onClick={() => setSelectedId(idx)}
+                      name={idx}
+                      id={idx}
+                    />
+                    <button type="submit">></button>
+                  </div>
+                ) : (
+                  <div type="text" onClick={() => setSelectedId(idx)}>
+                    {item.foods[0].description}
+                  </div>
+                )}{" "}
                 <div onClick={() => removeItem(idx)}>X</div>
-                {/* <div>{item.food.label}</div>
-                <div>{item.food.nutrients.ENERC_KCAL}</div> */}
-              </section>
+              </form>
             )
           })}
 
           <form className="item-input" onSubmit={handleSubmit}>
-            <div>
-              <input
-                type="text"
-                value={input[items.length]}
-                onChange={handleChange}
-                onClick={() => setSelectedId(items.length)}
-                name={items.length}
-                id={`ingr${items.length}`}
-                ref={inputElement}
-              />
-              <button type="submit">></button>
-            </div>
-            )
+            <input
+              type="text"
+              value={input[items.length]}
+              onChange={handleChange}
+              onClick={() => setSelectedId(items.length)}
+              name={items.length}
+              id={`ingr${items.length}`}
+              placeholder='...food'
+              ref={inputElement}
+            />
+            <button type="submit">></button>
           </form>
         </section>
-        {/* <div className="title">{`${item.common[0].tag_name}`}</div>
-        <div>{food.label}</div>
-        <img src={food.image} />
-        <p>Calories:{food.nutrients.ENERC_KCAL}</p>
-        <p>Protein:{food.nutrients.PROCNT}</p> */}
+
         <NutritionLabel>
           <div>Cals:{nutrientVals.calories}</div>
           {/* {getNutrients()} */}
