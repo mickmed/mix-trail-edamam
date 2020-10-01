@@ -3,8 +3,8 @@ import "./home.scss"
 import Layout from "./Layout"
 import NutritionLabel from "./NutritionLabel"
 import { getItem } from "./ApiHelper"
-import SearchBar from "./SearchBar"
-import AsyncSelect from "react-select/async"
+// import SearchBar from "./SearchBar"
+// import AsyncSelect from "react-select/async"
 
 const Home = (props) => {
   const [nutrientVals, setNutrientVals] = useState([])
@@ -203,17 +203,17 @@ const Home = (props) => {
             </div>
           </div>
           {
-            <AsyncSelect
-              isMulti
-              value={input[items.length]}
-              onChange={onChange}
-              placeholder={"kate"}
-              loadOptions={loadOptions}
-              name={items.length}
-              id={`ingr${items.length}`}
-              placeholder="...food"
-              ref={inputElement}
-            />
+            // <AsyncSelect
+            //   isMulti
+            //   value={input[items.length]}
+            //   onChange={onChange}
+            //   placeholder={"kate"}
+            //   loadOptions={loadOptions}
+            //   name={items.length}
+            //   id={`ingr${items.length}`}
+            //   placeholder="...food"
+            //   ref={inputElement}
+            // />
           }
         </section>
 

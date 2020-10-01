@@ -3,7 +3,7 @@ import AsyncSelect from 'react-select/async'
 import { getItem } from './ApiHelper'
 // import Search from "./Search"
 
-class SearchBar extends React.Component {
+class SearchBar extends Component {
   state = { selectedFoods: [] }
 
   onChange = (selectedFoods) => {

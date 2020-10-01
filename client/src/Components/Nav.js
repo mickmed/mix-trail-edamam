@@ -1,12 +1,12 @@
 import React from "react"
-import { Link } from "react-router-dom"
+// import { Link } from "react-router-dom"
 import "./nav.scss"
 import Search from "./Search.js"
-import SearchBar from "./SearchBar.js"
+// import SearchBar from "./SearchBar.js"
 
 
 const Nav = (props) => {
-  const { handleChange, handleSubmit, handleClick, search, selections } = props
+  const { handleChange, handleSubmit, search } = props
   // console.log(suggestions.foods)
   return (
     <div className="nav">

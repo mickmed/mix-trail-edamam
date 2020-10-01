@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react"
+import React from "react"
 import "./App.scss"
 import { Route, Switch } from "react-router-dom"
-import axios from "axios"
+// import axios from "axios"
 import Home from "./Components/Home"
-import Layout from "./Components/Layout"
+// import Layout from "./Components/Layout"
 import Nav from "./Components/Nav"
 
 function App() {
