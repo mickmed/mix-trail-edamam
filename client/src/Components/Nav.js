@@ -2,6 +2,8 @@ import React from "react"
 import { Link } from "react-router-dom"
 import "./nav.scss"
 import Search from "./Search.js"
+import SearchBar from "./SearchBar.js"
+
 
 const Nav = (props) => {
   const { handleChange, handleSubmit, handleClick, search, selections } = props
@@ -19,6 +21,7 @@ const Nav = (props) => {
          
         ))}
       </div> */}
+      {/* <SearchBar/> */}
     </div>
   )
 }

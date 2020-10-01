@@ -26,7 +26,13 @@ export const getItem = async (search, pageSize) => {
 // console.log(pageSize)
   /**USDA KEY */
   const api_key = process.env.REACT_APP_USDA_API_KEY
-  const baseUrl = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${api_key}&dataType=Foundation, SR Legacy, Survey (FNDDS)`
+  const baseUrl = 
+  `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${api_key}&dataType= 
+  
+  Survey (FNDDS),
+
+  `
+
   const params = `&query=${search}&pageSize=${pageSize}`
   const url = baseUrl + params
 

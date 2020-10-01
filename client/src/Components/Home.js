@@ -3,6 +3,8 @@ import "./home.scss"
 import Layout from "./Layout"
 import NutritionLabel from "./NutritionLabel"
 import { getItem } from "./ApiHelper"
+import SearchBar from "./SearchBar"
+import AsyncSelect from "react-select/async"
 
 const Home = (props) => {
   const [nutrientVals, setNutrientVals] = useState([])
@@ -10,7 +12,8 @@ const Home = (props) => {
   const [selectedId, setSelectedId] = useState(null)
   const [search, setSearch] = useState("")
   const [items, setItems] = useState([])
-  const [suggestions, setSuggestions] = useState("")
+  const [suggestions, setSuggestions] = useState(null)
+  const [cursor, setCursor] = useState()
 
   const inputElement = useRef(null)
 
@@ -27,10 +30,13 @@ const Home = (props) => {
     e.target.value.length > 3 && getSuggestions(e.target.value)
   }
 
-  const getSuggestions = () => {
-    const suggestions = getItem(search, 20)
-    setSuggestions(suggestions)
+  const getSuggestions = async (str) => {
+    console.log(str)
+    const suggestions = await getItem(str, 50)
+    console.log(suggestions)
+    setSuggestions(suggestions.foods)
   }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     const resp = await getQueryData(search, 1)
@@ -102,6 +108,33 @@ const Home = (props) => {
       [name]: value,
     })
   }
+
+  const loadOptions = async (inputText, callback) => {
+    const response = await getItem(inputText, 20)
+
+    return callback(
+      response.foods.map((el) => ({ label: el.description, value: el.fdcId }))
+    )
+  }
+  const onChange = () => {}
+
+  
+
+  const handleKeyDown = (e) => {
+    
+    // arrow up/down button should select next/previous list element
+    if (e.keyCode === 38 && cursor > 0) {
+      this.setState( prevState => ({
+        cursor: prevState.cursor - 1
+      }))
+    } else if (e.keyCode === 40 && cursor < suggestions.length - 1) {
+      this.setState( prevState => ({
+        cursor: prevState.cursor + 1
+      }))
+    }
+  }
+
+
   return (
     <Layout>
       <div className="home">
@@ -112,7 +145,6 @@ const Home = (props) => {
             return (
               <form
                 key={idx}
-               
                 className="item-input"
                 onSubmit={handleUpdateIndex}
               >
@@ -146,11 +178,43 @@ const Home = (props) => {
               onClick={() => setSelectedId(items.length)}
               name={items.length}
               id={`ingr${items.length}`}
-              placeholder='...food'
+              placeholder="...food"
               ref={inputElement}
             />
             <button type="submit">></button>
           </form>
+          <div>
+            {suggestions &&
+              suggestions.map((suggestion) => (
+                <div>{suggestion.description}</div>
+              ))}
+            <div>
+              <input onKeyDown={handleKeyDown} />
+              {/* <div>
+                {suggestions && suggestions.map((item, i) => (
+                  <div
+                    key={item._id}
+                    className={cursor === i ? "active" : null}
+                  >
+                    <span>{item.title}</span>
+                  </div>
+                ))}
+              </div> */}
+            </div>
+          </div>
+          {
+            <AsyncSelect
+              isMulti
+              value={input[items.length]}
+              onChange={onChange}
+              placeholder={"kate"}
+              loadOptions={loadOptions}
+              name={items.length}
+              id={`ingr${items.length}`}
+              placeholder="...food"
+              ref={inputElement}
+            />
+          }
         </section>
 
         <NutritionLabel>
