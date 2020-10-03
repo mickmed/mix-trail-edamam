@@ -13,13 +13,20 @@ const Home = (props) => {
   const [search, setSearch] = useState("")
   const [items, setItems] = useState([])
   const [suggestions, setSuggestions] = useState(null)
-  const [cursor, setCursor] = useState()
+  const [rerender, setRerender] = useState(false)
 
-  const inputElement = useRef(null)
+  const inputElemen = useRef(null)
 
   useEffect(() => {
-    inputElement.current.focus()
-  }, [nutrientVals])
+    console.log(inputElemen.current)
+   inputElemen.current !== null ? inputElemen.current.focus() : setRerender(!rerender)
+  }, [selectedId])
+
+  useEffect(() => {
+    console.log(inputElemen.current)
+   inputElemen.current !== null && inputElemen.current.focus()
+  }, [rerender])
+
 
   const getQueryData = async () => {
     return await getItem(search, 1)
@@ -48,7 +55,7 @@ const Home = (props) => {
         setNutrientVals((prevState) => {
           return [
             ...prevState.map((item, index) => {
-              return { ...item, value: item.value + currentItem[index].value }
+              return { ...item, value: item.value.toFixed(2) + currentItem[index].value.toFixed(2) }
             }),
           ]
         })
@@ -65,10 +72,11 @@ const Home = (props) => {
       setNutrientVals((prevState) => {
         return [
           ...prevState.map((item, index) => {
+          console.log(item.value.toFixed(2), removed[0].foods[0].foodNutrients[index].value.toFixed(2))
             return {
               ...item,
               value:
-                item.value - removed[0].foods[0].foodNutrients[index].value,
+                item.value.toFixed(2) - removed[0].foods[0].foodNutrients[index].value.toFixed(2),
             }
           }),
         ]
@@ -76,12 +84,16 @@ const Home = (props) => {
     setItems(newItems)
   }
 
-  const handleUpdateIndex = async (e) => {
-    e.preventDefault()
-    // console.log(e.target, selectedId)
-    let resp = await getItem(input[selectedId], 1)
+  const handleUpdateIndex = async (option) => {
+
+
+    console.log(option)
+    // e.preventDefault()
+    console.log(input[selectedId])
+    let resp = await getItem(option.label, 1)
     console.log(resp)
     let newItems = [...items]
+    console.log(newItems)
     let removed = newItems.splice(selectedId, 1, resp)
 
     nutrientVals.length !== 0 &&
@@ -99,9 +111,12 @@ const Home = (props) => {
         ]
       })
     setItems(newItems)
+    setSelectedId(items.length)
+    
   }
 
   const handleUpdateChange = (e) => {
+    
     const { name, value } = e.target
     setInput({
       ...input,
@@ -111,66 +126,91 @@ const Home = (props) => {
 
   const loadOptions = async (inputText, callback) => {
     const response = await getItem(inputText, 20)
-
+    setSuggestions(response)
     return callback(
       response.foods.map((el) => ({ label: el.description, value: el.fdcId }))
     )
   }
-  const onChange = () => {}
+  const onChange = async (option, name) => {
+    // console.log(option.label, name, suggestions)
 
-  
+    // let resp = suggestions.foods.find(suggestion=>{
+    //   return suggestion.description === option[0].label
+    console.log(null? 1: selectedId + 1)
+      setSelectedId(items.length+1)
+      console.log(items.length)
+      // })
 
-  const handleKeyDown = (e) => {
-    
-    // arrow up/down button should select next/previous list element
-    if (e.keyCode === 38 && cursor > 0) {
-      this.setState( prevState => ({
-        cursor: prevState.cursor - 1
-      }))
-    } else if (e.keyCode === 40 && cursor < suggestions.length - 1) {
-      this.setState( prevState => ({
-        cursor: prevState.cursor + 1
-      }))
+    const resp = await getItem(option.label, 1)
+    // console.log(resp)
+    if (resp.foods.length !== 0) {
+      let currentItem = resp.foods[0].foodNutrients
+      nutrientVals.length === 0 && setNutrientVals(currentItem)
+      nutrientVals.length !== 0 &&
+        setNutrientVals((prevState) => {
+          return [
+            ...prevState.map((item, index) => {
+              return { ...item, value: item.value + currentItem[index].value }
+            }),
+          ]
+        })
+      setItems((prevState) => [...prevState, resp])
+      setInput({
+        ...input,
+        [name]: option.label,
+      })
     }
   }
 
+  const goHere = () => {
+    console.log('here')
+  }
 
   return (
     <Layout>
       <div className="home">
         <section className="item-info-wrapper">
           {items.map((item, idx) => {
+            // console.log("l")
             // console.log(input && input[`input` + idx])
             // console.log(item.foods[0].description)
+            // console.log(selectedId)
             return (
-              <form
-                key={idx}
-                className="item-input"
-                onSubmit={handleUpdateIndex}
-              >
-                {selectedId === idx ? (
-                  <div>
-                    <input
-                      type="text"
-                      value={input[idx] || item.foods[0].description}
-                      onChange={handleUpdateChange}
-                      onClick={() => setSelectedId(idx)}
-                      name={idx}
-                      id={idx}
+              // <div
+              //   key={idx}
+              //   className="item-input"
+              //   onSubmit={handleUpdateIndex}
+              // >
+                selectedId === idx ? (
+                    
+                    <AsyncSelect
+                      value={{ value: "oragne pasoof", label: item.foods[0].description}}
+                      onChange={(option, name) =>
+                        handleUpdateIndex(option, items.length)
+                      }
+                      // onClick={() => setSelectedId(idx)}
+                      loadOptions={loadOptions}
+                      name={items.length}
+                      id={`ingr${items.length}`}
+                      placeholder="...food"
+                      ref={inputElemen}
                     />
-                    <button type="submit">></button>
-                  </div>
+                   
                 ) : (
+                 
                   <div type="text" onClick={() => setSelectedId(idx)}>
                     {item.foods[0].description}
+                    {item.foods[0].foodNutrients[0].value}
+
                   </div>
-                )}{" "}
-                <div onClick={() => removeItem(idx)}>X</div>
-              </form>
+                
+                )
+              //   <div onClick={() => removeItem(idx)}>X</div>
+              // </div>
             )
           })}
 
-          <form className="item-input" onSubmit={handleSubmit}>
+          {/* <form className="item-input" onSubmit={handleSubmit}>
             <input
               type="text"
               value={input[items.length]}
@@ -182,37 +222,20 @@ const Home = (props) => {
               ref={inputElement}
             />
             <button type="submit">></button>
-          </form>
-          <div>
-            {suggestions &&
-              suggestions.map((suggestion) => (
-                <div>{suggestion.description}</div>
-              ))}
-            <div>
-              <input onKeyDown={handleKeyDown} />
-              {/* <div>
-                {suggestions && suggestions.map((item, i) => (
-                  <div
-                    key={item._id}
-                    className={cursor === i ? "active" : null}
-                  >
-                    <span>{item.title}</span>
-                  </div>
-                ))}
-              </div> */}
-            </div>
-          </div>
+          </form> */}
+
           {
             <AsyncSelect
-              isMulti
-              value={input[items.length]}
-              onChange={onChange}
-              
+              value={{ value: "oragne pasoof", label: input[items.length] }}
+              onChange={(option, name) => onChange(option, items.length)}
+              // onClick={() => console.log('hi') && setSelectedId(items.length)}
+              // onClick={()=> goHere}
               loadOptions={loadOptions}
               name={items.length}
               id={`ingr${items.length}`}
               placeholder="...food"
-              ref={inputElement}
+              ref={inputElemen}
+              
             />
           }
         </section>
@@ -227,80 +250,3 @@ const Home = (props) => {
 }
 
 export default Home
-
-/*CODE FOR EDAMAME TO SET THE STATE OF ITEMS */
-// items.map((item, idx) => {
-
-//   console.log(item)
-//   calories += item.calories
-//   for (let obj in item.totalNutrients) {
-//     tots[obj] = {
-//       ...item.totalNutrients[obj],
-//       quantity:
-//         tots[obj] !== undefined
-//           ? tots[obj].quantity + item.totalNutrients[obj].quantity
-//           : item.totalNutrients[obj].quantity,
-//     }
-//   }
-//   setInput({
-//     ...input,
-//     [`ingr${idx}`]: item.ingredients[0].text,
-//   })
-//   setInput({ ingr0: currentItem.ingredients[0].text })
-// })
-
-// setNutrientVals((prevState) => {
-//   console.log(Object.keys(prevState))
-//   return {
-//     ...prevState,
-//     calories: calories,
-//     totalNutrients: tots,
-//   }
-// })
-
-// items.map((item, idx) => {
-
-//   console.log(item)
-//   calories += item.calories
-//   for (let obj in item.totalNutrients) {
-//     tots[obj] = {
-//       ...item.totalNutrients[obj],
-//       quantity:
-//         tots[obj] !== undefined
-//           ? tots[obj].quantity + item.totalNutrients[obj].quantity
-//           : item.totalNutrients[obj].quantity,
-//     }
-//   }
-//   setInput({
-//     ...input,
-//     [`ingr${idx}`]: item.ingredients[0].text,
-//   })
-//   setInput({ ingr0: currentItem.ingredients[0].text })
-// })
-
-// setNutrientVals((prevState) => {
-//   console.log(Object.keys(prevState))
-//   return {
-//     ...prevState,
-//     calories: calories,
-//     totalNutrients: tots,
-//   }
-// })
-
-//   let cur = currentItem.totalNutrients
-
-//   setNutrientVals((prevState) => {
-//     let totalNutrients = {}
-//     for (let obj in prevState.totalNutrients) {
-//       totalNutrients[obj] = {
-//         ...prevState[obj],
-//         quantity:
-//           prevState.totalNutrients[obj].quantity + cur[obj].quantity,
-//       }
-//     }
-//     return {
-//       ...prevState,
-//       calories: prevState.calories + currentItem.calories,
-//       totalNutrients: totalNutrients,
-//     }
-//   })
