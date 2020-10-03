@@ -9,32 +9,15 @@
   .item-info-wrapper {
     background: white;
 
-    .item-input {
-      width: 100%;
-      display: flex;
+    .menu-item{
+      display:flex;
+      margin:1vh 1vw;
+      width:100%;
       justify-content: space-between;
-      padding:1vw;
-      margin-bottom:1vh;
-      box-sizing: border-box;
-      // margin-top:2vh;
-      // div{
-      //   width:90%;
-      //   div{
-      //     width:90%;
-      //   }
-      // }
-
-      div{
-        div{
-          width:500px;
-        }
+      .css-2b097c-container{
+       width:90%;
       }
-
-      input{
-        padding:1vw;
-        width:80%;
-      }
-     
+      
     }
   }
   img {

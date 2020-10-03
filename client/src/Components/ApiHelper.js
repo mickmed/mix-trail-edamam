@@ -29,7 +29,10 @@ export const getItem = async (search, pageSize) => {
   const baseUrl = 
   `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${api_key}&dataType= 
   
-  Survey (FNDDS),
+  // Survey (FNDDS),
+  // Foundation,
+  // Branded,
+  SR Legacy
 
   `
 

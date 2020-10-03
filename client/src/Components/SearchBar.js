@@ -21,7 +21,7 @@ class SearchBar extends Component {
   render() {
     return (
       <div>
-      
+       
         {<AsyncSelect
           isMulti
           value={this.state.selectedUsers}

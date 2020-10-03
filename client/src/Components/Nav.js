@@ -10,18 +10,13 @@ const Nav = (props) => {
   // console.log(suggestions.foods)
   return (
     <div className="nav">
+       <h4>Mix Trail</h4>
       <Search
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         search={search}
       />
-      {/* <div className="selections">
-        {selections.foods.map((select) => (
-          <div onClick={()=>handleClick(select.description)} className="selection">{select.description}</div>
-         
-        ))}
-      </div> */}
-      {/* <SearchBar/> */}
+   
     </div>
   )
 }
