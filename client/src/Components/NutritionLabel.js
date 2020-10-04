@@ -5,13 +5,12 @@ const NutritionalLabel = ({ nutrientVals }) => {
   return (
     <section className="nutrition-label">
       <div>
-        {nutrientVals.map((nutrient) => (
-          <div>
-            {nutrient.nutrientName}
-            {nutrient.value}
-          </div>
-        ))}
-      </div>
+         
+        hi  
+{nutrientVals.nf_calories}
+
+
+
 
       <div id="nut-facts-wrapper">
                 <p id="ingID"></p>
@@ -30,7 +29,7 @@ const NutritionalLabel = ({ nutrientVals }) => {
                     <div>
                         <p class="amt-per-serv">Amount Per Serving</p>
                         <div class="calories-line">
-                            <h3>Calories</h3><h3 id="calories"></h3>
+        <h3>Calories</h3><h3 id="calories">{nutrientVals.nf_calories}</h3>
                             <h3>Calories from Fat</h3>
                         </div>
                         {/* <!-- MAIN SECTION --> */}
@@ -99,6 +98,7 @@ const NutritionalLabel = ({ nutrientVals }) => {
                     </div>
                 </div>
             </div>
+    </div>
     </section>
   )
 }
