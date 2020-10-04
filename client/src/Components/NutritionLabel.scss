@@ -6,18 +6,29 @@
 }
 
 #nut-facts-wrapper {
-    flex: 2;
     min-height: 550px;
 }
 
 .nutrition-facts {
     background: rgba(255, 255, 255, 1);
-    width: 300px;
+    width: 85%;
+    margin: 0 auto;
     border: solid;
-    padding: 0px 5px;
+    box-sizing: border-box;
+    padding: 0 1vw;
+    span {
+        font-size: 2vw;
+        color: blue;
+    }
+    .calories {
+        .calories-line {
+            span {
+                font-size: 2vw;
+                color: blue;
+            }
+        }
+    }
 }
-
-
 
 #serv-size-row,
 #serv-cont-row,
@@ -25,7 +36,11 @@
 #tot-carb-inner-row,
 .protein {
     display: flex;
-    padding: 3px;
+    // padding: .5vh;
+}
+#tot-fat-inner-row {
+    display: flex;
+    justify-content: space-between;
 }
 
 #servAmnt,
@@ -36,42 +51,48 @@
 #totalCarb,
 #protein {
     color: blue;
-
 }
-
 
 .nutrition-facts div {
-    padding-top: 5px;
+}
+.nutrition-facts h1 {
+    padding: 0;
+    margin: 1vh 0 0.5vh;
 }
 
-.nutrition-facts .top {
+.nutrition-facts .serving {
     border-bottom: 8px solid black;
+    display: flex;
+    justify-content: space-between;
+    span {
+        h3 {
+            padding: 0 0.3vw;
+        }
+    }
 }
 
 .nutrition-facts h1 {
-    font-family: 'Helvetica_Black', arial;
+    font-family: "Helvetica_Black", arial;
     font-size: 36px;
     /*text-align: center;*/
     font-weight: bold;
-    ;
 }
 
-.nutrition-facts h3,
-    {
-    font-size: 16px;
+.nutrition-facts h3 {
+    font-size: 18px;
 }
-
 
 .amt-per-serv,
 .perc-daily-val {
-    font-family: 'Helvetica_Black', arial;
+    font-family: "Helvetica_Black", arial;
     border-bottom: 1px solid black;
     font-size: 12px;
     font-weight: bold;
+    margin: 0.5vh 0 0;
 }
 
 .nutrition-facts h4 {
-    font-family: 'Helvetica_Black', arial;
+    font-family: "Helvetica_Black", arial;
 }
 
 .calories-line {
@@ -87,17 +108,15 @@
 }
 
 .sub-heading {
-
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     padding-top: 5px;
 }
 
 .fat-sub-heading,
 .carb-sub-heading {
-
     padding-left: 20px;
-
 }
 
 .fat-sub-heading h3,
@@ -118,19 +137,18 @@
 .vitA,
 .vitC,
 .calcium,
-.iron {
+.iron,
+.potassium{
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid black;
 }
-
 
 .chol,
 .sodium,
 .total-carb {
     display: flex;
     justify-content: space-between;
-
 }
 
 .chol,

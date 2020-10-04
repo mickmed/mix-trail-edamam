@@ -11,17 +11,29 @@
 
     .menu-item {
       display: flex;
-      margin: 1vh 1vw;
-      width: 100%;
+      margin-bottom:2vh;
+      
+      width: 90%;
       justify-content: space-between;
       color: green;
       font-size: 3vw;
-      div {
+
+      &:hover{
+        background:lightgrey;
       }
+      div{
+        span{
+          padding:.25vw;
+        }
+      }
+    .remove-X{
+      font-size:3vw;
+    }
     }
     form.item-input {
       width: 90%;
       display:flex;
+      margin-top:5vh;
       input {
         width: 100%;
         padding:1vw;

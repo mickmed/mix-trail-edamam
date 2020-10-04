@@ -28,7 +28,6 @@ const Home = (props) => {
   //   console.log(inputElement.current)
   //   inputElement.current !== null && inputElement.current.focus()
   // }, [rerender])
- 
 
   const getQueryData = async () => {
     return await getItem(search, 1)
@@ -43,11 +42,11 @@ const Home = (props) => {
       console.log(search)
       return food.foods[0].food_name === search
     })
-
-    // const resp = await getQueryData(search, 1)
-
     let resp = res.foods[0]
-    console.log(resp)
+    // const rest = await getQueryData(search, 1)
+
+    // console.log(rest.foods[0])
+    // let resp= rest.foods[0]
 
     if (resp.length !== 0) {
       let foodKeys = Object.keys(resp)
@@ -106,9 +105,8 @@ const Home = (props) => {
         }
         return newState
       })
-    await setSelectedId(items.length)  
+    await setSelectedId(items.length)
     await setItems(newItems)
-    
   }
   const onChange = (e) => {
     const { name, value } = e.target
@@ -133,11 +131,13 @@ const Home = (props) => {
                     onChange={onChange}
                     onSubmit={handleUpdateIndex}
                     refo={inputElement}
-                   
                   />
                 ) : (
                   <div type="text" onClick={() => setSelectedId(idx)}>
-                    {item.food_name}
+                    <span>{item.serving_qty}</span>
+                    <span>{item.serving_unit}</span>
+
+                    <span>{item.food_name}</span>
                     {/* {item.nf_calories} */}
                   </div>
                 )}
@@ -156,7 +156,6 @@ const Home = (props) => {
               onChange={handleChange}
               onSubmit={handleSubmit}
               refo={inputElement}
-
             />
           }
         </section>
