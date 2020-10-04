@@ -11,11 +11,7 @@ const Nav = (props) => {
   return (
     <div className="nav">
        <h4>Mix Trail</h4>
-      <Search
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        search={search}
-      />
+     
    
     </div>
   )

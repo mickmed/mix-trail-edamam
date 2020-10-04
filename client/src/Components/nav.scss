@@ -2,9 +2,19 @@
   background-image:linear-gradient(to right, rgb(194, 235, 171), rgb(91, 91, 230));
   height:8vh;
   display:flex;
-  justify-content:space-around;
+  justify-content:space-between;
   padding:0 5vw;
   align-items:center;
+
+  font-family:'Calligraffitti';
+  h4{
+    transform:translateY(30%) rotate(-3deg);
+      color:yellow;
+  text-shadow:2px 2px brown;
+  font-size:3vw;
+  letter-spacing: .5vw;
+
+  }
 }
 
 .selections{

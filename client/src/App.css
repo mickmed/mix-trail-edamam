@@ -1,0 +1,21 @@
+/* @font-face{
+  src: local('Vegan'), url(./fonts/vegan.ttf);
+  font-family:'Vegan';
+  src: local('Counrty Side'), url(./fonts/country-side.ttf);
+  font-family:'Country Side';
+} */
+
+body{
+  margin:0;
+  padding:0;
+}
+.App{
+  
+  height:200vh;
+ 
+  max-width:1400px;
+  margin:0 auto;
+ 
+}
+
+

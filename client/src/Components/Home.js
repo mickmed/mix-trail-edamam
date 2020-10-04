@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react"
 import "./home.scss"
 import Layout from "./Layout"
 import NutritionLabel from "./NutritionLabel"
+import Form from "./Form.js"
 import { getItem } from "./ApiHelper"
 
 import { foods } from "./data.js"
@@ -14,19 +15,20 @@ const Home = (props) => {
   const [items, setItems] = useState([])
   const [suggestions, setSuggestions] = useState(null)
   const [rerender, setRerender] = useState(false)
-  const inputElemen = useRef(null)
+  const inputElement = useRef(null)
 
   useEffect(() => {
-    console.log(inputElemen.current)
-    inputElemen.current !== null
-      ? inputElemen.current.focus()
+    console.log(inputElement.current)
+    inputElement.current !== null
+      ? inputElement.current.focus()
       : setRerender(!rerender)
   }, [selectedId])
 
-  // useEffect(() => {
-  //   console.log(inputElemen.current)
-  //   inputElemen.current !== null && inputElemen.current.focus()
+  //   useEffect(() => {
+  //   console.log(inputElement.current)
+  //   inputElement.current !== null && inputElement.current.focus()
   // }, [rerender])
+ 
 
   const getQueryData = async () => {
     return await getItem(search, 1)
@@ -59,13 +61,12 @@ const Home = (props) => {
       nutrientVals.length === 0 && setNutrientVals(nutVals)
       nutrientVals.length !== 0 &&
         setNutrientVals((prevState) => {
-          let prev = {...prevState}
+          let prev = { ...prevState }
           let newState = {}
-          for(let key in prev){
+          for (let key in prev) {
             newState[key] = prev[key] + nutVals[key]
           }
           return newState
-         
         })
       setItems((prevState) => [...prevState, resp])
       setSelectedId(selectedId + 1)
@@ -76,15 +77,14 @@ const Home = (props) => {
     let removed = newItems.splice(index, 1)
 
     nutrientVals.length !== 0 &&
-    setNutrientVals((prevState) => {
-      let prev = {...prevState}
-      let newState = {}
-      for(let key in prev){
-        newState[key] = prev[key] - removed[0][key]
-      }
-      return newState
-     
-    })
+      setNutrientVals((prevState) => {
+        let prev = { ...prevState }
+        let newState = {}
+        for (let key in prev) {
+          newState[key] = prev[key] - removed[0][key]
+        }
+        return newState
+      })
     setItems(newItems)
   }
 
@@ -96,19 +96,19 @@ const Home = (props) => {
     })
     let newItems = [...items]
     let removed = newItems.splice(selectedId, 1, resp.foods[0])
-   
+
     nutrientVals.length !== 0 &&
-    setNutrientVals((prevState) => {
-      let prev = {...prevState}
-      let newState = {}
-      for(let key in prev){
-        newState[key] = prev[key] - removed[0][key] + resp.foods[0][key]
-      }
-      return newState
-     
-    })
+      setNutrientVals((prevState) => {
+        let prev = { ...prevState }
+        let newState = {}
+        for (let key in prev) {
+          newState[key] = prev[key] - removed[0][key] + resp.foods[0][key]
+        }
+        return newState
+      })
+    await setSelectedId(items.length)  
     await setItems(newItems)
-    await setSelectedId(items.length)
+    
   }
   const onChange = (e) => {
     const { name, value } = e.target
@@ -126,23 +126,19 @@ const Home = (props) => {
             return (
               <div key={idx} className="menu-item">
                 {selectedId === idx ? (
-                  <form className="item-input" onSubmit={handleUpdateIndex}>
-                    <input
-                      type="text"
-                      value={input[idx]}
-                      onChange={onChange}
-                      onClick={() => setSelectedId(idx)}
-                      name={idx}
-                      id={`ingr${idx}`}
-                      placeholder="...food"
-                      // ref={inputElement}
-                    />
-                    <button type="submit">></button>
-                  </form>
+                  <Form
+                    idx={idx}
+                    value={input[idx]}
+                    onClick={setSelectedId}
+                    onChange={onChange}
+                    onSubmit={handleUpdateIndex}
+                    refo={inputElement}
+                   
+                  />
                 ) : (
                   <div type="text" onClick={() => setSelectedId(idx)}>
                     {item.food_name}
-                    {item.nf_calories}
+                    {/* {item.nf_calories} */}
                   </div>
                 )}
                 <div className="remove-X" onClick={() => removeItem(idx)}>
@@ -153,23 +149,18 @@ const Home = (props) => {
           })}
 
           {
-            <form className="item-input" onSubmit={handleSubmit}>
-              <input
-                type="text"
-                value={input[items.length]}
-                onChange={handleChange}
-                onClick={() => setSelectedId(items.length)}
-                name={items.length}
-                id={`ingr${items.length}`}
-                removeItem
-                placeholder="...food"
-                ref={inputElemen}
-              />
-              <button type="submit">></button>
-            </form>
+            <Form
+              idx={items.length}
+              value={input[items.length]}
+              onClick={setSelectedId}
+              onChange={handleChange}
+              onSubmit={handleSubmit}
+              refo={inputElement}
+
+            />
           }
         </section>
-        // <NutritionLabel nutrientVals={nutrientVals} />
+        <NutritionLabel nutrientVals={nutrientVals} />
       </div>
     </Layout>
   )

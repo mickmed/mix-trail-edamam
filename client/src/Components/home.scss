@@ -9,15 +9,24 @@
   .item-info-wrapper {
     background: white;
 
-    .menu-item{
-      display:flex;
-      margin:1vh 1vw;
-      width:100%;
+    .menu-item {
+      display: flex;
+      margin: 1vh 1vw;
+      width: 100%;
       justify-content: space-between;
-      .css-2b097c-container{
-       width:90%;
+      color: green;
+      font-size: 3vw;
+      div {
       }
-      
+    }
+    form.item-input {
+      width: 90%;
+      display:flex;
+      input {
+        width: 100%;
+        padding:1vw;
+        font-size:2vw;
+      }
     }
   }
   img {
