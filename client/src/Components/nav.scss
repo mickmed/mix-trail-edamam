@@ -1,27 +1,41 @@
-.nav{
-  background-image:linear-gradient(to right, rgb(194, 235, 171), rgb(91, 91, 230));
-  height:8vh;
-  display:flex;
-  justify-content:space-between;
-  padding:0 5vw;
-  align-items:center;
+.nav {
+  // background-image:linear-gradient(to right, rgb(194, 235, 171), rgb(91, 91, 230));
+  height: 8vh;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 5vw;
+  align-items: center;
+  // background-image:url('/veggies4.jpg');
+  background-position: center;
+  background:linear-gradient(rgba(46, 59, 175, 1),rgba(255, 255, 255,1));
 
-  font-family:'Calligraffitti';
-  h4{
-    transform:translateY(30%) rotate(-3deg);
-      color:yellow;
-  text-shadow:2px 2px brown;
-  font-size:3vw;
-  letter-spacing: .5vw;
+  font-family: "Itim";
+  h4 {
+    transform: translate(-10%, 10%) rotate(0deg);
+    // color:yellow;
+    color: rgb(201, 25, 177);
+    // text-shadow: 2px 2px rgb(247, 247, 233);
+    font-size: 3vw;
+    letter-spacing: .4vw;
+    // font-weight:900;
+  }
+  p{
+    transform: translate(0, 60%) rotate(0deg);
+    color: rgb(201, 25, 177);
 
+  }
+  span {
+    font-size: 4vw;
+    // font-weight:100;
+    
   }
 }
 
-.selections{
-  margin-top:50vh;
-  width:30%;
-  height:500%;
-  overflow-Y:scroll;
-  background:red;
-  color:black;
+.selections {
+  margin-top: 50vh;
+  width: 30%;
+  height: 500%;
+  overflow-y: scroll;
+  background: red;
+  color: black;
 }

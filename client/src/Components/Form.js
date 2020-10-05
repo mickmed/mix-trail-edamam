@@ -10,7 +10,7 @@ const Form = ({idx, value, onClick, onChange, onSubmit, refo }) => {
         onClick={() => onClick(idx)}
         name={idx}
         id={`ingr${idx}`}
-        placeholder="...food"
+        placeholder="...enter food"
         ref={refo}
       />
       <button type="submit">></button>

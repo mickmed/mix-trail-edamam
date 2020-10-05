@@ -8,6 +8,7 @@
   }
   .item-info-wrapper {
     background: white;
+    margin-top:4vh;
 
     .menu-item {
       display: flex;
@@ -33,11 +34,18 @@
     form.item-input {
       width: 90%;
       display:flex;
-      margin-top:5vh;
+      // margin-top:5vh;
       input {
         width: 100%;
         padding:1vw;
         font-size:2vw;
+        border:0;
+        border-bottom:1px solid;
+      }
+      button{
+        border:0;
+        background:0;
+        font-size:3vw;
       }
     }
   }

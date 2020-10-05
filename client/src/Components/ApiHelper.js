@@ -3,7 +3,6 @@ import axios from "axios"
 export const getItem = async (search, pageSize) => {
   /**NUTRITIONIX KEYS AND HEADER */
 
-  console.log('ere')
   const configHeaders = {
     headers: {
       "x-app-id": process.env.REACT_APP_NUTRITIONIX_X_APP_ID,
@@ -12,14 +11,20 @@ export const getItem = async (search, pageSize) => {
     },
   }
   // const instant = `https://trackapi.nutritionix.com/v2/search/instant?query=${search}`
-  const resp = await axios.post(
-    `https://trackapi.nutritionix.com/v2/natural/nutrients`,
-    {
-      query: `${search}`,
-    },
-    configHeaders
-  )
-console.log(resp)
+  try {
+    const resp = await axios.post(
+      `https://trackapi.nutritionix.com/v2/natural/nutrients`,
+      {
+        query: `${search}`,
+      },
+      configHeaders
+    )
+    console.log(resp)
+    return resp.data
+  } catch (error) {
+    console.log(error)
+  }
+
   /**EDAMAM KEYS **/
   // const appId = process.env.REACT_APP_EDAMAM_NUTRITION_DATA_APP_ID
   // const appKey = process.env.REACT_APP_EDAMAM_NUTRITION_DATA_APP_KEY
@@ -28,8 +33,8 @@ console.log(resp)
 
   /**USDA KEY ******************************************************/
   // const api_key = process.env.REACT_APP_USDA_API_KEY
-  // const baseUrl = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${api_key}&dataType= 
-  
+  // const baseUrl = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${api_key}&dataType=
+
   // // Survey (FNDDS),
   // // Foundation,
   // // Branded,
@@ -38,8 +43,4 @@ console.log(resp)
   // const params = `&query=${search}&pageSize=${pageSize}`
   // const url = baseUrl + params
   /** END USDA KEY ***************************************/
-
-
-
-  return resp.data
 }

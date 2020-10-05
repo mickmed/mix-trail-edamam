@@ -42,13 +42,13 @@ const Home = (props) => {
       console.log(search)
       return food.foods[0].food_name === search
     })
-    let resp = res.foods[0]
-    // const rest = await getQueryData(search, 1)
+    // let resp = res.foods[0]
+    const rest = await getQueryData(search, 1)
 
-    // console.log(rest.foods[0])
-    // let resp= rest.foods[0]
+   
+    let resp = rest !== undefined && rest.foods[0]
 
-    if (resp.length !== 0) {
+    if (resp) {
       let foodKeys = Object.keys(resp)
       let nutVals = {}
       for (let key in resp) {

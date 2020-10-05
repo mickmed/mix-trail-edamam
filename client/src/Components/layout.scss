@@ -1,12 +1,12 @@
 .layout {
-  height: 100vh;
+  height: 90vh;
   // border: 1px black solid;
   width: 95%;
   margin: 2vh auto;
 
   .layout-children {
     display:flex;
-    height:70%;
+    height:100%;
     > div{
       flex:1;
       // padding:1vw;

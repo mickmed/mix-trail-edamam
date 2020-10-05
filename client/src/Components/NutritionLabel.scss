@@ -10,6 +10,8 @@
 }
 
 .nutrition-facts {
+    overflow:scroll;
+    height:80vh;
     background: rgba(255, 255, 255, 1);
     width: 85%;
     margin: 0 auto;
@@ -19,6 +21,7 @@
     span {
         font-size: 2vw;
         color: blue;
+        padding:1vw;
     }
     .calories {
         .calories-line {

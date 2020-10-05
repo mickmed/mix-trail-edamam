@@ -10,7 +10,8 @@ const Nav = (props) => {
   // console.log(suggestions.foods)
   return (
     <div className="nav">
-       <h4>Mix Trail</h4>
+       <h4>~<span>M</span>ix <span>T</span>rail~</h4>
+       <p>scale your nutrients</p>
      
    
     </div>
