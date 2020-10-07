@@ -1,17 +1,8 @@
 /*-----nutrition label starts here------*/
 
-#ingID,
-#ingName {
-    display: none;
-}
-
-#nut-facts-wrapper {
-    min-height: 550px;
-}
 
 .nutrition-facts {
-    overflow:scroll;
-    height:80vh;
+    overflow: scroll;
     background: rgba(255, 255, 255, 1);
     width: 85%;
     margin: 0 auto;
@@ -20,149 +11,87 @@
     padding: 0 1vw;
     span {
         font-size: 2vw;
-        color: blue;
-        padding:1vw;
+        padding: 1vw;
     }
-    .calories {
-        .calories-line {
-            span {
-                font-size: 2vw;
-                color: blue;
+    h1 {
+        font-family: "Helvetica_Black", arial;
+        font-size: 4vw;
+        font-weight: bold;
+    }
+    h3 {
+        font-size: 18px;
+    }
+    h4 {
+        font-family: "Helvetica_Black", arial;
+    }
+    h1,
+    h3,
+    h4,
+    h6 {
+        margin: 0;
+    }
+
+    h6 {
+        padding-right: 1vw;
+    }
+    .serving {
+        border-bottom: 8px solid black;
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5vh 0;
+        span {
+            display: flex;
+            justify-content: flex-start;
+            padding: 0;
+            h3 {
+                padding: 0 0;
             }
         }
     }
-}
-
-#serv-size-row,
-#serv-cont-row,
-#tot-fat-inner-row,
-#tot-carb-inner-row,
-.protein {
-    display: flex;
-    // padding: .5vh;
-}
-#tot-fat-inner-row {
-    display: flex;
-    justify-content: space-between;
-}
-
-#servAmnt,
-#servMeas,
-#servCont,
-#calories,
-#totalFat,
-#totalCarb,
-#protein {
-    color: blue;
-}
-
-.nutrition-facts div {
-}
-.nutrition-facts h1 {
-    padding: 0;
-    margin: 1vh 0 0.5vh;
-}
-
-.nutrition-facts .serving {
-    border-bottom: 8px solid black;
-    display: flex;
-    justify-content: space-between;
-    span {
-        h3 {
-            padding: 0 0.3vw;
-        }
+    .amnt-per-serving {
+        margin: .5vh 0;
     }
-}
+    .perc-daily-val {
+        font-family: "Helvetica_Black", arial;
+        font-size: 12px;
+        font-weight: bold;
+        margin: 0.5vh 0 0;
+        display: flex;
+        justify-content: flex-end;
+    }.primary, .secondary{
+        padding:.5vh 0;
+    }
+    .primary {
+        border-top: 1px solid;
+        display: flex;
+        justify-content: space-between;
+    }
 
-.nutrition-facts h1 {
-    font-family: "Helvetica_Black", arial;
-    font-size: 36px;
-    /*text-align: center;*/
-    font-weight: bold;
-}
+    .secondary {
+        border-top: 1px solid;
+        width: 90%;
+        display: flex;
+        justify-content: space-between;
+        margin-left: 10%;
+    }
 
-.nutrition-facts h3 {
-    font-size: 18px;
-}
+    
 
-.amt-per-serv,
-.perc-daily-val {
-    font-family: "Helvetica_Black", arial;
-    border-bottom: 1px solid black;
-    font-size: 12px;
-    font-weight: bold;
-    margin: 0.5vh 0 0;
-}
+    .chol {
+        border: 0;
+    }
 
-.nutrition-facts h4 {
-    font-family: "Helvetica_Black", arial;
-}
-
-.calories-line {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 5px;
-    border-bottom: 4px solid black;
-}
-
-.perc-daily-val {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.sub-heading {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-top: 5px;
-}
-
-.fat-sub-heading,
-.carb-sub-heading {
-    padding-left: 20px;
-}
-
-.fat-sub-heading h3,
-.carb-sub-heading h3 {
-    /*border-top:1px solid black;*/
-    /*border-bottom:1px solid black;*/
-    padding-top: 2px;
-}
-
-.sat-fat,
-.diet-fiber {
-    display: flex;
-    justify-content: space-between;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    .protein {
+        border-bottom: 8px solid black;
+    }   
 }
 
 .vitA,
 .vitC,
 .calcium,
 .iron,
-.potassium{
+.potassium {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid black;
 }
-
-.chol,
-.sodium,
-.total-carb {
-    display: flex;
-    justify-content: space-between;
-}
-
-.chol,
-.sodium {
-    border-bottom: 1px solid black;
-}
-
-.protein {
-    border-bottom: 8px solid black;
-}
-
-/*.sub-heading.chol h3, .sodium h3{
-    font-family: 'Helvetica_Black', arial;
-}*/

@@ -1,0 +1,117 @@
+.splash {
+  display: flex;
+  flex-direction: column;
+  background-image: url("/veggies-90a.jpg");
+  background-size: 105%;
+  background-repeat: no-repeat;
+  // background-position:center;
+  height: 90vh;
+  padding-top:5vh;
+  background-color:#f5f9fc;
+  // justify-content: center;
+  a {
+    text-decoration: none;
+    font-weight: 600;
+
+    div {
+      position: relative;
+      left: -50vw;
+      color: green;
+      text-shadow:1px 1px white;
+      font-size: 4vw;
+      display: inline-block;
+      justify-content: flex-end;
+      // -webkit-text-stroke: 1px white;
+      font-weight:900;
+
+      // font-style:italic;
+      margin: 4vw;
+      padding: 3vw;
+      border: 2px solid green;
+      border-left: 0;
+      border-radius: 1vw;
+      padding-left: 15vw;
+      transform: skewX(-8deg);
+      // left: -5vw;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+.home-banner {
+  animation: slidein 0.75s 0.5s forwards;
+}
+
+.recipes-banner {
+  animation: slidein 1s 1.5s forwards;
+}
+
+.learn-more-banner {
+  animation: slidein 1.5s 2.5s forwards;
+  color:white;
+}
+
+@keyframes slidein {
+  from {
+    left: -50vw;
+    opacity: 0;
+  }
+  to {
+    left: -10vw;
+    opacity: 1;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .splash {
+    background-image:url('/veggies1.jpg');
+    background-position: center;
+    font-size: 1px;
+    a {
+      div {
+        font-size: 2vw;
+        margin:2vw;
+       
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .splash {
+    font-size: 1px;
+    a {
+      div {
+        font-size: 2vw;
+        padding:2vw;
+        padding-left:5vw;
+       
+      }
+      .home-banner {
+        animation: slideinBig 0.75s 0.5s forwards;
+      }
+      
+      .recipes-banner {
+        animation: slideinBig 1s 1.0s forwards;
+      }
+      
+      .learn-more-banner {
+        animation: slideinBig 1.5s 1.5s forwards;
+        
+      }
+    }
+  }
+}
+
+@keyframes slideinBig {
+  from {
+    left: -50vw;
+    opacity: 0;
+  }
+  to {
+    left: -5vw;
+    opacity: 1;
+  }
+}
