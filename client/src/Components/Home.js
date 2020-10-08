@@ -89,22 +89,25 @@ const Home = (props) => {
 
   const handleUpdateIndex = async (e) => {
     e.preventDefault()
+    console.log(input[selectedId])
+    const resp = await getItem(input[selectedId], 1)
+console.log(resp)
+    // let resp = foods.find((food) => {
+    //   return food.foods[0].food_name === input[selectedId]
+    // })
 
-    let resp = foods.find((food) => {
-      return food.foods[0].food_name === input[selectedId]
-    })
     let newItems = [...items]
     let removed = newItems.splice(selectedId, 1, resp.foods[0])
 
-    nutrientVals.length !== 0 &&
-      setNutrientVals((prevState) => {
-        let prev = { ...prevState }
-        let newState = {}
-        for (let key in prev) {
-          newState[key] = prev[key] - removed[0][key] + resp.foods[0][key]
-        }
-        return newState
-      })
+    // nutrientVals.length !== 0 &&
+    //   setNutrientVals((prevState) => {
+    //     let prev = { ...prevState }
+    //     let newState = {}
+    //     for (let key in prev) {
+    //       newState[key] = prev[key] - removed[0][key] + resp.foods[0][key]
+    //     }
+    //     return newState
+    //   })
     await setSelectedId(items.length)
     await setItems(newItems)
   }
@@ -119,6 +122,8 @@ const Home = (props) => {
   return (
     <Layout>
       <div className="home">
+     
+
         <section className="item-info-wrapper">
           {items.map((item, idx) => {
             return (

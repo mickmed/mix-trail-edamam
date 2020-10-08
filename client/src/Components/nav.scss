@@ -1,54 +1,45 @@
 .nav {
-  // background-image:linear-gradient(to right, rgb(194, 235, 171), rgb(91, 91, 230));
-  height: 8vh;
-  display: flex;
-  justify-content: center;
-  // justify-content: flex-start;
-  // align-items: flex-end;
-  padding: 0 5vw;
-  // align-items: center;
-  // background-image:url('/veggies4.jpg');
-  // background-position: center;
-  background: linear-gradient(rgb(119, 175, 46), (#f5f9fc));
-  background: linear-gradient(green, (#f5f9fc));
-
-  font-family: "Itim";
-  // font-family: "Arial";
-  // border-bottom:1px solid rgb(201, 25, 177);
-  a {
+	display: flex;
+	// justify-content: center;
+  // background: linear-gradient(green, (#f5f9fc));
+	background: linear-gradient(green, (#3d9ae0));
+  
+	padding: 0 5vw;
+	height: 8vh;
+	font-family: 'Sweet Hipster';
+	a {
+		display: flex;
+		align-items: center;
     text-decoration: none;
-    display: flex;
-    align-items: center;
-
-    h4 {
-      transform: translate(0, -.5vh) rotate(0deg);
-      // color:yellow;
-      // color: rgb(201, 25, 177);
-      color: white;
-      text-shadow: 1px 1px rgb(201, 25, 177);
-      font-size: 4vh;
-      letter-spacing: 0.4vw;
-      margin: 0;
-      span {
-        font-size: 5vh;
-        // font-weight:100;
-      }
-      // font-weight:900;
-    }
-    p {
-      color: rgb(201, 25, 177);
-      // font-size: 5vw;
-      margin: 0;
-      // transform: translate(10%, 60%) rotate(0deg);
-    }
-  }
+    transform:translateY(50%);
+		h4 {
+			transform: translate(0, -.5vh) rotate(0deg);
+			margin: 0;
+			text-shadow: 1px 1px green;
+			color: white;
+      font-size: 11vh;
+      font-weight: 600;
+      text-shadow:10px 5px 10px rgb(0, 0, 0),10px 5px 10px rgb(0, 0, 0) ;
+      // letter-spacing: 0.4vw;
+      // -webkit-text-stroke:1px green;
+    //   -webkit-font-smoothing: antialiased;
+    // -moz-osx-font-smoothing: grayscale;
+    // text-rendering: optimizeLegibility;
+			span {
+				font-size: 14vh;
+			}
+		}
+		p {
+			margin: 0;
+			color: rgb(201, 25, 177);
+		}
+	}
 }
-
 .selections {
-  margin-top: 50vh;
-  width: 30%;
-  height: 500%;
-  overflow-y: scroll;
-  background: red;
-  color: black;
+	margin-top: 50vh;
+	background: red;
+	width: 30%;
+	height: 500%;
+	overflow-y: scroll;
+	color: black;
 }

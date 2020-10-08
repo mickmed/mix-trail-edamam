@@ -1,18 +1,28 @@
-/* @font-face{
-  src: local('Vegan'), url(./fonts/vegan.ttf);
-  font-family:'Vegan';
+@font-face{
+  
   src: local('Counrty Side'), url(./fonts/country-side.ttf);
   font-family:'Country Side';
-} */
+ 
+}
+@font-face{
+   src: local('Vegan'), url(./fonts/vegan.ttf);
+  font-family:'Vegan';
+}
+@font-face{
+  src: local('Sweet Hipster'), url(./fonts/Southland\ TTF.ttf);
+ font-family:'Sweet Hipster';
+}
+
 
 body{
   margin:0;
   padding:0;
+  
 }
 .App{
   
   height:200vh;
- 
+
   max-width:1440px;
   margin:0 auto;
   overflow:hidden;

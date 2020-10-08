@@ -9,7 +9,7 @@ const Nav = (props) => {
     <div className="nav">
       <Link to="/">
         <h4>
-          ~ <span>M</span>ix <span>T</span>rail&nbsp;~
+          <span>S</span>caled&nbsp;
         </h4>
         {/* <p>scale your nutrients</p> */}
       </Link>
