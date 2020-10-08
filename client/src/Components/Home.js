@@ -89,9 +89,7 @@ const Home = (props) => {
 
   const handleUpdateIndex = async (e) => {
     e.preventDefault()
-    console.log(input[selectedId])
     const resp = await getItem(input[selectedId], 1)
-console.log(resp)
     // let resp = foods.find((food) => {
     //   return food.foods[0].food_name === input[selectedId]
     // })

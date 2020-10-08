@@ -39,7 +39,7 @@ const NutritionalLabel = ({ nutrientVals }) => {
 
   const rVals = (val) => {
   
-    return isNaN(val) ? "" : (val * 100).toFixed(2)
+    return isNaN(val) ? "" : Math.round((val * 100))
   }
 
   return (
@@ -74,7 +74,7 @@ const NutritionalLabel = ({ nutrientVals }) => {
           <h4>Total Fat {vals.nf_total_fat}g</h4>
 
           <div>
-            <h3>{rVals(vals.nf_total_fat / 78)} %</h3>
+            <h3>{rVals(vals.nf_total_fat / 78)}%</h3>
           </div>
         </div>
 
@@ -95,7 +95,7 @@ const NutritionalLabel = ({ nutrientVals }) => {
 
         <div className="primary">
           <h4>Sodium {vals.nf_sodium}mg</h4>
-          <h3>{rVals(vals.nf_sodium / 2300)} %</h3>
+          <h3>{rVals(vals.nf_sodium / 2300)}%</h3>
         </div>
 
         <div className="primary">
@@ -105,7 +105,7 @@ const NutritionalLabel = ({ nutrientVals }) => {
 
         <div className="secondary">
           <h3>Dietary Fiber {vals.nf_dietary_fiber}g</h3>
-          <h3>{rVals(vals.nf_total_carbohydrate / 275)} %</h3>
+          <h3>{rVals(vals.nf_total_carbohydrate / 275)}%</h3>
         </div>
 
         <div className="secondary">
