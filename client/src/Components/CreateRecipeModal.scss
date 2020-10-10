@@ -1,0 +1,47 @@
+.create-recipe-modal{
+
+  position:absolute;
+  left: 0%;
+  top:0;
+  // transform: translate(-50%, -50%);
+  width:100%;
+  background:white;
+  border-radius:1vw;
+ 
+  opacity:1;
+  padding:5%;
+  z-index:2;
+  // margin-left:5%;
+  box-sizing:border-box;
+
+  form{
+    // // display:flex;
+    // justify-content:center;
+    // // align-items: center;
+    // flex-direction:column;
+    
+    
+    input{
+      width:80%;
+    
+      margin:0 auto 0 3vw;
+      margin-bottom:3vh;
+      border:0;
+      border-bottom:1px solid green;
+      background:white;
+      padding:3%;
+      
+    }
+    .create-buttons{
+      display:flex;
+      justify-content:space-between;
+      width:100%;
+      button{
+        background:transparent;
+        color:blue;
+        border:0;
+      }
+    }
+  }
+
+}

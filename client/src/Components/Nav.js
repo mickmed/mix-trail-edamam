@@ -13,6 +13,7 @@ const Nav = (props) => {
         </h4>
         {/* <p>scale your nutrients</p> */}
       </Link>
+      <Link to='/'><div>My Recipes</div></Link>
     </div>
   )
 }

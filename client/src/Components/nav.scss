@@ -3,7 +3,7 @@
 	// justify-content: center;
   // background: linear-gradient(green, (#f5f9fc));
 	background: linear-gradient(green, (#3d9ae0));
-  
+  justify-content:space-between;
 	padding: 0 5vw;
 	height: 8vh;
 	font-family: 'Sweet Hipster';
@@ -33,6 +33,10 @@
 			margin: 0;
 			color: rgb(201, 25, 177);
 		}
+	}
+	div{
+		color:white;
+		font-size:5vw;
 	}
 }
 .selections {

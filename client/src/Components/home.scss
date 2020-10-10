@@ -6,21 +6,35 @@
   box-sizing: border-box;
   // opacity:0;
   animation: fadein 2s forwards;
+  position:relative;
   width: 100%;
+ 
   section {
     // flex: 1;
     width: 100%;
     // min-height: 20vh;
-    min-height: 70%;
+    // min-height: 70%;
     position: relative;
     margin-top: 1vh;
   }
   .item-info-wrapper {
     background: white;
-    padding-top: 4vh;
-
-    overflowy: scroll;
-
+    padding-top: 2vh;
+    min-height:20vh;
+    overflow-y: scroll;
+   position:relative;
+    .save-button {
+      display: flex;
+        justify-content: flex-end;
+        margin:0 1vh 5vh 0;
+        
+      .save-recipe {
+        color: blue;
+        background:transparent;
+        border:0;
+        
+      }
+    }
     .menu-item {
       display: flex;
 
@@ -47,14 +61,14 @@
       width: 90%;
       display: flex;
       // margin-top:5vh;
-      margin: 0 auto;
+      margin: 0 0 0 5vw;
       input {
         width: 100%;
         padding: 1vw;
         font-size: 4vw;
         border: 0;
         border-bottom: 1px solid;
-        outline:none;
+        outline: none;
       }
       button {
         border: 0;
@@ -106,7 +120,7 @@
     section {
     }
     .item-info-wrapper {
-      margin-top: 4vh;
+      margin-top: 1vh;
       .menu-item {
         font-size: 2vw;
         .remove-X {
