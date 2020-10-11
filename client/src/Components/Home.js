@@ -28,7 +28,7 @@ const Home = (props) => {
 
   useEffect(() => {
    
-    console.log(inputElement.current)
+    console.log(apiUrl)
     inputElement.current !== null
       ? inputElement.current.focus()
       : setRerender(!rerender)
