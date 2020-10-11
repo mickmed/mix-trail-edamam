@@ -42,9 +42,9 @@ const NutritionalLabel = ({ nutrientVals }) => {
   
     return isNaN(val) ? "" : Math.round((val * 100))
   }
+    // this nutrition label was originaly part of my final project at PerScholas, Nov 2018
 
   return (
-    // this nutrition label was originaly part of my final project at PerScholas, Nov 2018
 
     <section className="nutrition-label">
       <div className="nutrition-facts" ref={labelRef}>
