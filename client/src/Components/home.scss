@@ -6,9 +6,9 @@
   box-sizing: border-box;
   // opacity:0;
   animation: fadein 2s forwards;
-  position:relative;
+  position: relative;
   width: 100%;
- 
+
   section {
     // flex: 1;
     width: 100%;
@@ -20,19 +20,18 @@
   .item-info-wrapper {
     background: white;
     padding-top: 2vh;
-    min-height:50vh;
+    min-height: 50vh;
     overflow-y: scroll;
-   position:relative;
+    position: relative;
     .save-button {
       display: flex;
-        justify-content: flex-end;
-        margin:0 1vh 5vh 0;
-        
+      justify-content: flex-end;
+      margin: 0 1vh 5vh 0;
+
       .save-recipe {
         color: blue;
-        background:transparent;
-        border:0;
-        
+        background: transparent;
+        border: 0;
       }
     }
     .menu-item {
@@ -55,6 +54,25 @@
       }
       .remove-X {
         font-size: 3vw;
+      }
+      form.item-input {
+        width: 90%;
+        display: flex;
+        // margin-top:5vh;
+        // margin: 0 0 0 5vw;
+        input {
+          width: 100%;
+          padding: 1vw;
+          font-size: 3vw;
+          border: 0;
+          border-bottom: 1px solid;
+          outline: none;
+        }
+        button {
+          border: 0;
+          background: 0;
+          font-size: 3vw;
+        }
       }
     }
     form.item-input {
