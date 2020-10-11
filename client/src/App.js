@@ -9,13 +9,14 @@ import Recipes from "./Components/Recipes"
 import Recipe from "./Components/Recipe"
 import Layout from "./Components/Layout"
 import axios from "axios"
+import apiUrl from './apiConfig'
 
 function App() {
   const [recipes, setRecipes] = useState([])
 
   useEffect(() => {
     const getRecipes = async () => {
-      const resp = await axios.get("http://localhost:3000/api/recipes")
+      const resp = await axios.get(`${apiUrl}/recipes`)
       setRecipes(resp.data)
     }
     getRecipes()
