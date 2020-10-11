@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react"
-import CreateRecipe from "./CreateRecipe"
+// import CreateRecipe from "./CreateRecipe"
 import "./CreateRecipeModal.scss"
 import axios from "axios"
 import { set } from "mongoose"
+import apiUrl  from './apiConfig'
 
 const CreateRecipeModal = (props) => {
   const { setRenderModal, renderModal, items, setItem, nutrientVals, item } = props
@@ -38,7 +39,7 @@ const CreateRecipeModal = (props) => {
     const body = { ...value, ingredients: items, nutrientVals: nutrientVals }
     console.log(value, items, body)
 
-    const resp = await axios.post("http://localhost:3000/api/recipes", body)
+    const resp = await axios.post(`${apiUrl}/recipes`, body)
     console.log(resp)
     setItem(resp.data)
   }
@@ -51,7 +52,7 @@ const CreateRecipeModal = (props) => {
     console.log(value, items, body)
 
     const resp = await axios.put(
-      `http://localhost:3000/api/recipes/${item._id}`,
+      `${apiUrl}/recipes/${item._id}`,
       body
     )
     console.log(resp)

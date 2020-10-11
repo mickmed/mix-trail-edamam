@@ -6,6 +6,8 @@ import NutritionLabel from "./NutritionLabel"
 import Form from "./Form.js"
 import { getItem } from "./ApiHelper"
 import CreateRecipeModal from "./CreateRecipeModal"
+import apiUrl  from './apiConfig'
+
 
 import { foods } from "./data.js"
 import axios from "axios"
@@ -40,7 +42,7 @@ const Home = (props) => {
       const item = props.recipes.find((recipe) => recipe._id === id)
       const getItem = async() =>{
         console.log('here')
-        const resp = await axios(`http://localhost:3000/api/recipes/${id}`)
+        const resp = await axios(`${apiUrl}/recipes/${id}`)
         console.log(resp)
          setItems(resp.data.ingredients)
       setNutrientVals(resp.data.nutrientVals[0])

@@ -26,6 +26,12 @@
 
 <br>
 
+### &#128755; Api
+- Nutritionix
+
+
+<br>
+
 ### &#127758; Deployed
 - [Current Site](https://sweetly-different.netlify.app)
 
