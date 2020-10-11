@@ -6,15 +6,14 @@ import Search from "./Search.js"
 
 const Nav = (props) => {
   return (
-    <div className="nav">
+    <header className="nav">
       <Link to="/">
         <h4>
           <span>S</span>caled&nbsp;
         </h4>
-        {/* <p>scale your nutrients</p> */}
       </Link>
-      <Link to='/'><div>My Recipes</div></Link>
-    </div>
+      <Link to='/recipes'><div>My Recipes</div></Link>
+    </header>
   )
 }
 

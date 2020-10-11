@@ -5,8 +5,9 @@ const router = Router()
 
 
 router.get('/recipes', controllers.getRecipes)
-router.get('/recipe/:id', controllers.getRecipe)
+router.get('/recipes/:id', controllers.getRecipe)
 router.post('/recipes', controllers.createRecipe)
+router.put('/recipes/:id', controllers.updateRecipe)
 
 
 module.exports = router

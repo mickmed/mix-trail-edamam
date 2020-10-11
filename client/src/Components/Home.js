@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react"
+import { useParams } from "react-router-dom"
 import "./home.scss"
 import Layout from "./Layout"
 import NutritionLabel from "./NutritionLabel"
@@ -19,14 +20,41 @@ const Home = (props) => {
   const [suggestions, setSuggestions] = useState(null)
   const [rerender, setRerender] = useState(false)
   const [renderModal, setRenderModal] = useState(false)
+  const [item, setItem] = useState([])
   const inputElement = useRef(null)
+  const { id } = useParams()
 
   useEffect(() => {
+   
     console.log(inputElement.current)
     inputElement.current !== null
       ? inputElement.current.focus()
       : setRerender(!rerender)
+
+   
   }, [selectedId])
+
+  useEffect(()=>{
+    console.log(props.recipes)
+     if (id) {
+      const item = props.recipes.find((recipe) => recipe._id === id)
+      const getItem = async() =>{
+        console.log('here')
+        const resp = await axios(`http://localhost:3000/api/recipes/${id}`)
+        console.log(resp)
+         setItems(resp.data.ingredients)
+      setNutrientVals(resp.data.nutrientVals[0])
+      setItem(resp.data)
+      }
+      console.log(item)
+      getItem()
+      // console.log(id, props.recipes)
+      // console.log(item)
+     
+    }
+  }, [])
+
+  
 
   const getQueryData = async () => {
     return await getItem(search, 1)
@@ -119,70 +147,70 @@ const Home = (props) => {
     // const resp = await axios()
 
     setRenderModal(true)
-    console.log(items)
-    setRenderModal(true)
+  
   }
 
   return (
-    <Layout>
-      <div className="home">
-        <section className="item-info-wrapper">
-          {renderModal && (
-            <CreateRecipeModal setRenderModal={setRenderModal} items={items} />
-          )}
-          {!renderModal && (
-            <div className="save-button">
-              {
-                // items.length> 2 &&
-                <button className="save-recipe" onClick={saveRecipe}>
-                  Save Recipe
-                </button>
-              }
-            </div>
-          )}
-          {!renderModal &&
-            items.map((item, idx) => {
-              return (
-                <div key={idx} className="menu-item">
-                  {selectedId === idx ? (
-                    <Form
-                      idx={idx}
-                      value={input[idx]}
-                      onClick={setSelectedId}
-                      onChange={onChange}
-                      onSubmit={handleUpdateIndex}
-                      refo={inputElement}
-                    />
-                  ) : (
-                    <div type="text" onClick={() => setSelectedId(idx)}>
-                      <span>{item.serving_qty}</span>
-                      <span>{item.serving_unit}</span>
+    <div className="home">
+      <section className="item-info-wrapper">
+        {renderModal && (
+          <CreateRecipeModal renderModal={renderModal} setItem = {setItem} setRenderModal={setRenderModal} items={items} setItems={setItems} nutrientVals={nutrientVals} item={item}/>
+        )}
+        {!renderModal && (
+          <div className="save-button">
+            {
+              
+              <button className="save-recipe" onClick={saveRecipe}>
+               {id ? 'Update Recipe' : 'Save Recipe'}
+              </button> 
 
-                      <span>{item.food_name}</span>
-                      {/* {item.nf_calories} */}
-                    </div>
-                  )}
-                  <div className="remove-X" onClick={() => removeItem(idx)}>
-                    X
+
+
+            }
+          </div>
+        )}
+        {!renderModal &&
+          items.map((item, idx) => {
+            return (
+              <div key={idx} className="menu-item">
+                {selectedId === idx ? (
+                  <Form
+                    idx={idx}
+                    value={input[idx]}
+                    onClick={setSelectedId}
+                    onChange={onChange}
+                    onSubmit={handleUpdateIndex}
+                    refo={inputElement}
+                  />
+                ) : (
+                  <div type="text" onClick={() => setSelectedId(idx)}>
+                    <span>{item.serving_qty}</span>
+                    <span>{item.serving_unit}</span>
+
+                    <span>{item.food_name}</span>
+                    {/* {item.nf_calories} */}
                   </div>
+                )}
+                <div className="remove-X" onClick={() => removeItem(idx)}>
+                  X
                 </div>
-              )
-            })}
+              </div>
+            )
+          })}
 
-          {
-            <Form
-              idx={items.length}
-              value={input[items.length]}
-              onClick={setSelectedId}
-              onChange={handleChange}
-              onSubmit={handleSubmit}
-              refo={inputElement}
-            />
-          }
-        </section>
-        <NutritionLabel nutrientVals={nutrientVals} />
-      </div>
-    </Layout>
+        {
+          <Form
+            idx={items.length}
+            value={input[items.length]}
+            onClick={setSelectedId}
+            onChange={handleChange}
+            onSubmit={handleSubmit}
+            refo={inputElement}
+          />
+        }
+      </section>
+      <NutritionLabel nutrientVals={nutrientVals} />
+    </div>
   )
 }
 

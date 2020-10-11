@@ -6,10 +6,11 @@ const NutritionalLabel = ({ nutrientVals }) => {
   const [btnTxt, setBtnTxt] = useState("down")
   const [style, setStyle] = useState({})
   const labelRef = React.createRef()
+ 
 
   useEffect(() => {
     if (labelRef.current.clientHeight >= labelRef.current.scrollHeight - 50) {
-      console.log("here")
+     
       setStyle({ display: "none" })
     }
   }, [scroll])

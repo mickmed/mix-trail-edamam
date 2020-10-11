@@ -20,7 +20,7 @@
   .item-info-wrapper {
     background: white;
     padding-top: 2vh;
-    min-height:20vh;
+    min-height:50vh;
     overflow-y: scroll;
    position:relative;
     .save-button {
@@ -38,7 +38,7 @@
     .menu-item {
       display: flex;
 
-      width: 90%;
+      width: 80%;
       margin: 0 auto 2vh;
       justify-content: space-between;
       color: green;

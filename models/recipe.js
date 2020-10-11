@@ -7,7 +7,8 @@ const Recipe = new Schema(
     imgURL: { type: String, required: true },
     description: { type: String, required: true },
     category: { type: String, required: true },
-    ingredients: []
+    ingredients: [],
+    nutrientVals:[]
   },
   { timestamps: true }
 )

@@ -1,0 +1,12 @@
+.recipes{
+
+  display:flex;
+  align-items: flex-start;
+  flex-direction:column;
+  margin:5vw;
+  .recipe-name{
+    color:purple;
+    font-size:3vw;
+  }
+}
+

@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import './Recipes.scss'
+import { Link } from 'react-router-dom'
 
+const Recipes = (props) => { 
+  const { recipes } = props
 
-const Recipes = () => { 
-  const [recipes, setRecipes] = useState([])
-
-  useEffect(()=>{
-    const getRecipes = async() => {
-      const resp = await axios.get('http://localhost:3000/api/recipes')
-      console.log(resp)
-      setRecipes(resp)
-    }
-    getRecipes()
-  },[])
+ 
 
   return(
-    <div>
-      Recipes
+    <div className='recipes'>
+      
+      {recipes && recipes.map((recipe, idx)=>(
+        <Link to={`/recipes/${recipe._id}`}key={idx} ><div className='recipe-name'>{recipe.name}</div></Link>
+      ))}
     </div>
   )
 }
