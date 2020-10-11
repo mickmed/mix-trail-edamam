@@ -1,7 +1,7 @@
-production:
-    clients:
-        default:
-            uri: &lt;%= ENV['MONGODB_URI'] %&gt;
-        options:
-            skip_version_check: true
-        safe: true
+# production:
+#     clients:
+#         default:
+#             uri: &lt;%= ENV['MONGODB_URI'] %&gt;
+#         options:
+#             skip_version_check: true
+#         safe: true
