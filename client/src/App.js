@@ -9,7 +9,7 @@ import Recipes from "./Components/Recipes"
 import Recipe from "./Components/Recipe"
 import Layout from "./Components/Layout"
 import axios from "axios"
-import apiUrl from './apiConfig'
+import apiUrl from './Components/apiConfig'
 
 function App() {
   const [recipes, setRecipes] = useState([])
