@@ -4,7 +4,7 @@ let apiUrl
 
 const apiUrls = {
     production: 'https://mix-trail.herokuapp.com/api',
-    development: 'http://localhost:3000/api'
+    development: 'https://mix-trail.herokuapp.com/api'
 }
 
 if (window.location.hostname === 'localhost') {
