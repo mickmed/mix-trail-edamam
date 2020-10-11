@@ -3,7 +3,7 @@
 let apiUrl
 
 const apiUrls = {
-    production: 'https://mixtrail.herokuapp.com/api',
+    production: 'https://mix-trail.herokuapp.com/api',
     development: 'http://localhost:3000/api'
 }
 
