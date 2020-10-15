@@ -10,6 +10,7 @@ import Recipe from "./Components/Recipe"
 import Layout from "./Components/Layout"
 import axios from "axios"
 import apiUrl from './Components/apiConfig'
+import About from './Components/About'
 
 function App() {
   const [recipes, setRecipes] = useState([])
@@ -39,8 +40,11 @@ function App() {
           <Route exact path="/recipes/:id">
             <Home recipes={recipes} />
           </Route>
+          <Route exact path="/about">
+          <About/>
+        </Route>
         </Switch>
-      </Layout>
+        </Layout>
     </div>
   )
 }

@@ -13,6 +13,13 @@ const Nav = (props) => {
         </h4>
       </Link>
       <Link to='/recipes'><div>My Recipes</div></Link>
+      <Link to='/recipes/new'><div>New Recipe</div></Link>
+      <Link to='/about'><div>About</div></Link>
+
+
+      
+
+
     </header>
   )
 }

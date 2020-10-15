@@ -3,10 +3,19 @@ import React, { useState, useEffect } from "react"
 import "./CreateRecipeModal.scss"
 import axios from "axios"
 import { set } from "mongoose"
-import apiUrl  from './apiConfig'
+import apiUrl from "./apiConfig"
 
 const CreateRecipeModal = (props) => {
-  const { setRenderModal, renderModal, items, setItem, nutrientVals, item } = props
+  const {
+    setRenderModal,
+    renderModal,
+    items,
+    setItem,
+    nutrientVals,
+    item,
+    onChange,
+    input
+  } = props
   const inputValues = ["name", "description", "imgURL", "category"]
 
   const [value, setValue] = useState({
@@ -27,10 +36,10 @@ const CreateRecipeModal = (props) => {
     })
   }, [renderModal])
 
-  const handleChange = (e, val) => {
-    // console.log('e.target.value', e.target.value, val)
-    setValue({ ...value, [val]: e.target.value })
-  }
+  // const handleChange = (e, val) => {
+  //   // console.log('e.target.value', e.target.value, val)
+  //   setValue({ ...value, [val]: e.target.value })
+  // }
 
   const handleSubmit = async (e) => {
     console.log("submit")
@@ -51,29 +60,26 @@ const CreateRecipeModal = (props) => {
     const body = { ...value, ingredients: items, nutrientVals: nutrientVals }
     console.log(value, items, body)
 
-    const resp = await axios.put(
-      `${apiUrl}/recipes/${item._id}`,
-      body
-    )
+    const resp = await axios.put(`${apiUrl}/recipes/${item._id}`, body)
     console.log(resp)
     setItem(resp.data)
-
   }
   return (
     <div className="create-recipe-modal">
       <form onSubmit={props.item.length !== 0 ? handleUpdate : handleSubmit}>
-        {inputValues.map((val) => (
+        {inputValues.map((val, idx) => (
           <input
+            key={idx}
             type="text"
-            name="name"
-            value={value[val]}
+            name={val}
+            value={input[val] || ''}
             placeholder={val}
-            onChange={(e) => handleChange(e, val)}
-          />
+            onChange={(e) => onChange(e)}
+          />  
         ))}
 
         <div className="create-buttons">
-          <button onClick={handleUpdate} type="button">
+          <button onClick={() => setRenderModal()} type="button">
             cancel
           </button>
           <button type="submit">save</button>

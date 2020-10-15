@@ -13,7 +13,7 @@ const Form = ({idx, value, onClick, onChange, onSubmit, refo }) => {
         placeholder="...enter food"
         ref={refo}
       />
-      <button type="submit">></button>
+      <button type="submit">+</button>
     </form>
   )
 }

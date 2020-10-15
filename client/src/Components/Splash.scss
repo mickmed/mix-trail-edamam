@@ -12,10 +12,11 @@
   a {
     text-decoration: none;
     font-weight: 600;
+    z-index: 3;
 
     div {
       position: relative;
-      left: -50vw;
+      left: -100vw;
       color: green;
       text-shadow:1px 1px white;
       font-size: 4vw;
@@ -41,15 +42,16 @@
 }
 
 .home-banner {
-  animation: slidein 0.75s 0.5s forwards;
+  animation: slidein 0.5s 0.25s forwards;
+  z-index:3;
 }
 
 .recipes-banner {
-  animation: slidein 1s 1.5s forwards;
+  animation: slidein .75s .5s forwards;
 }
 
 .learn-more-banner {
-  animation: slidein 1.5s 2.5s forwards;
+  animation: slidein 1s .75s forwards;
   color:white;
 }
 

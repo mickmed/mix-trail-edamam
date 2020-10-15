@@ -6,21 +6,23 @@
   justify-content:space-between;
 	padding: 0 5vw;
 	height: 8vh;
-	font-family: 'Sweet Hipster';
+	font-family: 'Southland';
 	a {
 		display: flex;
 		align-items: center;
-    text-decoration: none;
+		text-decoration: none;
 		h4 {
-			transform: translate(0, -.5vh) rotate(0deg);
-			transform:translateY(10%);
-
+			transform: translate(0, 430%) rotate(-2deg);
+			z-index:1;
+// position:relative;
+			line-height:1px;
 			margin: 0;
 			text-shadow: 1px 1px green;
 			color: white;
       font-size: 11vh;
       font-weight: 600;
-      text-shadow:10px 5px 10px rgb(0, 0, 0),10px 5px 10px rgb(0, 0, 0) ;
+			text-shadow:10px 5px 10px rgb(0, 0, 0),10px 5px 10px rgb(0, 0, 0) ;
+			font-family:'Southland';
       // letter-spacing: 0.4vw;
       // -webkit-text-stroke:1px green;
     //   -webkit-font-smoothing: antialiased;
@@ -28,6 +30,7 @@
     // text-rendering: optimizeLegibility;
 			span {
 				font-size: 14vh;
+			
 			}
 		}
 		p {

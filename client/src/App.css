@@ -9,8 +9,8 @@
   font-family:'Vegan';
 }
 @font-face{
-  src: local('Sweet Hipster'), url(./fonts/Southland\ TTF.ttf);
- font-family:'Sweet Hipster';
+  src: local('Southland'), url(./fonts/Southland\ TTF.ttf);
+ font-family:'Southland';
 }
 
 

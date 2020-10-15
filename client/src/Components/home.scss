@@ -19,14 +19,29 @@
   }
   .item-info-wrapper {
     background: white;
-    padding-top: 2vh;
+    padding-top: 5vh;
     min-height: 50vh;
     overflow-y: scroll;
     position: relative;
+    
+
     .save-button {
       display: flex;
       justify-content: flex-end;
-      margin: 0 1vh 5vh 0;
+      margin: 0 4vw;
+
+      input.recipe-name {
+        border: 0;
+        // z-index: inherit;
+        // border-bottom:solid 1px;
+        height: 30px;
+        outline: none;
+        width: 200%;
+      }
+      button {
+        font-size: 3vw;
+        // visibility: hidden;
+      }
 
       .save-recipe {
         color: blue;
@@ -36,54 +51,38 @@
     }
     .menu-item {
       display: flex;
-
-      width: 80%;
-      margin: 0 auto 2vh;
+      letter-spacing: 0.2vw;
+      width: 85%;
+      margin: 3vh auto 2vh;
       justify-content: space-between;
       color: green;
       font-size: 4vw;
-      font-weight: 600;
-
+      // font-weight: 600;
+      font-family:arial;
+      span {
+        padding: .5vw;
+      }
       &:hover {
         background: lightgrey;
       }
-      div {
-        span {
-          padding: 0.25vw;
-        }
-      }
+    
       .remove-X {
         font-size: 3vw;
+        
       }
-      form.item-input {
-        width: 90%;
-        display: flex;
-        // margin-top:5vh;
-        // margin: 0 0 0 5vw;
-        input {
-          width: 100%;
-          padding: 1vw;
-          font-size: 3vw;
-          border: 0;
-          border-bottom: 1px solid;
-          outline: none;
-        }
-        button {
-          border: 0;
-          background: 0;
-          font-size: 3vw;
-        }
-      }
+      
+      
     }
     form.item-input {
-      width: 90%;
+      width: 85%;
       display: flex;
       // margin-top:5vh;
-      margin: 0 0 0 5vw;
+      margin: 0 auto;
       input {
         width: 100%;
         padding: 1vw;
         font-size: 4vw;
+        margin: 3vh auto;
         border: 0;
         border-bottom: 1px solid;
         outline: none;
@@ -91,7 +90,8 @@
       button {
         border: 0;
         background: 0;
-        font-size: 3vw;
+        font-size: 4vw;
+       transform:translateX(5px);
       }
     }
   }

@@ -5,11 +5,11 @@
   position:relative;
 
   .layout-children {
-  margin: 3vh auto;
-
+  padding:2%;
+z-index: 5;
     display:flex;
     height:100%;
-    width:100%;
+    width:96%;
   
     > div{
       flex:1;

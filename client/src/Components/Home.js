@@ -24,6 +24,7 @@ const Home = (props) => {
   const [renderModal, setRenderModal] = useState(false)
   const [item, setItem] = useState([])
   const inputElement = useRef(null)
+  const inputRef = useRef(null)
   const { id } = useParams()
 
   useEffect(() => {
@@ -38,6 +39,7 @@ const Home = (props) => {
 
   useEffect(()=>{
     console.log(props.recipes)
+    inputRef.current.focus()
      if (id) {
       const item = props.recipes.find((recipe) => recipe._id === id)
       const getItem = async() =>{
@@ -151,24 +153,28 @@ const Home = (props) => {
     setRenderModal(true)
   
   }
+  const handleNameChange = () => {
+
+  }
 
   return (
     <div className="home">
       <section className="item-info-wrapper">
+        
         {renderModal && (
-          <CreateRecipeModal renderModal={renderModal} setItem = {setItem} setRenderModal={setRenderModal} items={items} setItems={setItems} nutrientVals={nutrientVals} item={item}/>
+          <CreateRecipeModal renderModal={renderModal} setItem = {setItem} setRenderModal={setRenderModal} items={items} setItems={setItems} nutrientVals={nutrientVals} item={item} input={input} onChange={onChange}/>
         )}
         {!renderModal && (
           <div className="save-button">
-            {
-              
+              {console.log(input.name)}
+              <input type ='text' name='name' className='recipe-name' value={input.name || ''} placeholder='recipe name' onChange={onChange} ref={inputRef}/>
               <button className="save-recipe" onClick={saveRecipe}>
                {id ? 'Update Recipe' : 'Save Recipe'}
               </button> 
 
 
 
-            }
+            
           </div>
         )}
         {!renderModal &&
@@ -178,7 +184,7 @@ const Home = (props) => {
                 {selectedId === idx ? (
                   <Form
                     idx={idx}
-                    value={input[idx]}
+                    value={input[idx] || ''}
                     onClick={setSelectedId}
                     onChange={onChange}
                     onSubmit={handleUpdateIndex}

@@ -4,9 +4,9 @@ const Schema = mongoose.Schema
 const Recipe = new Schema(
   {
     name: { type: String, required: true },
-    imgURL: { type: String, required: true },
-    description: { type: String, required: true },
-    category: { type: String, required: true },
+    imgURL: { type: String, required: false },
+    description: { type: String, required: false },
+    category: { type: String, required: false },
     ingredients: [],
     nutrientVals:[]
   },
