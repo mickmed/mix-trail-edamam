@@ -1,8 +1,7 @@
 import React from "react"
-import { Link } from "react-router-dom"
-import "./nav.scss"
-import Search from "./Search.js"
-// import SearchBar from "./SearchBar.js"
+import { Link } from 'react-router-dom'
+import './Nav.scss'
+
 
 const Nav = (props) => {
   return (

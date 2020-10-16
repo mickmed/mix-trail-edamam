@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect, useLayoutEffect, useRef } from "react"
 import { useParams } from "react-router-dom"
-import "./home.scss"
-import Layout from "./Layout"
+import "./Home.scss"
 import NutritionLabel from "./NutritionLabel"
 import Form from "./Form.js"
 import { getItem } from "./ApiHelper"
 import CreateRecipeModal from "./CreateRecipeModal"
-import apiUrl  from './apiConfig'
-
+import apiUrl from "./apiConfig"
 
 import { foods } from "./data.js"
 import axios from "axios"
@@ -23,42 +21,55 @@ const Home = (props) => {
   const [rerender, setRerender] = useState(false)
   const [renderModal, setRenderModal] = useState(false)
   const [item, setItem] = useState([])
+  const [fadeOut, setFadeOut] = useState([])
   const inputElement = useRef(null)
   const inputRef = useRef(null)
   const { id } = useParams()
 
+  const firstUpdate = useRef(true)
+  useLayoutEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false
+      return
+    }
+    renderModal === false &&
+    setFadeOut("fade-out")
+
+    console.log("componentDidUpdateFunction", firstUpdate.current)
+  }, [renderModal])
+
+
+  // useEffect(() => {
+  //   setFadeOut("fade-out")
+  // }, [renderModal])
+
+
   useEffect(() => {
-   
     console.log(apiUrl)
     inputElement.current !== null
       ? inputElement.current.focus()
       : setRerender(!rerender)
-
-   
   }, [selectedId])
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(props.recipes)
     inputRef.current.focus()
-     if (id) {
+    if (id) {
       const item = props.recipes.find((recipe) => recipe._id === id)
-      const getItem = async() =>{
-        console.log('here')
+      const getItem = async () => {
+        console.log("here")
         const resp = await axios(`${apiUrl}/recipes/${id}`)
         console.log(resp)
-         setItems(resp.data.ingredients)
-      setNutrientVals(resp.data.nutrientVals[0])
-      setItem(resp.data)
+        setItems(resp.data.ingredients)
+        setNutrientVals(resp.data.nutrientVals[0])
+        setItem(resp.data)
       }
       console.log(item)
       getItem()
       // console.log(id, props.recipes)
       // console.log(item)
-     
     }
   }, [])
-
-  
 
   const getQueryData = async () => {
     return await getItem(search, 1)
@@ -151,30 +162,39 @@ const Home = (props) => {
     // const resp = await axios()
 
     setRenderModal(true)
-  
-  }
-  const handleNameChange = () => {
-
   }
 
   return (
-    <div className="home">
+    <div className={`home ${fadeOut}`}>
+      {console.log(firstUpdate.current)}
       <section className="item-info-wrapper">
-        
         {renderModal && (
-          <CreateRecipeModal renderModal={renderModal} setItem = {setItem} setRenderModal={setRenderModal} items={items} setItems={setItems} nutrientVals={nutrientVals} item={item} input={input} onChange={onChange}/>
+          <CreateRecipeModal
+            renderModal={renderModal}
+            setItem={setItem}
+            setRenderModal={setRenderModal}
+            items={items}
+            setItems={setItems}
+            nutrientVals={nutrientVals}
+            item={item}
+            input={input}
+            onChange={onChange}
+          />
         )}
         {!renderModal && (
           <div className="save-button">
-              {console.log(input.name)}
-              <input type ='text' name='name' className='recipe-name' value={input.name || ''} placeholder='recipe name' onChange={onChange} ref={inputRef}/>
-              <button className="save-recipe" onClick={saveRecipe}>
-               {id ? 'Update Recipe' : 'Save Recipe'}
-              </button> 
-
-
-
-            
+            <input
+              type="text"
+              name="name"
+              className="recipe-name"
+              value={input.name || ""}
+              placeholder="recipe name"
+              onChange={onChange}
+              ref={inputRef}
+            />
+            <button className="save-recipe" onClick={saveRecipe}>
+              {id ? "Update Recipe" : "Save Recipe"}
+            </button>
           </div>
         )}
         {!renderModal &&
@@ -184,7 +204,7 @@ const Home = (props) => {
                 {selectedId === idx ? (
                   <Form
                     idx={idx}
-                    value={input[idx] || ''}
+                    value={input[idx] || ""}
                     onClick={setSelectedId}
                     onChange={onChange}
                     onSubmit={handleUpdateIndex}

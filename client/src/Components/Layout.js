@@ -1,5 +1,5 @@
 import React from "react"
-import "./layout.scss"
+import "./Layout.scss"
 // import Nav from "./Nav"
 import Footer from "./Footer"
 import Nav from "./Nav"
@@ -18,3 +18,6 @@ const Layout = (props) => {
 }
 
 export default Layout
+
+
+

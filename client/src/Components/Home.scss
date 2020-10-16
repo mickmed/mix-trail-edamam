@@ -1,3 +1,10 @@
+.fade-out{
+
+  animation: fadein 2s forwards;
+  background:blue;
+  opactity:0;
+}
+
 .home {
   display: flex;
   flex-direction: column;
