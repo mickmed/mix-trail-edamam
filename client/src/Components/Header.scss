@@ -1,4 +1,4 @@
-.nav {
+header {
 	display: flex;
 	// justify-content: center;
   // background: linear-gradient(green, (#f5f9fc));
@@ -7,6 +7,11 @@
 	padding: 0 5vw;
 	height: 8vh;
 	font-family: 'Southland';
+	.burger{
+		font-size:8vw;
+		color:white;
+	
+	}
 	a {
 		display: flex;
 		align-items: center;
@@ -38,9 +43,16 @@
 			color: rgb(201, 25, 177);
 		}
 	}
-	div{
+	.menu-items{
 		color:white;
 		font-size:2vw;
+		display:flex;
+		font-family:Arial;
+		align-items: center;
+		font-size:2vw;
+		div{
+			padding:0 3vw;
+		}
 	}
 }
 .selections {

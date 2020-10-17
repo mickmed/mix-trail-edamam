@@ -1,15 +1,17 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import "./SideBar.scss"
+import Nav from './Nav'
 
-const SideBar = () => {
+const SideBar = (props) => {
+
+  const style = props.sidebar && {}
   return (
-    <section>
-      <Link to="/">make</Link>
-      <Link to="/">make</Link>
-      <Link to="/">make</Link>
+    <section className='sidebar' style={style}>
+      <Nav sidebar={props.sidebar} setSidebar={props.setSidebar} />
+     
     </section>
   )
 }
 
-export default Sidebar
+export default SideBar

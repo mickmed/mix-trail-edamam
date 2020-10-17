@@ -26,22 +26,10 @@ const Home = (props) => {
   const inputRef = useRef(null)
   const { id } = useParams()
 
-  const firstUpdate = useRef(true)
-  useLayoutEffect(() => {
-    if (firstUpdate.current) {
-      firstUpdate.current = false
-      return
-    }
-    renderModal === false &&
-    setFadeOut("fade-out")
-
-    console.log("componentDidUpdateFunction", firstUpdate.current)
-  }, [renderModal])
+ 
 
 
-  // useEffect(() => {
-  //   setFadeOut("fade-out")
-  // }, [renderModal])
+
 
 
   useEffect(() => {
@@ -164,9 +152,13 @@ const Home = (props) => {
     setRenderModal(true)
   }
 
+  const randNum = () => {
+    return Math.random()
+  }
+
   return (
-    <div className={`home ${fadeOut}`}>
-      {console.log(firstUpdate.current)}
+    <div className={`home ${fadeOut}`} key={randNum()}>
+     
       <section className="item-info-wrapper">
         {renderModal && (
           <CreateRecipeModal

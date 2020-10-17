@@ -2,19 +2,19 @@
   height: 100%;
   // border: 1px black solid;
   width: 100%;
-  position:relative;
+  position: relative;
 
   .layout-children {
-  padding:2%;
-z-index: 5;
-    display:flex;
-    height:100%;
-    width:96%;
-  
-    > div{
-      flex:1;
+    padding: 2%;
+    z-index: 5;
+    display: flex;
+    height: 100%;
+    width: 96%;
+
+    > div {
+      flex: 1;
       // padding:1vw;
-      > section{
+      > section {
         // padding:1vw;
       }
     }

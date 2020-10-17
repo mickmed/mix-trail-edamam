@@ -1,25 +1,29 @@
 import React from "react"
-import { Link } from 'react-router-dom'
-import './Nav.scss'
-
+import { useHistory, Link } from "react-router-dom"
 
 const Nav = (props) => {
+  const history = useHistory()
+  const {setSidebar} = props
+
+  let links = ["my recipes", "create a recipe", "about"]
+
+  const closeModal = (link) => {
+    setSidebar(!props.sidebar)
+
+    link =
+      link === "my recipes"
+        ? "recipes"
+        : link === "create a recipe"
+        ? "recipes/new"
+        : link === "about" && "about"
+    history.push(`/${link}`)
+  }
   return (
-    <header className="nav">
-      <Link to="/">
-        <h4>
-          <span>S</span>caled&nbsp;
-        </h4>
-      </Link>
-      <Link to='/recipes'><div>My Recipes</div></Link>
-      <Link to='/recipes/new'><div>New Recipe</div></Link>
-      <Link to='/about'><div>About</div></Link>
-
-
-      
-
-
-    </header>
+    <nav>
+      {links.map((link, idx) => (
+        <div onClick={() => closeModal(link)}>{link}</div>
+      ))}
+    </nav>
   )
 }
 

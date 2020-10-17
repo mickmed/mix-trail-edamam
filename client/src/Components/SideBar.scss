@@ -1,0 +1,21 @@
+.sidebar {
+	display: flex;
+	position: absolute;
+	right: 0;
+	flex-direction: column;
+	z-index: 8;
+	background: #ffffff;
+  height: 90vh;
+  padding:5%;
+  width:40%;
+  border:1px solid blue;
+  background:linear-gradient(#d2d2d2, #afafaf);
+  
+  a{
+    text-decoration:none;
+    text-align:center;
+    margin:5vw 0;
+    color:green;
+    font-weight:600;
+  }
+}
