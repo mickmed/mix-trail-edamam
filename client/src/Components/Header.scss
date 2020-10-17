@@ -1,16 +1,15 @@
 header {
 	display: flex;
 	// justify-content: center;
-  // background: linear-gradient(green, (#f5f9fc));
+	// background: linear-gradient(green, (#f5f9fc));
 	background: linear-gradient(green, (#3d9ae0));
-  justify-content:space-between;
+	justify-content: space-between;
 	padding: 0 5vw;
 	height: 8vh;
-	font-family: 'Southland';
-	.burger{
-		font-size:8vw;
-		color:white;
-	
+	font-family: "Southland";
+	.burger {
+		font-size: 8vw;
+		color: white;
 	}
 	a {
 		display: flex;
@@ -18,24 +17,23 @@ header {
 		text-decoration: none;
 		h4 {
 			transform: translate(0, 430%) rotate(-2deg);
-			z-index:1;
-// position:relative;
-			line-height:1px;
+			z-index: 1;
+			// position:relative;
+			line-height: 1px;
 			margin: 0;
 			text-shadow: 1px 1px green;
 			color: white;
-      font-size: 11vh;
-      font-weight: 600;
-			text-shadow:10px 5px 10px rgb(0, 0, 0),10px 5px 10px rgb(0, 0, 0) ;
-			font-family:'Southland';
-      // letter-spacing: 0.4vw;
-      // -webkit-text-stroke:1px green;
-    //   -webkit-font-smoothing: antialiased;
-    // -moz-osx-font-smoothing: grayscale;
-    // text-rendering: optimizeLegibility;
+			font-size: 11vh;
+			font-weight: 600;
+			text-shadow: 10px 5px 10px rgb(0, 0, 0), 10px 5px 10px rgb(0, 0, 0);
+			font-family: "Southland";
+			// letter-spacing: 0.4vw;
+			// -webkit-text-stroke:1px green;
+			//   -webkit-font-smoothing: antialiased;
+			// -moz-osx-font-smoothing: grayscale;
+			// text-rendering: optimizeLegibility;
 			span {
 				font-size: 14vh;
-			
 			}
 		}
 		p {
@@ -43,15 +41,20 @@ header {
 			color: rgb(201, 25, 177);
 		}
 	}
-	.menu-items{
-		color:white;
-		font-size:2vw;
-		display:flex;
-		font-family:Arial;
-		align-items: center;
-		font-size:2vw;
-		div{
-			padding:0 3vw;
+	.menu-items {
+		color: white;
+		font-size: 2vw;
+
+		font-family: Arial;
+
+		font-size: 2vw;
+		nav {
+			
+			display: flex;
+			align-items: center;
+			a{
+				padding: 0 3vw;
+			}
 		}
 	}
 }

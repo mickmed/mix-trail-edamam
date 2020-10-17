@@ -1,14 +1,21 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { useHistory, Link } from "react-router-dom"
 
 const Nav = (props) => {
   const history = useHistory()
-  const {setSidebar} = props
+  const { setSidebar } = props
+  // const [style, setStyle] = useState()
 
   let links = ["my recipes", "create a recipe", "about"]
 
+  const style = props.origin === "sidebar" ? {
+    display: "flex",
+    flexDirection: "column",
+  } : {}
+
   const closeModal = (link) => {
-    setSidebar(!props.sidebar)
+    console.log(props.origin)
+    props.origin === "sidebar" && setSidebar(!props.sidebar)
 
     link =
       link === "my recipes"
@@ -19,9 +26,9 @@ const Nav = (props) => {
     history.push(`/${link}`)
   }
   return (
-    <nav>
+    <nav style={style}>
       {links.map((link, idx) => (
-        <div onClick={() => closeModal(link)}>{link}</div>
+        <a onClick={() => closeModal(link)}>{link}</a>
       ))}
     </nav>
   )
