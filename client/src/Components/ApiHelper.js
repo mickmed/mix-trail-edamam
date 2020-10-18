@@ -25,22 +25,7 @@ export const getItem = async (search, pageSize) => {
     console.log(error)
   }
 
-  /**EDAMAM KEYS **/
-  // const appId = process.env.REACT_APP_EDAMAM_NUTRITION_DATA_APP_ID
-  // const appKey = process.env.REACT_APP_EDAMAM_NUTRITION_DATA_APP_KEY
-  // const url = `https://api.edamam.com/api/nutrition-data?app_id=${appId}&app_key=${appKey}&ingr=${search} `
-  // console.log(pageSize)
-
-  /**USDA KEY ******************************************************/
-  // const api_key = process.env.REACT_APP_USDA_API_KEY
-  // const baseUrl = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${api_key}&dataType=
-
-  // // Survey (FNDDS),
-  // // Foundation,
-  // // Branded,
-  // SR Legacy
-  // `
-  // const params = `&query=${search}&pageSize=${pageSize}`
-  // const url = baseUrl + params
-  /** END USDA KEY ***************************************/
+ 
 }
+
+

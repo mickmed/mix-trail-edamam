@@ -37,6 +37,7 @@ function App() {
     <div className="App" ref={appWidth}>
       <Layout appWidth={appWidth} sidebar={sidebar} setSidebar={setSidebar}>
         <Switch>
+
           <Route exact path="/">
             <Splash />
           </Route>
@@ -52,6 +53,7 @@ function App() {
           <Route exact path="/about">
             <About />
           </Route>
+          
         </Switch>
       </Layout>
     </div>

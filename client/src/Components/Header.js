@@ -17,6 +17,8 @@ const Header = (props) => {
         <h4>
           <span>S</span>caled&nbsp;
         </h4>
+      <p className='attribution'>Powered by Nutritionix</p>
+
       </Link>
       <div
         className="menu-items"

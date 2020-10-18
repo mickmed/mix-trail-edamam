@@ -181,13 +181,13 @@ const Home = (props) => {
               name="name"
               className="recipe-name"
               value={input.name || ""}
-              placeholder="recipe name"
+              placeholder="...add recipe name"
               onChange={onChange}
               ref={inputRef}
             />
-            <button className="save-recipe" onClick={saveRecipe}>
+            {items.length > 1 && <button className="save-recipe" onClick={saveRecipe}>
               {id ? "Update Recipe" : "Save Recipe"}
-            </button>
+            </button>}
           </div>
         )}
         {!renderModal &&

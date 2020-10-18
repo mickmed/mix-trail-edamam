@@ -38,7 +38,12 @@ header {
 		}
 		p {
 			margin: 0;
+			font-family:arial;
+			font-size:2vw;
 			color: rgb(201, 25, 177);
+			color: rgb(61, 71, 161);
+			margin-left:2vw;
+			
 		}
 	}
 	.menu-items {
@@ -71,7 +76,12 @@ header {
 @media only screen and (min-width:900px){
 	header{
 		.menu-items{
-			font-size:1.2vw;
+			font-size:1.5vw;
+		}
+		a{
+			p{
+				font-size:1vw;
+			}
 		}
 	}
 }
