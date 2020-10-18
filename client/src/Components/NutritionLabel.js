@@ -54,11 +54,11 @@ const NutritionalLabel = ({ nutrientVals }) => {
         <div className="serving">
           <span>
             <h6>Serving Size</h6>
-            <h6>n/a</h6>
+            <h6>1</h6>
           </span>
           <span>
             <h6>Servings Per Container</h6>
-            <h6>n/a</h6>
+            <h6>1</h6>
           </span>
         </div>
         {/* <!-- TOP SUB HEADING --> */}

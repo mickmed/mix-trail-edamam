@@ -24,6 +24,7 @@ const Footer = () => {
           className="attribution"
         >
           Powered by Nutritionix
+          <img src='https://d2eawub7utcl6.cloudfront.net/images/nix-apple-grey.png' alt='icon'/>
         </a>
       </div>
     </footer>

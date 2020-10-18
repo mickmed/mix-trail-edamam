@@ -26,12 +26,6 @@ const Home = (props) => {
   const inputRef = useRef(null)
   const { id } = useParams()
 
- 
-
-
-
-
-
   useEffect(() => {
     console.log(apiUrl)
     inputElement.current !== null
@@ -51,7 +45,7 @@ const Home = (props) => {
         setItems(resp.data.ingredients)
         setNutrientVals(resp.data.nutrientVals[0])
         setItem(resp.data)
-        setInput({...input, name:resp.data.name})
+        setInput({ ...input, name: resp.data.name })
       }
       console.log(item)
       getItem()
@@ -148,9 +142,28 @@ const Home = (props) => {
   }
 
   const saveRecipe = async () => {
-    // const resp = await axios()
+    console.log("submit")
+    // e.preventDefault()
+    setRenderModal(false)
+    const body = { ...input, ingredients: items, nutrientVals: nutrientVals }
+    console.log({ ...input }, items, body)
 
-    setRenderModal(true)
+    const resp = await axios.post(`${apiUrl}/recipes`, body)
+    console.log(resp)
+    setItem(resp.data)
+  }
+
+  const updateRecipe = async (e) => {
+    console.log("update", items)
+    console.log("input", input)
+
+    setRenderModal(false)
+    const body = { ...input, ingredients: items, nutrientVals: nutrientVals }
+    console.log({ ...input }, items, body)
+
+    const resp = await axios.put(`${apiUrl}/recipes/${item._id}`, body)
+    console.log(resp)
+    setItem(resp.data)
   }
 
   const randNum = () => {
@@ -159,7 +172,6 @@ const Home = (props) => {
 
   return (
     <div className={`home ${fadeOut}`}>
-     
       <section className="item-info-wrapper">
         {renderModal && (
           <CreateRecipeModal
@@ -174,22 +186,37 @@ const Home = (props) => {
             onChange={onChange}
           />
         )}
-        {!renderModal && (
-          <div className="save-button">
-            <input
-              type="text"
-              name="name"
-              className="recipe-name"
-              value={input.name || ""}
-              placeholder="...add recipe name"
-              onChange={onChange}
-              ref={inputRef}
-            />
-            {items.length > 1 && <button className="save-recipe" onClick={saveRecipe}>
-              {id ? "Update Recipe" : "Save Recipe"}
-            </button>}
-          </div>
-        )}
+
+        <div className="save-button">
+          <input
+            type="text"
+            name="name"
+            className="recipe-name"
+            value={input.name || ""}
+            placeholder="...add recipe name"
+            onChange={onChange}
+            ref={inputRef}
+          />
+          {items.length > 1 && (
+            <>
+              <button
+                className="save-recipe"
+                onClick={() => setRenderModal(!renderModal)}
+                style={renderModal ? {background:'blue', color:'white'} : {}}
+              >
+                details
+              </button>
+              <button
+                className="save-recipe"
+                onClick={id ? updateRecipe : saveRecipe}
+               
+              >
+                {id ? "update" : "save"}
+              </button>
+            </>
+          )}
+        </div>
+
         {!renderModal &&
           items.map((item, idx) => {
             return (
@@ -219,7 +246,7 @@ const Home = (props) => {
             )
           })}
 
-        {
+        {!renderModal && (
           <Form
             idx={items.length}
             value={input[items.length]}
@@ -228,7 +255,7 @@ const Home = (props) => {
             onSubmit={handleSubmit}
             refo={inputElement}
           />
-        }
+        )}
       </section>
       <NutritionLabel nutrientVals={nutrientVals} />
     </div>
