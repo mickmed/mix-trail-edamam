@@ -3,10 +3,9 @@
 ***Mick Roth***
 
 
-### Mix Trail
+## Scaled
 
-## Nutrient Tracker
-  This app calculates the nutrition facts based on user ingredients. Natural language entry for ingredients and measurements. Build a recipe and generate a calculated ```nutrition facts``` label.
+   Scaled is a recipe calculator that allows users to calculate a ```nutrition facts``` label based on given ingredients. Natural language processing is available, for e.g., '1/2 cup strawberries.' The app uses the free tier of the nutritionix API. Unfortunately this limits calls to 200/day, including undefined returns but is sufficient to showcase the functionality. Also users can save recipes that when retrieved do not make an api call. 
  
 
 
@@ -27,13 +26,13 @@
 <br>
 
 ### &#128755; Api
-- Nutritionix
+- [Nutritionix](https://developer.nutritionix.com/)
 
 
 <br>
 
 ### &#127758; Deployed
-- [Current Site](https://sweetly-different.netlify.app)
+- [Current Site on Netlify](https://scaled-nutrition-facts.netlify.app/)
 
 
 <br>

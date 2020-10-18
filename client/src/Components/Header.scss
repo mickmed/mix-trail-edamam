@@ -73,14 +73,25 @@ header {
 }
 
 
+@media only screen and (min-width:600px){
+	header{
+		
+		a{
+			p.attribution{
+				font-size:1.5vw;
+			}
+		}
+	}
+}
+
 @media only screen and (min-width:900px){
 	header{
 		.menu-items{
 			font-size:1.5vw;
 		}
 		a{
-			p{
-				font-size:1vw;
+			p.attribution{
+				font-size:1.2vw;
 			}
 		}
 	}

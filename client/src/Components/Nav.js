@@ -28,7 +28,7 @@ const Nav = (props) => {
   return (
     <nav style={style}>
       {links.map((link, idx) => (
-        <a onClick={() => closeModal(link)}>{link}</a>
+        <a key={idx} onClick={() => closeModal(link)}>{link}</a>
       ))}
     </nav>
   )

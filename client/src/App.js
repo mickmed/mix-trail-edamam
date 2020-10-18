@@ -7,6 +7,7 @@ import Home from "./Components/Home"
 import Nav from "./Components/Header"
 import Recipes from "./Components/Recipes"
 import Recipe from "./Components/Recipe"
+import RecipeCreate from './Components/RecipeCreate'
 import Layout from "./Components/Layout"
 import axios from "axios"
 import apiUrl from "./Components/apiConfig"
@@ -44,9 +45,9 @@ function App() {
           <Route exact path="/recipes">
             <Recipes recipes={recipes} />
           </Route>
-          <Route exact path="/recipes/new">
-            <Home />
-          </Route>
+          {/* <Route exact path="/recipes/new">
+            <RecipeCreate />
+          </Route> */}
           <Route exact path="/recipes/:id">
             <Home recipes={recipes} sidebar={sidebar} />
           </Route>

@@ -28,7 +28,7 @@ const CreateRecipeModal = (props) => {
             value={input[val]}
             placeholder={val}
             onChange={(e) => onChange(e)}
-            autocomplete='off'
+            autoComplete='off'
           />  
         ))}
 

@@ -1,6 +1,6 @@
 import React from "react"
 
-const Form = ({idx, value, onClick, onChange, onSubmit, refo }) => {
+const Form = ({idx, value, onClick, onChange, onSubmit, refo, origin }) => {
   return (
     <form className="item-input" onSubmit={onSubmit}>
       <input
@@ -12,9 +12,10 @@ const Form = ({idx, value, onClick, onChange, onSubmit, refo }) => {
         id={`ingr${idx}`}
         placeholder="...enter food"
         ref={refo}
-        autocomplete='off'
+        autoComplete='off'
       />
-      <button type="submit">+</button>
+      {console.log(refo)}
+      <button type="submit">{origin === 'addItem' ? '+' : '>'}</button>
     </form>
   )
 }

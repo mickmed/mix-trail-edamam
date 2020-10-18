@@ -10,30 +10,32 @@ import { foods } from "./data.js"
 import axios from "axios"
 
 const Home = (props) => {
+  const [item, setItem] = useState([])
+  const [items, setItems] = useState([])
   const [nutrientVals, setNutrientVals] = useState([])
   const [input, setInput] = useState({})
   const [selectedId, setSelectedId] = useState(null)
   const [search, setSearch] = useState("")
-  const [items, setItems] = useState([])
-  const [rerender, setRerender] = useState(false)
   const [renderModal, setRenderModal] = useState(false)
-  const [item, setItem] = useState([])
   const [fadeOut, setFadeOut] = useState([])
   const inputElement = useRef(null)
-  const inputRef = useRef(null)
+  // const inputRef = useRef(null)
   const { id } = useParams()
 
   useEffect(() => {
-    console.log(apiUrl)
-    inputElement.current !== null
-      ? inputElement.current.focus()
-      : setRerender(!rerender)
-  }, [selectedId])
+   
+    setItems([])
+    setItem([])
+    setNutrientVals([])
+    setInput({})
+    inputElement.current.focus()
+  }, [id])
+
+
 
   useEffect(() => {
-    console.log(props.recipes)
-    inputRef.current.focus()
-    if (id) {
+  
+    if (id !== "new") {
       const item = props.recipes.find((recipe) => recipe._id === id)
       const getItem = async () => {
         const resp = await axios(`${apiUrl}/recipes/${id}`)
@@ -41,13 +43,16 @@ const Home = (props) => {
         setNutrientVals(resp.data.nutrientVals[0])
         setItem(resp.data)
         setInput({ ...input, ...resp.data })
+   
+
       }
+      console.log(inputElement)
 
       getItem()
     }
   }, [])
 
-  const handleChange = (e) => {
+  const itemHandleChange = (e) => {
     setSearch(e.target.value)
   }
 
@@ -126,22 +131,19 @@ const Home = (props) => {
     })
   }
 
-  const updateRecipe = async (e) => {
-    setRenderModal(false)
-    const body = { ...input, ingredients: items, nutrientVals: nutrientVals }
-    const resp = await axios.put(`${apiUrl}/recipes/${item._id}`, body)
-    setItem(resp.data)
-  }
+
 
   const saveRecipe = async () => {
     setRenderModal(false)
     const body = { ...input, ingredients: items, nutrientVals: nutrientVals }
-    let resp = id
-      ? await axios.put(`${apiUrl}/recipes/${item._id}`, body)
-      : await axios.post(`${apiUrl}/recipes`, body)
-
+    let resp =
+      id !== "new"
+        ? await axios.put(`${apiUrl}/recipes/${item._id}`, body)
+        : await axios.post(`${apiUrl}/recipes`, body)
+    console.log(resp.data)
     setItem(resp.data)
   }
+
   return (
     <div className={`home ${fadeOut}`}>
       <section className="item-info-wrapper">
@@ -167,8 +169,8 @@ const Home = (props) => {
             value={input.name || ""}
             placeholder="...add recipe name"
             onChange={onChange}
-            ref={inputRef}
-            autocomplete='off'
+            ref={inputElement}
+            autoComplete="off"
           />
           {items.length > 1 && (
             <>
@@ -181,11 +183,8 @@ const Home = (props) => {
               >
                 details
               </button>
-              <button
-                className="save-recipe"
-                onClick={saveRecipe}
-              >
-                {id ? "update" : "save"}
+              <button className="save-recipe" onClick={saveRecipe}>
+                {id !== "new" ? "update" : "save"}
               </button>
             </>
           )}
@@ -197,18 +196,20 @@ const Home = (props) => {
                 {selectedId === idx ? (
                   <Form
                     idx={idx}
-                    value={input[idx] || ""}
+                    value={
+                      input[idx] ||
+                      `${item.serving_qty}  ${item.serving_unit} ${item.food_name}`
+                    }
                     onClick={setSelectedId}
                     onChange={onChange}
                     onSubmit={updateItem}
-                    refo={inputElement}
+                    // refo={inputElement}
                   />
                 ) : (
                   <div type="text" onClick={() => setSelectedId(idx)}>
                     <span>{item.serving_qty}</span>
                     <span>{item.serving_unit}</span>
                     <span>{item.food_name}</span>
-                    {/* {item.nf_calories} */}
                   </div>
                 )}
                 <div className="remove-X" onClick={() => removeItem(idx)}>
@@ -217,14 +218,16 @@ const Home = (props) => {
               </div>
             )
           })}
+        
         {!renderModal && (
           <Form
             idx={items.length}
-            value={input[items.length]}
+            value={"" || input[items.length]}
             onClick={setSelectedId}
-            onChange={handleChange}
+            onChange={itemHandleChange}
             onSubmit={addItem}
-            refo={inputElement}
+            // refo={inputElement}
+            origin='addItem'
           />
         )}
       </section>

@@ -7,21 +7,24 @@ import apiUrl from "./apiConfig"
 const Recipes = (props) => {
   const { recipes } = props
 
-  const deleteRecipe = async (id) => {
+  const deleteRecipe = async (id, name) => {
     console.log(id)
+    alert(`are you sure you want to delete ${name}`)
     const resp = await axios.delete(`${apiUrl}/recipes/${id}`)
     console.log(resp)
   }
 
-  return (
+  
+  return !recipes ? (<div>...loading</div>) : (
     <div className="recipes">
       {recipes &&
         recipes.map((recipe, idx) => (
-          <div key={idx}>
+          <div className='recipe-list' key={idx}>
+            <div onClick={() => deleteRecipe(recipe._id, recipe.name)}>X</div>
             <Link to={`/recipes/${recipe._id}`}>
               <div className="recipe-name">{recipe.name}</div>
             </Link>
-            <div onClick={() => deleteRecipe(recipe._id)}>X</div>
+            
           </div>
         ))}
     </div>
