@@ -12,6 +12,7 @@ const Form = ({idx, value, onClick, onChange, onSubmit, refo }) => {
         id={`ingr${idx}`}
         placeholder="...enter food"
         ref={refo}
+        autocomplete='off'
       />
       <button type="submit">+</button>
     </form>

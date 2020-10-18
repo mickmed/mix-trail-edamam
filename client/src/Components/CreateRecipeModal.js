@@ -7,11 +7,7 @@ import apiUrl from "./apiConfig"
 
 const CreateRecipeModal = (props) => {
   const {
-    setRenderModal,
-    renderModal,
-    items,
-    setItem,
-    nutrientVals,
+ id,
     item,
     onChange,
     input
@@ -29,9 +25,10 @@ const CreateRecipeModal = (props) => {
             key={idx}
             type="text"
             name={val}
-            value={input[val] || item[val] || ''}
+            value={input[val]}
             placeholder={val}
             onChange={(e) => onChange(e)}
+            autocomplete='off'
           />  
         ))}
 
