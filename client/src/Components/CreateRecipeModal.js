@@ -45,8 +45,8 @@ const CreateRecipeModal = (props) => {
     console.log("submit")
     e.preventDefault()
     setRenderModal(false)
-    const body = { ...value, ingredients: items, nutrientVals: nutrientVals }
-    console.log(value, items, body)
+    const body = { ...props.input, ingredients: items, nutrientVals: nutrientVals }
+    console.log({...props.input}, items, body)
 
     const resp = await axios.post(`${apiUrl}/recipes`, body)
     console.log(resp)
@@ -57,8 +57,8 @@ const CreateRecipeModal = (props) => {
     console.log("update", items)
     e.preventDefault()
     setRenderModal(false)
-    const body = { ...value, ingredients: items, nutrientVals: nutrientVals }
-    console.log(value, items, body)
+    const body = { ...props.input, ingredients: items, nutrientVals: nutrientVals }
+    console.log({...props.input}, items, body)
 
     const resp = await axios.put(`${apiUrl}/recipes/${item._id}`, body)
     console.log(resp)

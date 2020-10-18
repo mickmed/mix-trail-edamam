@@ -16,7 +16,7 @@ header {
 		align-items: center;
 		text-decoration: none;
 		h4 {
-			transform: translate(0, 430%) rotate(-2deg);
+			transform: translate(0, 530%) rotate(-2deg);
 			z-index: 1;
 			// position:relative;
 			line-height: 1px;
@@ -65,4 +65,13 @@ header {
 	height: 500%;
 	overflow-y: scroll;
 	color: black;
+}
+
+
+@media only screen and (min-width:900px){
+	header{
+		.menu-items{
+			font-size:1.2vw;
+		}
+	}
 }

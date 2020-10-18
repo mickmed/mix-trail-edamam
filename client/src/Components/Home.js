@@ -51,6 +51,7 @@ const Home = (props) => {
         setItems(resp.data.ingredients)
         setNutrientVals(resp.data.nutrientVals[0])
         setItem(resp.data)
+        setInput({...input, name:resp.data.name})
       }
       console.log(item)
       getItem()
@@ -157,7 +158,7 @@ const Home = (props) => {
   }
 
   return (
-    <div className={`home ${fadeOut}`} key={randNum()}>
+    <div className={`home ${fadeOut}`}>
      
       <section className="item-info-wrapper">
         {renderModal && (
