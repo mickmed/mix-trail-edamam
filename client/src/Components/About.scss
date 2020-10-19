@@ -1,6 +1,7 @@
 .about{
-  padding:10%;
+  padding:7%;
   line-height:150%;
+  animation: fadein 1s forwards;
 }
 
 @media only screen and (min-width:900px){
@@ -9,3 +10,12 @@
 }
   }
   
+
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }

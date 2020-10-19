@@ -10,11 +10,15 @@ header {
 	.burger {
 		font-size: 8vw;
 		color: white;
+	cursor:pointer;
+
 	}
 	a {
 		display: flex;
 		align-items: center;
 		text-decoration: none;
+	cursor:pointer;
+
 		h4 {
 			transform: translate(0, 530%) rotate(-2deg);
 			z-index: 1;
@@ -87,11 +91,11 @@ header {
 @media only screen and (min-width:900px){
 	header{
 		.menu-items{
-			font-size:1.5vw;
+			font-size:1.2vw;
 		}
 		a{
 			p.attribution{
-				font-size:1.2vw;
+				font-size:.8vw;
 			}
 		}
 	}

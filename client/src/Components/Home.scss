@@ -1,7 +1,5 @@
-.fade-out{
-
+.fade-out {
   animation: fadein 2s forwards;
- 
 }
 
 .home {
@@ -29,7 +27,6 @@
     height: 70vh;
     overflow-y: scroll;
     position: relative;
-    
 
     .save-button {
       display: flex;
@@ -43,44 +40,41 @@
         height: 30px;
         outline: none;
         width: 200%;
-        font-size:4vw;
-        transform:translate(-2vw, .25vh);
-        &:hover{
-          transform:scale(1.1);
+        font-size: 4vw;
+        transform: translate(-2vw, 0.25vh);
+        &:hover {
+          transform: scale(1.1);
         }
       }
-      
+
       button.save-recipe {
         color: blue;
-        transform:scale(.8);
-        margin-bottom:3vh;
+        transform: scale(0.8);
+        margin-bottom: 3vh;
         // background: transparent;
         // border: 1px solid blue;
       }
     }
     .menu-item {
       display: flex;
-      letter-spacing: 0.2vw;
+      letter-spacing: 0.1vw;
       width: 85%;
       margin: 3vh auto 2vh;
       justify-content: space-between;
       color: green;
       font-size: 4vw;
       // font-weight: 600;
-      font-family:arial;
+      font-family: arial;
       span {
-        padding: .5vw;
+        padding: 0.5vw;
       }
       &:hover {
         background: lightgrey;
       }
-    
+
       .remove-X {
         font-size: 3vw;
-        
       }
-      
-      
     }
     form.item-input {
       width: 85%;
@@ -99,8 +93,8 @@
       button {
         border: 0;
         background: 0;
-        font-size: 4vw;
-       transform:translateX(5px);
+        font-size: 3vw;
+        transform: translateX(5px);
       }
     }
   }
@@ -127,12 +121,12 @@
     }
     .item-info-wrapper {
       margin-top: 1vh;
-      .save-button{
-        input.recipe-name{
-          font-size:2vw;
+      .save-button {
+        input.recipe-name {
+          font-size: 2vw;
         }
-        button{
-          font-size:1.5vw;
+        button {
+          font-size: 1.5vw;
         }
       }
       .menu-item {
@@ -156,6 +150,12 @@
     }
     .item-info-wrapper {
       margin-top: 1vh;
+      .save-button {
+        input.recipe-name {
+          font-size:1.7vw;
+        }
+      }
+
       .menu-item {
         font-size: 2vw;
         .remove-X {

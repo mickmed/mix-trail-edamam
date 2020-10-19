@@ -7,7 +7,6 @@ import Home from "./Components/Home"
 import Nav from "./Components/Header"
 import Recipes from "./Components/Recipes"
 import Recipe from "./Components/Recipe"
-import RecipeCreate from './Components/RecipeCreate'
 import Layout from "./Components/Layout"
 import axios from "axios"
 import apiUrl from "./Components/apiConfig"
@@ -17,7 +16,6 @@ import About from "./Components/About"
 function App() {
   const [recipes, setRecipes] = useState([])
   const [sidebar, setSidebar] = useState(false)
-  const [shoonga, setShoonga] = useState(false)
   const appWidth = useRef(null)
 
   useEffect(()=>{
@@ -45,9 +43,7 @@ function App() {
           <Route exact path="/recipes">
             <Recipes recipes={recipes} />
           </Route>
-          {/* <Route exact path="/recipes/new">
-            <RecipeCreate />
-          </Route> */}
+         
           <Route exact path="/recipes/:id">
             <Home recipes={recipes} sidebar={sidebar} />
           </Route>
