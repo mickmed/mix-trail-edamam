@@ -40,6 +40,6 @@
 - [Current Site on Netlify](https://scaled-nutrition-facts.netlify.app/)
 
 
-<br><br>
+<br>
 
 
