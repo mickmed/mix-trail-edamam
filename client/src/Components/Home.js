@@ -23,7 +23,6 @@ const Home = (props) => {
   const { id } = useParams()
 
   useEffect(() => {
-   
     setItems([])
     setItem([])
     setNutrientVals([])
@@ -31,10 +30,7 @@ const Home = (props) => {
     inputElement.current.focus()
   }, [id])
 
-
-
   useEffect(() => {
-  
     if (id !== "new") {
       const item = props.recipes.find((recipe) => recipe._id === id)
       const getItem = async () => {
@@ -43,8 +39,6 @@ const Home = (props) => {
         setNutrientVals(resp.data.nutrientVals[0])
         setItem(resp.data)
         setInput({ ...input, ...resp.data })
-   
-
       }
       console.log(inputElement)
 
@@ -131,8 +125,6 @@ const Home = (props) => {
     })
   }
 
-
-
   const saveRecipe = async () => {
     setRenderModal(false)
     const body = { ...input, ingredients: items, nutrientVals: nutrientVals }
@@ -195,6 +187,7 @@ const Home = (props) => {
               <div key={idx} className="menu-item">
                 {selectedId === idx ? (
                   <Form
+                    className="edit-item-form"
                     idx={idx}
                     value={
                       input[idx] ||
@@ -218,16 +211,17 @@ const Home = (props) => {
               </div>
             )
           })}
-        
+
         {!renderModal && (
           <Form
+            className="add-item-form"
             idx={items.length}
             value={"" || input[items.length]}
             onClick={setSelectedId}
             onChange={itemHandleChange}
             onSubmit={addItem}
             // refo={inputElement}
-            origin='addItem'
+            origin="addItem"
           />
         )}
       </section>

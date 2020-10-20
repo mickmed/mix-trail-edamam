@@ -75,8 +75,18 @@
       .remove-X {
         font-size: 3vw;
       }
+      form.edit-item-form{
+        // width:120%;
+        margin:0 auto;
+        input{
+          padding:0;
+          width:100%;
+        }
+        
+      }
+      
     }
-    form.item-input {
+    form.add-item-form{
       width: 85%;
       display: flex;
       // margin-top:5vh;
@@ -157,19 +167,22 @@
       }
 
       .menu-item {
-        font-size: 2vw;
+        font-size: 1.5vw;
         .remove-X {
-          font-size: 2vw;
+          font-size: 1.5vw;
         }
       }
-    }
+  
     form.item-input {
-      font-size: 1px;
+      
       input {
-        font-size: 2vw;
+        font-size: 1.6vw;
+      }
+      button{
+        font-size:2vw;
       }
     }
-  }
+  }  }
 }
 
 @media only screen and (min-width: 900px) and (min-height: 1000px) {
