@@ -66,7 +66,7 @@ const NutritionalLabel = ({ nutrientVals }) => {
         <div className="primary">
           <h3>Calories {vals.nf_calories}</h3>
 
-          <h3>Calories from Fat {vals.nf_total_fat * 9}</h3>
+          <h3>Calories from Fat {vals.nf_total_fat * 9 || ''}</h3>
         </div>
 
         <p className="perc-daily-val">% Daily Value*</p>
@@ -135,7 +135,7 @@ const NutritionalLabel = ({ nutrientVals }) => {
         </div> */}
         <div className="potassium">
           <h3>Potassium {vals.nf_potassium}</h3>
-      <h3>{Math.round(4700/vals.nf_potassium)}%</h3>
+      <h3>{Math.round(4700/vals.nf_potassium) || ''}%</h3>
         </div>
         <div>
           <h6>*Percent Daily Values are based on a 2,000 calorie diet.</h6>

@@ -7,11 +7,13 @@
   flex-direction: column;
 
   height: 100%;
+  
   box-sizing: border-box;
   // opacity:0;
   animation: fadein 2s forwards;
   position: relative;
   width: 100%;
+  margin-top:10vh;
 
   section {
     // flex: 1;
@@ -22,11 +24,14 @@
     margin-top: 1vh;
   }
   .item-info-wrapper {
-    background: white;
+    background: #f5f9fc;
     padding-top: 5vh;
-    height: 70vh;
+    height: 30%;
     overflow-y: scroll;
     position: relative;
+    // border:solid;
+    width:95%;
+    margin:0 auto;
 
     .save-button {
       display: flex;
@@ -42,6 +47,8 @@
         width: 200%;
         font-size: 4vw;
         transform: translate(-2vw, 0.25vh);
+        background-color:#f5f9fc;
+
         &:hover {
           transform: scale(1.1);
         }
@@ -63,11 +70,14 @@
       justify-content: space-between;
       color: green;
       font-size: 4vw;
+      background-color:#f5f9fc;
+
+
       // font-weight: 600;
       font-family: arial;
       span {
         padding: 0.5vw;
-      }
+      }white
       &:hover {
         background: lightgrey;
       }
@@ -78,9 +88,13 @@
       form.edit-item-form{
         // width:120%;
         margin:0 auto;
+        background-color:#f5f9fc;
+
         input{
           padding:0;
           width:100%;
+          background-color:#f5f9fc;
+
         }
         
       }
@@ -99,6 +113,8 @@
         border: 0;
         border-bottom: 1px solid;
         outline: none;
+        background-color:#f5f9fc;
+
       }
       button {
         border: 0;
@@ -126,11 +142,13 @@
   .home {
     flex-direction: row;
     section {
-      height: 85%;
-      width: 50%;
+      // height: 85%;
+      width: 45%;
     }
     .item-info-wrapper {
       margin-top: 1vh;
+      height:60%;
+      width:50%;
       .save-button {
         input.recipe-name {
           font-size: 2vw;
@@ -145,7 +163,7 @@
           font-size: 2vw;
         }
       }
-      form.item-input {
+      form.add-item-form {
         input {
           font-size: 2vw;
         }
@@ -154,11 +172,14 @@
   }
 }
 
+
+
 @media only screen and (min-width: 900px) {
   .home {
     section {
     }
     .item-info-wrapper {
+      // max-height:55%;
       margin-top: 1vh;
       .save-button {
         input.recipe-name {
@@ -173,7 +194,7 @@
         }
       }
   
-    form.item-input {
+    form.add-item-form {
       
       input {
         font-size: 1.6vw;
@@ -185,15 +206,21 @@
   }  }
 }
 
-@media only screen and (min-width: 900px) and (min-height: 1000px) {
+@media only screen and (min-width: 600px) and (min-height: 900px) and (orientation: portrait) {
+  
   .home {
-    flex-direction: row;
+    // flex-direction: row;
+    .item-info-wrapper{
+     max-height:40%;
+    }
 
     section {
-      max-height: 40%;
+      // height: 10%;
     }
   }
 }
+
+
 .item-info-wrapper::-webkit-scrollbar {
   display: none;
 }

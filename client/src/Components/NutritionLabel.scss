@@ -1,101 +1,94 @@
-/*-----nutrition label starts here------*/
-
 .nutrition-label {
+    max-height: 60%;
     color: green;
-    height: 70vh;
-}
-.nutrition-facts {
-    overflow: scroll;
-    background: rgba(255, 255, 255, 1);
-    width: 90%;
-    margin: 0 auto;
-    border: 1px solid;
-    border-radius: 2vw;
-    box-sizing: border-box;
-    padding: 3vw;
-    // height: 100%;
-    span {
-        font-size: 2vw;
-        padding: 1vw;
-    }
-    h1 {
-        font-family: "Helvetica_Black", arial;
-        font-size: 6vw;
-        font-weight: bold;
-    }
-    h3 {
-        font-size: 18p;
-    }
-    h4 {
-        font-family: "Helvetica_Black", arial;
-    }
-    h1,
-    h3,
-    h4,
-    h6 {
-        margin: 0;
-    }
-
-    h6 {
-        padding-right: 1vw;
-    }
-
-    .serving {
-        border-bottom: 7px solid;
-        display: flex;
-        justify-content: space-between;
-        padding: 0.5vh 0;
+    .nutrition-facts {
+        box-sizing: border-box;
+        margin: 0 auto;
+        border: 1px solid;
+        border-radius: 2vw;
+        background: rgba(255, 255, 255, 1);
+        padding: 3%;
+        width: 90%;
+        height: 100%;
+        overflow: scroll;
+        // height: 100%;
         span {
+            padding: 1vw;
+            font-size: 2vw;
+        }
+        h1 {
+            font-family: "Helvetica_Black", arial;
+            font-size: 6vw;
+            font-weight: bold;
+        }
+        h3 {
+            font-size: 18p;
+        }
+        h4 {
+            font-family: "Helvetica_Black", arial;
+        }
+        h1,
+        h3,
+        h4,
+        h6 {
+            margin: 0;
+        }
+        h6 {
+            padding-right: 1vw;
+        }
+        .serving {
             display: flex;
-            justify-content: flex-start;
-            padding: 0;
-            h6 {
-                font-size: 3vw;
+            justify-content: space-between;
+            border-bottom: 7px solid;
+            padding: 0.5vh 0;
+            span {
+                display: flex;
+                justify-content: flex-start;
+                padding: 0;
+                h6 {
+                    font-size: 3vw;
+                }
             }
         }
-    }
-    .amnt-per-serving {
-        margin: 0.5vh 0;
-    }
-    .perc-daily-val {
-        font-family: "Helvetica_Black", arial;
-        font-size: 12px;
-        font-weight: bold;
-        margin: 0.5vh 0 0;
-        display: flex;
-        justify-content: flex-end;
-    }
-    .primary,
-    .secondary {
-        padding: 0.5vh 0;
-    }
-    .primary {
-        border-top: 1px solid;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .secondary {
-        border-top: 1px solid;
-        width: 90%;
-        display: flex;
-        justify-content: space-between;
-        margin-left: 10%;
-    }
-
-    .chol {
-        border: 0;
-    }
-
-    .protein {
-        border-bottom: 7px solid;
-        padding: 1vh 0 1vh;
-    }
-    .potassium{
-        padding-top:2vh;
+        .amnt-per-serving {
+            margin: 0.5vh 0;
+        }
+        .perc-daily-val {
+            display: flex;
+            justify-content: flex-end;
+            margin: 0.5vh 0 0;
+            font-family: "Helvetica_Black", arial;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .primary,
+        .secondary {
+            padding: 0.5vh 0;
+        }
+        .primary {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid;
+        }
+        .secondary {
+            display: flex;
+            justify-content: space-between;
+            margin-left: 10%;
+            border-top: 1px solid;
+            width: 90%;
+        }
+        .chol {
+            border: 0;
+        }
+        .protein {
+            border-bottom: 7px solid;
+            padding: 1vh 0 1vw;
+        }
+        .potassium {
+            padding-top: 2vh;
+        }
     }
 }
-
 .vitA,
 .vitC,
 .calcium,
@@ -104,82 +97,95 @@
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid black;
-    padding: 0.3vh;
+    padding: 0.3vw;
 }
 #arrow {
     position: absolute;
-    left: 0;
     right: 0;
     bottom: 3vh;
+    left: 0;
     z-index: 1;
-    background: white;
     margin: 0 auto;
-    font-size: 12vw;
+    background: white;
     color: green;
+    font-size: 12vw;
 }
-
 @media only screen and (min-width: 600px) {
-    .nutrition-facts {
-        padding: 2vw;
-        width: 85%;
-        border-radius: 0;
-        h1 {
-            font-size: 3vw;
-        }
-        .serving {
-            span {
-                h6 {
-                    font-size: 1.25vw;
+    .nutrition-label {
+        max-height: 65%;
+        // border: 2px solid red;
+        .nutrition-facts {
+            border-radius: 0;
+            padding: 2vw;
+            width: 85%;
+            h1 {
+                font-size: 3vw;
+            }
+            .serving {
+                span {
+                    h6 {
+                        font-size: 1.25vw;
+                    }
                 }
             }
         }
-    }
-    #arrow {
-        font-size: 6vw;
+        #arrow {
+            font-size: 6vw;
+        }
     }
 }
 @media only screen and (min-width: 900px) {
-    .nutrition-facts {
-        h1{
-            // font-size: 3vw;
-        }
-        h3 {
-            font-size: 1.7vw;
-        }
-        h4 {
-            font-size: 1.5vw;
-            font-weight: lighter;
+    .nutrition-label {
+        .nutrition-facts {
+            h1 {
+                // font-size: 3vw;
+            }
+            h3 {
+                font-size: 1.7vw;
+            }
+            h4 {
+                font-size: 1.5vw;
+                font-weight: lighter;
+            }
         }
     }
 }
 @media only screen and (min-width: 1600px) {
-    .nutrition-facts {
-        h1{
-            font-size: 2vw;
-        }
-        h3 {
-            font-size: 1.4vw;
-        }
-        h4 {
-            font-size: 1.3vw;
-            font-weight: lighter;
-        }
-        .serving {
-            span {
-                h6 {
-                    font-size: 1vw;
+    .nutrition-label {
+        .nutrition-facts {
+            h1 {
+                font-size: 2vw;
+            }
+            h3 {
+                font-size: 1.4vw;
+            }
+            h4 {
+                font-size: 1.3vw;
+                font-weight: lighter;
+            }
+            .serving {
+                span {
+                    h6 {
+                        font-size: 1vw;
+                    }
                 }
             }
         }
     }
 }
-
+@media only screen and (min-width: 600px) and (min-height: 900px) and (orientation: portrait) {
+    .nutrition-label {
+        max-height: 45%;
+        .nutrition-facts {
+        }
+    }
+}
 .nutrition-facts::-webkit-scrollbar {
     display: none;
 }
-
 /* Hide scrollbar for IE, Edge and Firefox */
 .nutrition-facts {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
 }

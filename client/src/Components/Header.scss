@@ -3,24 +3,31 @@ header {
 	// justify-content: center;
 	// background: linear-gradient(green, (#f5f9fc));
 	background: linear-gradient(green, (#3d9ae0));
-	justify-content: space-between;
-	padding: 0 5vw;
+	justify-content: space-around;
+	// padding: 0 5vw;
 	height: 8vh;
 	font-family: "Southland";
+	position: fixed;
+	margin: 0 auto;
+	padding: 0 3vw;
+	box-sizing: border-box;
+	z-index: 5;
+	width: inherit;
+	max-width: 1440px;
 	.burger {
 		font-size: 8vw;
 		color: white;
-	cursor:pointer;
-
+		cursor: pointer;
 	}
 	a {
 		display: flex;
 		align-items: center;
 		text-decoration: none;
-	cursor:pointer;
+		cursor: pointer;
+		// transform:translate(0, 0);
 
 		h4 {
-			transform: translate(0, 530%) rotate(-2deg);
+			transform: translate(-10%, 450%) rotate(-2deg);
 			z-index: 1;
 			// position:relative;
 			line-height: 1px;
@@ -42,12 +49,11 @@ header {
 		}
 		p {
 			margin: 0;
-			font-family:arial;
-			font-size:2vw;
+			font-family: arial;
+			font-size: 2vw;
 			color: rgb(201, 25, 177);
 			color: rgb(61, 71, 161);
-			margin-left:2vw;
-			
+			margin-left: 2vw;
 		}
 	}
 	.menu-items {
@@ -58,10 +64,9 @@ header {
 
 		font-size: 2vw;
 		nav {
-			
 			display: flex;
 			align-items: center;
-			a{
+			a {
 				padding: 0 3vw;
 			}
 		}
@@ -76,26 +81,31 @@ header {
 	color: black;
 }
 
-
-@media only screen and (min-width:600px){
-	header{
-		
-		a{
-			p.attribution{
-				font-size:1.5vw;
+@media only screen and (min-width: 600px) {
+	header {
+		a {
+			h4 {
+				transform: translate(0, 450%) rotate(-10deg);
+			}
+			p.attribution {
+				font-size: 1.3vw;
 			}
 		}
 	}
 }
 
-@media only screen and (min-width:900px){
-	header{
-		.menu-items{
-			font-size:1.2vw;
+@media only screen and (min-width: 900px) {
+	header {
+		.menu-items {
+			font-size: 1.2vw;
 		}
-		a{
-			p.attribution{
-				font-size:.8vw;
+
+		a {
+			h4 {
+				transform: translate(-70%, 450%) rotate(-25deg);
+			}
+			p.attribution {
+				font-size: 1vw;
 			}
 		}
 	}

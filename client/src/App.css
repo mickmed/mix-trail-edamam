@@ -29,4 +29,10 @@ body{
  
 }
 
+@media only screen and (min-width:600px){
+  .App{
+    height:120vh
+  }
+}
+
 
