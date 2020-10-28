@@ -6,14 +6,17 @@ import Header from "./Header"
 import Sidebar from "./SideBar"
 
 const Layout = (props) => {
-  // const { handleChange } = props
+  const { handleLogout, user, appWidth, sidebar, setSidebar, children} = props
 
   return (
     <div className="layout">
-      {console.log(props)}
-      <Header appWidth={props.appWidth} sidebar={props.sidebar} setSidebar={props.setSidebar} />
-      {props.sidebar && <Sidebar sidebar={props.sidebar} setSidebar={props.setSidebar} />}
-      <div className="layout-children" onClick={()=>props.setSidebar()}>{props.children}</div>
+   
+      <Header appWidth={appWidth} sidebar={sidebar} setSidebar={setSidebar} user={user} />
+      
+      {sidebar && <Sidebar user={user} sidebar={sidebar} setSidebar={setSidebar} handleLogout={handleLogout} appWidth={appWidth}/>}
+
+      <div className="layout-children" onClick={()=>setSidebar()}>{children}</div>
+
       <Footer />
     </div>
   )

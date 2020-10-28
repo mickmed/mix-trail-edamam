@@ -1,35 +1,53 @@
 import React, { useState, useEffect } from "react"
 import { useHistory, Link } from "react-router-dom"
+import "./Nav.scss"
 
 const Nav = (props) => {
   const history = useHistory()
-  const { setSidebar } = props
-  // const [style, setStyle] = useState()
+  const { sidebar, setSidebar, origin, user } = props
 
-  let links = ["my recipes", "create a recipe", "about"]
-
-  const style = props.origin === "sidebar" ? {
-    display: "flex",
-    flexDirection: "column",
-  } : {}
+  let links = ["recipes", "calculate", "about"]
 
   const closeModal = (link) => {
-    console.log(props.origin)
-    props.origin === "sidebar" && setSidebar(!props.sidebar)
+    origin === "sidebar" && setSidebar(!sidebar)
 
     link =
-      link === "my recipes"
+      link === "recipes"
         ? "recipes"
-        : link === "create a recipe"
+        : link === "calculate"
         ? "recipes/new"
         : link === "about" && "about"
+
     history.push(`/${link}`)
   }
+ 
   return (
-    <nav style={style}>
+    <nav>
+       {console.log(user)}
       {links.map((link, idx) => (
-        <a key={idx} onClick={() => closeModal(link)}>{link}</a>
+        // link = link === 'account' && <ion-icon name="person-outline"></ion-icon>
+        <a className="menu-items" key={idx} onClick={() => closeModal(link)}>
+          {link}
+        </a>
       ))}
+
+      {console.log(user !== null && user.username)}
+        
+
+      {/* {!user ? (
+        <Link to="/signin">
+          <div className="menu-items">
+            <ion-icon name="person-outline"></ion-icon>
+          </div>
+        </Link>
+      ) : (
+        <Link>
+          <div className="username" onClick={() => setSidebar(!sidebar)}>
+            {user.username.charAt(0)}
+          </div>
+        </Link>
+      )} */}
+      
     </nav>
   )
 }

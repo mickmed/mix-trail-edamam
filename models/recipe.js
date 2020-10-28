@@ -8,7 +8,12 @@ const Recipe = new Schema(
     description: { type: String, required: false },
     category: { type: String, required: false },
     ingredients: [],
-    nutrientVals:[]
+    nutrientVals:[],
+    // user:{
+    //   type: Schema.Types.ObjectId,
+    //   ref:'User'
+    // }
+
   },
   { timestamps: true }
 )

@@ -11,13 +11,20 @@ header {
 	margin: 0 auto;
 	padding: 0 3vw;
 	box-sizing: border-box;
-	z-index: 5;
+	z-index: 7;
 	width: inherit;
 	max-width: 1440px;
+	font-size:120%;
+	align-items: center;
+
+
 	.burger {
 		font-size: 8vw;
 		color: white;
 		cursor: pointer;
+		height:100%;
+		display:flex;
+		align-items: center;
 	}
 	a {
 		display: flex;
@@ -27,7 +34,7 @@ header {
 		// transform:translate(0, 0);
 
 		h4 {
-			transform: translate(-10%, 450%) rotate(-2deg);
+			transform: translate(0%, 450%) rotate(-10deg);
 			z-index: 1;
 			// position:relative;
 			line-height: 1px;
@@ -38,11 +45,7 @@ header {
 			font-weight: 600;
 			text-shadow: 10px 5px 10px rgb(0, 0, 0), 10px 5px 10px rgb(0, 0, 0);
 			font-family: "Southland";
-			// letter-spacing: 0.4vw;
-			// -webkit-text-stroke:1px green;
-			//   -webkit-font-smoothing: antialiased;
-			// -moz-osx-font-smoothing: grayscale;
-			// text-rendering: optimizeLegibility;
+
 			span {
 				font-size: 14vh;
 			}
@@ -56,33 +59,50 @@ header {
 			margin-left: 2vw;
 		}
 	}
-	.menu-items {
-		color: white;
-		font-size: 2vw;
-
-		font-family: Arial;
-
-		font-size: 2vw;
-		nav {
-			display: flex;
-			align-items: center;
-			a {
-				padding: 0 3vw;
-			}
-		}
-	}
+	
 }
-.selections {
-	margin-top: 50vh;
-	background: red;
-	width: 30%;
-	height: 500%;
-	overflow-y: scroll;
-	color: black;
+.menu-items, .username {
+  padding: 3%;
+  color: rgb(255, 255, 255);
+  font-size: 2vw;
+
+  font-family: Arial;
+  cursor: pointer;
+
+	ion-icon{
+		font-size:3vw;
+			border:1.5px solid;
+			border-radius:50%;
+			padding:30%;
+			// transform:translateY(12%);
+			
+	}
+  nav {
+    display: flex;
+    align-items: center;
+
+    a {
+      padding: 0 3vw;
+    }
+  }
+}
+.username{
+	font-family:'Vegan';
+	font-size:120%;
+	padding:30%;
+	border:1.5px solid;
+	border-radius:50%;
+	transform: scaleX(1.2);
+	background:blue;
 }
 
 @media only screen and (min-width: 600px) {
 	header {
+		.menu-items{
+			ion-icon{
+				font-size:2vw;
+			}
+		}
 		a {
 			h4 {
 				transform: translate(0, 450%) rotate(-10deg);
@@ -96,13 +116,25 @@ header {
 
 @media only screen and (min-width: 900px) {
 	header {
-		.menu-items {
-			font-size: 1.2vw;
-		}
-
 		a {
 			h4 {
-				transform: translate(-70%, 450%) rotate(-25deg);
+				transform: translate(-40%, 400%) rotate(-10deg);
+			}
+			p.attribution {
+				font-size: 1vw;
+			}
+		}
+	}
+	.menu-items {
+    font-size: 1.2vw;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+	header {
+		a {
+			h4 {
+				transform: translate(0%, 400%) rotate(-10deg);
 			}
 			p.attribution {
 				font-size: 1vw;
