@@ -19,7 +19,7 @@ export const getItem = async (search, pageSize) => {
       },
       configHeaders
     )
-    console.log(resp)
+   
     return resp.data
   } catch (error) {
     console.log(error)

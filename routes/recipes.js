@@ -1,6 +1,7 @@
 const { Router } = require("express")
 const controllers = require("../controllers/recipes")
 const authControllers = require('../controllers/auth')
+const restrict = require('../helpers')
 
 
 
@@ -9,9 +10,9 @@ const router = Router()
 router.get("/recipes", controllers.getRecipes)
 router.get("/recipes/:id", controllers.getRecipe)
 router.post("/recipes", controllers.createRecipe)
-router.put("/recipes/:id", controllers.updateRecipe)
+router.put("/recipes/:id", restrict, controllers.updateRecipe)
 
-router.delete("/recipes/:id", controllers.deleteRecipe)
+router.delete("/recipes/:id", restrict, controllers.deleteRecipe)
 
 
 router.get('/users/:id/recipes', controllers.getRecipesByUser)

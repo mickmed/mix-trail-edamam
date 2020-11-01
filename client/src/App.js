@@ -4,18 +4,15 @@ import { Route, Switch, useHistory } from "react-router-dom"
 import { removeToken } from "./Services/auth"
 // import axios from "axios"
 import Splash from "./Components/Splash"
-import Home from "./Components/Home"
-import Nav from "./Components/Header"
+import RecipeDetail from "./Components/RecipeDetail"
 import Recipes from "./Components/Recipes"
-import Recipe from "./Components/Recipe"
 import Layout from "./Components/Layout"
-import axios from "axios"
-import apiUrl from "./Components/apiConfig"
 import About from "./Components/About"
 import SignUp from "./Screens/SignUp"
 import SignIn from "./Screens/SignIn"
 
 import { verifyUser } from "./Services/auth"
+import { getRecipes, getUserRecipes } from "./Services/recipes"
 
 function App(props) {
   const [recipes, setRecipes] = useState([])
@@ -26,20 +23,20 @@ function App(props) {
   const appWidth = useRef(null)
 
   useEffect(() => {
-    const getUserRecipes = async () => {
+    const getData = async () => {
+      console.log(await getRecipes())
+
       const user = await verifyUser()
       user && setUser(user.user)
-      console.log(user.user)
-
-      const recipes = await axios.get(`${apiUrl}/recipes`)
-      setRecipes(recipes.data)
-      
-      const userRecipes = await axios.get(
-        `${apiUrl}/users/${user.user.id}/recipes`
-      )
-      setUserRecipes(userRecipes.data)
+      console.log(user.user.id)
+      const recipes = await getRecipes()
+      setRecipes(recipes)
+      console.log(user)
+      const userRecipes = await getUserRecipes(user.user.id)
+      console.log(userRecipes)
+      setUserRecipes(userRecipes)
     }
-    getUserRecipes()
+    getData()
   }, [])
 
   const handleLogout = () => {
@@ -64,11 +61,11 @@ function App(props) {
             <Splash />
           </Route>
           <Route exact path="/recipes">
-            <Recipes recipes={recipes} userRecipes={userRecipes}/>
+            <Recipes recipes={recipes} userRecipes={userRecipes} />
           </Route>
 
           <Route exact path="/recipes/:id">
-            <Home recipes={recipes} sidebar={sidebar} user={user} />
+            <RecipeDetail recipes={recipes} sidebar={sidebar} user={user} />
           </Route>
           <Route exact path="/about">
             <About />

@@ -3,6 +3,7 @@ import axios from "axios"
 import "./Recipes.scss"
 import { Link } from "react-router-dom"
 import apiUrl from "./apiConfig"
+import { deleteRecipe } from '../Services/recipes'
 
 const Recipes = (props) => {
   const { recipes, userRecipes } = props
@@ -12,7 +13,7 @@ const Recipes = (props) => {
   const deleteRecipe = async (id, name) => {
     console.log(id)
     alert(`are you sure you want to delete ${name}`)
-    const resp = await axios.delete(`${apiUrl}/recipes/${id}`)
+    const resp = await deleteRecipe(id)
     console.log(resp)
   }
 
@@ -22,8 +23,8 @@ const Recipes = (props) => {
     <div className="recipes">
 
 
-      {recipes ?
-              recipes.map((recipe, idx) => (
+      {userRecipes ?
+              userRecipes.map((recipe, idx) => (
           <div className='recipe-list' key={idx}>
             <div onClick={() => deleteRecipe(recipe._id, recipe.name)}>X</div>
             <Link to={`/recipes/${recipe._id}`}>

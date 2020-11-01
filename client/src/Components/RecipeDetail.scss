@@ -2,7 +2,7 @@
   animation: fadein 2s forwards;
 }
 
-.home {
+.recipe-detail {
   display: flex;
   flex-direction: column;
 
@@ -140,7 +140,7 @@
 }
 
 @media only screen and (min-width: 600px) {
-  .home {
+  .recipe-detail {
     flex-direction: row;
     section {
       // height: 85%;
@@ -176,7 +176,7 @@
 
 
 @media only screen and (min-width: 900px) {
-  .home {
+  .recipe-detail {
     section {
     }
     .item-info-wrapper {
@@ -209,7 +209,7 @@
 
 @media only screen and (min-width: 600px) and (min-height: 900px) and (orientation: portrait) {
   
-  .home {
+  .recipe-detail {
     // flex-direction: row;
     .item-info-wrapper{
      max-height:40%;

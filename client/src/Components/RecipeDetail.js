@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from "react"
 import { useParams } from "react-router-dom"
-import "./Home.scss"
+import "./RecipeDetail.scss"
 import NutritionLabel from "./NutritionLabel"
 import Form from "./Form.js"
 import { getItem } from "./ApiHelper"
 import CreateRecipeModal from "./CreateRecipeModal"
-import apiUrl from "./apiConfig"
+import api from "./apiConfig"
 import { foods } from "./data.js"
 import axios from "axios"
 
-const Home = (props) => {
+
+const RecipeDetail = (props) => {
   const [item, setItem] = useState([])
   const [items, setItems] = useState([])
   const [nutrientVals, setNutrientVals] = useState([])
@@ -36,7 +37,7 @@ const Home = (props) => {
     if (id !== "new") {
       const item = props.recipes.find((recipe) => recipe._id === id)
       const getItem = async () => {
-        const resp = await axios(`${apiUrl}/recipes/${id}`)
+        const resp = await axios(`${api}/recipes/${id}`)
         setItems(resp.data.ingredients)
         setNutrientVals(resp.data.nutrientVals[0])
         setItem(resp.data)
@@ -133,14 +134,14 @@ const Home = (props) => {
     console.log('userid', user.id)
     let resp =
       id !== "new"
-        ? await axios.put(`${apiUrl}/recipes/${item._id}`, body)
-        : await axios.post(`${apiUrl}/recipes`, body)
+        ? await axios.put(`${api}/recipes/${item._id}`, body)
+        : await axios.post(`${api}/recipes`, body)
     console.log(resp.data)
     setItem(resp.data)
   }
 
   return (
-    <div className={`home ${fadeOut}`}>
+    <div className={`recipe-detail ${fadeOut}`}>
       <section className="item-info-wrapper">
         {renderModal && (
           <CreateRecipeModal
@@ -232,4 +233,4 @@ const Home = (props) => {
     </div>
   )
 }
-export default Home
+export default RecipeDetail
