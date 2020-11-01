@@ -2,6 +2,8 @@ const { Router } = require("express")
 const controllers = require("../controllers/recipes")
 const authControllers = require('../controllers/auth')
 
+
+
 const router = Router()
 
 router.get("/recipes", controllers.getRecipes)
@@ -10,6 +12,9 @@ router.post("/recipes", controllers.createRecipe)
 router.put("/recipes/:id", controllers.updateRecipe)
 
 router.delete("/recipes/:id", controllers.deleteRecipe)
+
+
+router.get('/users/:id/recipes', controllers.getRecipesByUser)
 
 
 

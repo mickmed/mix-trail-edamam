@@ -1,6 +1,7 @@
 .signup {
   padding:5%;
   margin-top: 10vh;
+ min-height:150vh;
   // display:flex;
   // align-items: center;
   h3{
@@ -13,7 +14,7 @@
   }
 
   .signup-form {
-    margin:20% 0 0;
+    // margin:3% 0 0;
     width:50%;
     display: flex;
     flex-wrap: wrap;
@@ -47,7 +48,7 @@
   .signup{
     .signup-form{
       input{
-        width:50%;
+        width:70%;
       }
     }
   }

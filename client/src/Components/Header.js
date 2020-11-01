@@ -20,30 +20,26 @@ const Header = (props) => {
 
       {appWidth > 600 ? (
         <Nav sidebar={sidebar} setSidebar={setSidebar} user={user} />
-      ) : user ? (
-        <Link>
-          <div
-            className="username"
-           
-            onClick={() => setSidebar(!sidebar)}
-          >
-            {user.username.charAt(0)}
-          </div>
-        </Link>
       ) : (
         <div className="burger" onClick={() => props.setSidebar(!sidebar)}>
           <ion-icon name="menu-outline"></ion-icon>
         </div>
       )}
 
-      {!user &&
-        
-            <Link to="/signin">
-              <div className="menu-items">
-                <ion-icon name="person-outline"></ion-icon>
-              </div>
-            </Link>
-          }
+      {user ? (
+        <Link>
+          <div className="username" onClick={() => setSidebar(!sidebar)}>
+            {console.log(user)}
+            {user.username.charAt(0)}
+          </div>
+        </Link>
+      ) : (
+        <Link to="/signin">
+          <div className="menu-items">
+            <ion-icon name="person-outline"></ion-icon>
+          </div>
+        </Link>
+      )}
     </header>
   )
 }

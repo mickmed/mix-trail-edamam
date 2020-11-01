@@ -68,7 +68,7 @@ class SignIn extends Component {
                 <div className="signup">
                     <form className='signup-form' onSubmit={this.onSignIn}>
                     <Link to='/signup'><h6>sign up here</h6></Link>
-                        
+                        <div>
                         <label>Username</label>
                         <input
                             required
@@ -86,7 +86,7 @@ class SignIn extends Component {
                             type="password"
                             placeholder="Password"
                             onChange={this.handleChange}
-                        />
+                        /></div>
                         {this.renderError()}
                     </form>
                 </div>

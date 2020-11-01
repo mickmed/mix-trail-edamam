@@ -1,3 +1,4 @@
+require('../.env')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const User = require('../models/user')
@@ -8,10 +9,11 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 
 const SALT_ROUNDS = 11
-const TOKEN_KEY = 'shoonga'
+const TOKEN_KEY = process.env.SECRET_KEY
 console.log('key', process.env.SECRET_KEY)
 
 const signUp = async (req, res) => {
+    console.log('inside')
     try {
         const { username, email, password } = req.body
         const newPassword = await bcrypt.hash(password, SALT_ROUNDS)
@@ -20,7 +22,7 @@ const signUp = async (req, res) => {
             email,
             password:newPassword
         })
-
+        console.log()
         await user.save()
 
         const payload = {
@@ -43,7 +45,11 @@ const signIn = async (req, res) => {
     try {
         const { username, password } = req.body
         const user = await User.findOne({ username: username })
-        if (await bcrypt.compare(password, user.password_digest)) {
+        console.log(password)
+        console.log(user.password)
+
+        if (await bcrypt.compare(password, user
+        .password)) {
             const payload = {
                 id: user._id,
                 username: user.username,

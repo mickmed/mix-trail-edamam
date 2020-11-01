@@ -1,57 +1,47 @@
 .sidebar {
-  display: flex;
-  flex-direction:column;
-  justify-content:start;
-  position: absolute;
-  right: -50%;
-  top: 18vh;
-  z-index: 8;
-  background: #ffffff;
-  height: 46vh;
-  padding: 5%;
-  width: 15%;
-  border: 1px solid white;
-  z-index: 8;
-  background: linear-gradient(rgb(171, 201, 171), rgb(171, 194, 194));
-  animation: slideSidebar .5s forwards;
-  flex:1;
-
-  
-  
-  nav {
-    justify-content: flex-start;
-    flex-direction: column;
-    height:50%;
-    // text-shadow:.25px .25px black;
-
-   
-  
-    a {
-      font-size: 1em;
-      font-weight:lighter;
-      color:white;
-      
-    }
-  }
-
-  a {
-    text-decoration: none;
-    text-align: left;
-    margin: 5vw 0;
-    color: green;
-    font-weight: 600;
-  }
-  .logout{
-    cursor:pointer;
-  }
+	display: flex;
+	position: absolute;
+	top: 13vh;
+	right: -50%;
+	flex: 1;
+	flex-direction: column;
+	justify-content: start;
+	z-index: 8;
+	border: 1px solid white;
+	background: linear-gradient(rgb(171, 201, 171), rgb(171, 194, 194));
+	padding: 5%;
+	width: 15%;
+	height: 36vh;
+	animation: slideSidebar 0.5s forwards;
+	nav {
+		flex-direction: column;
+		justify-content: flex-start;
+		height: 50%;
+		// text-shadow: .25px .25px black;
+		a {
+			color: white;
+			font-size: 1em;
+			font-weight: lighter;
+		}
+	}
+	a {
+		margin: 5vw 0;
+		text-align: left;
+		text-decoration: none;
+		color: green;
+		font-weight: 600;
+	}
+	.logout {
+		cursor: pointer;
+	}
 }
 @keyframes slideSidebar {
-  from {
-    right: -50vw;
-    opacity: 0;
-  }
-  to {
-    right: 0vw;
-    opacity: 1;
-  }
+	from {
+		right: -50vw;
+		opacity: 0;
+	}
+	to {
+		right: 0vw;
+		opacity: 1;
+	}
 }

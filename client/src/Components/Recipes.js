@@ -5,7 +5,9 @@ import { Link } from "react-router-dom"
 import apiUrl from "./apiConfig"
 
 const Recipes = (props) => {
-  const { recipes } = props
+  const { recipes, userRecipes } = props
+
+
 
   const deleteRecipe = async (id, name) => {
     console.log(id)
@@ -16,9 +18,12 @@ const Recipes = (props) => {
 
   
   return !recipes ? (<div>...loading</div>) : (
+
     <div className="recipes">
-      {recipes &&
-        recipes.map((recipe, idx) => (
+
+
+      {recipes ?
+              recipes.map((recipe, idx) => (
           <div className='recipe-list' key={idx}>
             <div onClick={() => deleteRecipe(recipe._id, recipe.name)}>X</div>
             <Link to={`/recipes/${recipe._id}`}>
@@ -26,7 +31,18 @@ const Recipes = (props) => {
             </Link>
             
           </div>
-        ))}
+        )
+          
+        ):
+        recipes.map((recipe,idx)=> (
+          <div>{recipe.name}</div>
+        ))
+      
+      }
+
+
+
+
     </div>
   )
 }

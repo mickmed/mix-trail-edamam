@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+var User = require('../models/user.js');
 
 const Recipe = new Schema(
   {
@@ -9,10 +10,11 @@ const Recipe = new Schema(
     category: { type: String, required: false },
     ingredients: [],
     nutrientVals:[],
-    // user:{
-    //   type: Schema.Types.ObjectId,
-    //   ref:'User'
-    // }
+    
+    user:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: User
+    }
 
   },
   { timestamps: true }

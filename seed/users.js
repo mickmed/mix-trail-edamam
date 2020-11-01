@@ -20,16 +20,7 @@ const main = async () => {
     await User.insertMany(users)
     console.log("Created users!")
 
-    //create login user
-    const  user = await User.create({
-        username:'marka',
-        email:'marca@marca.com',
-        password: 'shoonga'
-    })
-
-    await user.save
-
-    console.log('created' + User.countDocuments({username:'marka'}))
+  
 
     User.count({}, function( err, count){
         console.log( "Number of users:", count );

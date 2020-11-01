@@ -29,12 +29,16 @@ const createRecipe = async(req, res) => {
   try{
     const recipe = await new Recipe(req.body)
     await recipe.save()
+
+    console.log('recipeeeee', req.body)
     res.status(201).json(recipe)
   }catch(error){
     console.log(error)
     res.status(500).json({error: error.message})
   }
 }
+
+
 
 const updateRecipe = async (req, res) => {
   const { id } = req.params
@@ -67,11 +71,32 @@ const deleteRecipe = async (req, res) => {
   }
 }
 
+
+getRecipesByUser = async (req, res) => {
+  console.log('params_id', req.params.id)
+  try{
+    
+    const recipes = await Recipe.find({ user: req.params.id})
+    .populate('user', 'username -_id')
+    // .select("ingredients")
+    console.log('recipes', recipes)
+    return res.json(recipes)
+  }catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
+
+
+
+
 module.exports = {
 
   getRecipes,
   getRecipe,
   createRecipe,
   updateRecipe,
-  deleteRecipe
+  deleteRecipe,
+
+  getRecipesByUser
 }

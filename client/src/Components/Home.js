@@ -22,6 +22,8 @@ const Home = (props) => {
   // const inputRef = useRef(null)
   const { id } = useParams()
 
+  const { user, recipes, sidebar } = props
+
   useEffect(() => {
     setItems([])
     setItem([])
@@ -127,7 +129,8 @@ const Home = (props) => {
 
   const saveRecipe = async () => {
     setRenderModal(false)
-    const body = { ...input, ingredients: items, nutrientVals: nutrientVals }
+    const body = { ...input, ingredients: items, nutrientVals: nutrientVals, user: user.id }
+    console.log('userid', user.id)
     let resp =
       id !== "new"
         ? await axios.put(`${apiUrl}/recipes/${item._id}`, body)

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react"
 import "./App.css"
 import { Route, Switch, useHistory } from "react-router-dom"
-import { removeToken } from './Services/auth'
+import { removeToken } from "./Services/auth"
 // import axios from "axios"
 import Splash from "./Components/Splash"
 import Home from "./Components/Home"
@@ -21,40 +21,37 @@ function App(props) {
   const [recipes, setRecipes] = useState([])
   const [sidebar, setSidebar] = useState(false)
   const [user, setUser] = useState(null)
+  const [userRecipes, setUserRecipes] = useState([])
   const history = useHistory()
   const appWidth = useRef(null)
 
   useEffect(() => {
-    const getRecipes = async () => {
-      const resp = await axios.get(`${apiUrl}/recipes`)
-      setRecipes(resp.data)
-    }
-
-
-    getRecipes()
-
-    const getUser = async () => {
-     
+    const getUserRecipes = async () => {
       const user = await verifyUser()
-    
       user && setUser(user.user)
       console.log(user.user)
+
+      const recipes = await axios.get(`${apiUrl}/recipes`)
+      setRecipes(recipes.data)
+      
+      const userRecipes = await axios.get(
+        `${apiUrl}/users/${user.user.id}/recipes`
+      )
+      setUserRecipes(userRecipes.data)
     }
-    getUser()
+    getUserRecipes()
   }, [])
 
   const handleLogout = () => {
     setSidebar(!sidebar)
-    setUser(null);
-    localStorage.removeItem('token');
-    removeToken();
-    history.push('/')
+    setUser(null)
+    localStorage.removeItem("token")
+    removeToken()
+    history.push("/")
   }
 
   return (
-  
     <div className="App" ref={appWidth}>
-     
       <Layout
         user={user}
         appWidth={appWidth}
@@ -67,20 +64,21 @@ function App(props) {
             <Splash />
           </Route>
           <Route exact path="/recipes">
-            <Recipes recipes={recipes} />
+            <Recipes recipes={recipes} userRecipes={userRecipes}/>
           </Route>
 
           <Route exact path="/recipes/:id">
-            <Home recipes={recipes} sidebar={sidebar} />
+            <Home recipes={recipes} sidebar={sidebar} user={user} />
           </Route>
           <Route exact path="/about">
             <About />
           </Route>
 
-         
           <Route
             path="/signin"
-            render={(props) => <SignIn {...props} user={user} setUser={setUser} />}
+            render={(props) => (
+              <SignIn {...props} user={user} setUser={setUser} />
+            )}
           />
           <Route
             path="/signup"
