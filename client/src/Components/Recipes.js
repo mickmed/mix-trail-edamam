@@ -24,6 +24,8 @@ const Recipes = (props) => {
       <div className="recipe-list" key={idx}>
         <Link to={`/recipes/${recipe._id}`}>
           <div className="recipe-name">{recipe.name}</div>
+          <div className="recipe-name">{recipe.name}</div>
+          
         </Link>
         <div onClick={() => deleteRecipeMsg(recipe._id, recipe.name)}>
           X
