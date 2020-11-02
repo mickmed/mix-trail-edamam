@@ -12,7 +12,7 @@ const SideBar = (props) => {
     <section className="sidebar" style={style}>
       {console.log("logout", user, appWidth.current.clientWidth)}
 
-      {user && appWidth.current.clientWidth < 600 ? (
+      {appWidth.current.clientWidth < 900 && (
         <>
           <Nav
             user={user}
@@ -20,29 +20,16 @@ const SideBar = (props) => {
             setSidebar={setSidebar}
             origin="sidebar"
           />
-
-          <div className="logout" onClick={handleLogout}>
-            logout
-            {console.log("logout")}
-          </div>
         </>
-      ) : user ? (
+      )}
+
+      {user ? (
         <div className="logout" onClick={handleLogout}>
           logout
           {console.log("logout")}
         </div>
-      ) : !user && appWidth.current.clientWidth < 600 ? (
-        <>
-          <Nav
-            user={user}
-            sidebar={sidebar}
-            setSidebar={setSidebar}
-            origin="sidebar"
-          />
-        </>
       ) : (
-        !user && appWidth.current.clientWidth > 600 &&
-        <Link to="/signin">lodgin</Link>
+        <Link to="/signin">login</Link>
       )}
     </section>
   )

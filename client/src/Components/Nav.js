@@ -4,7 +4,7 @@ import "./Nav.scss"
 
 const Nav = (props) => {
   const history = useHistory()
-  const { sidebar, setSidebar, origin, user } = props
+  const { sidebar, setSidebar, origin } = props
 
   let links = ["recipes", "calculate", "about"]
 
@@ -23,7 +23,7 @@ const Nav = (props) => {
  
   return (
     <nav>
-       {console.log(user)}
+      
       {links.map((link, idx) => (
         // link = link === 'account' && <ion-icon name="person-outline"></ion-icon>
         <a className="menu-items" key={idx} onClick={() => closeModal(link)}>
@@ -31,22 +31,9 @@ const Nav = (props) => {
         </a>
       ))}
 
-      {console.log(user !== null && user.username)}
+    
         
 
-      {/* {!user ? (
-        <Link to="/signin">
-          <div className="menu-items">
-            <ion-icon name="person-outline"></ion-icon>
-          </div>
-        </Link>
-      ) : (
-        <Link>
-          <div className="username" onClick={() => setSidebar(!sidebar)}>
-            {user.username.charAt(0)}
-          </div>
-        </Link>
-      )} */}
       
     </nav>
   )

@@ -1,21 +1,52 @@
-import React from "react"
+import React, { useState } from "react"
+import { useHistory } from "react-router-dom"
 import "./Layout.scss"
 // import Nav from "./Nav"
 import Footer from "./Footer"
 import Header from "./Header"
 import Sidebar from "./SideBar"
+import Search from "./Search"
 
 const Layout = (props) => {
-  const { handleLogout, user, appWidth, sidebar, setSidebar, children} = props
+  const {
+    handleLogout,
+    user,
+    appWidth,
+    sidebar,
+    setSidebar,
+    children,
+    recipes,
+    handleChange,
+    searchString
+  } = props
+  const history = useHistory()
+
+  
 
   return (
     <div className="layout">
-   
-      <Header appWidth={appWidth} sidebar={sidebar} setSidebar={setSidebar} user={user} />
-      
-      {sidebar && <Sidebar user={user} sidebar={sidebar} setSidebar={setSidebar} handleLogout={handleLogout} appWidth={appWidth}/>}
+      <Header
+        appWidth={appWidth}
+        sidebar={sidebar}
+        setSidebar={setSidebar}
+        user={user}
+        handleChange={handleChange}
+        searchString={searchString}
+      />
 
-      <div className="layout-children" onClick={()=>setSidebar()}>{children}</div>
+      {sidebar && (
+        <Sidebar
+          user={user}
+          sidebar={sidebar}
+          setSidebar={setSidebar}
+          handleLogout={handleLogout}
+          appWidth={appWidth}
+        />
+      )}
+
+      <div className="layout-children" onClick={() => setSidebar()}>
+        {children}
+      </div>
 
       <Footer />
     </div>

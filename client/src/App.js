@@ -19,21 +19,22 @@ function App(props) {
   const [sidebar, setSidebar] = useState(false)
   const [user, setUser] = useState(null)
   const [userRecipes, setUserRecipes] = useState([])
+  const [filteredRecipes, setFilteredRecipes] = useState([])
+  const [searchString, setSearchString] = useState("")
+
   const history = useHistory()
   const appWidth = useRef(null)
 
   useEffect(() => {
     const getData = async () => {
-      console.log(await getRecipes())
 
       const user = await verifyUser()
       user && setUser(user.user)
-      console.log(user.user.id)
+
       const recipes = await getRecipes()
       setRecipes(recipes)
-      console.log(user)
-      const userRecipes = await getUserRecipes(user.user.id)
-      console.log(userRecipes)
+
+      const userRecipes = user && await getUserRecipes(user.user.id)
       setUserRecipes(userRecipes)
     }
     getData()
@@ -46,6 +47,22 @@ function App(props) {
     removeToken()
     history.push("/")
   }
+  const handleChange = (e) => {
+    if (e.target.value.length > 2) {
+      const matchingRecipes = recipes.filter((recipe, idx) => {
+        return recipe.name.includes(e.target.value)
+      })
+
+      if (matchingRecipes.length > 0) {
+        history.push("/recipes/search")
+      }
+      setFilteredRecipes(matchingRecipes)
+    } else {
+      history.push("/recipes")
+      setFilteredRecipes([])
+    }
+    setSearchString(e.target.value)
+  }
 
   return (
     <div className="App" ref={appWidth}>
@@ -55,17 +72,41 @@ function App(props) {
         sidebar={sidebar}
         setSidebar={setSidebar}
         handleLogout={handleLogout}
+        recipes={recipes}
+        handleChange={handleChange}
+        searchString={searchString}
       >
         <Switch>
           <Route exact path="/">
             <Splash />
           </Route>
+
+          <Route exact path="/recipes/search">
+            <Recipes
+              recipes={recipes}
+              userRecipes={userRecipes}
+              handleChange={handleChange}
+              searchString={searchString}
+              filteredRecipes={filteredRecipes}
+            />
+          </Route>
           <Route exact path="/recipes">
-            <Recipes recipes={recipes} userRecipes={userRecipes} />
+            <Recipes
+              recipes={recipes}
+              userRecipes={userRecipes}
+              handleChange={handleChange}
+              searchString={searchString}
+              filteredRecipes={filteredRecipes}
+            />
           </Route>
 
           <Route exact path="/recipes/:id">
-            <RecipeDetail recipes={recipes} sidebar={sidebar} user={user} />
+            <RecipeDetail
+              recipes={recipes}
+              sidebar={sidebar}
+              user={user}
+              filteredRecipes={filteredRecipes}
+            />
           </Route>
           <Route exact path="/about">
             <About />
