@@ -8,6 +8,7 @@ import CreateRecipeModal from "./CreateRecipeModal"
 import api from "./apiConfig"
 import { foods } from "./data.js"
 import axios from "axios"
+import { getRecipeById, createRecipe, updateRecipe, } from '../Services/recipes'
 
 
 const RecipeDetail = (props) => {
@@ -23,24 +24,25 @@ const RecipeDetail = (props) => {
   // const inputRef = useRef(null)
   const { id } = useParams()
 
-  const { user, recipes, sidebar } = props
+  const { user, recipes, userRecipes, setUserRecipes, sidebar } = props
 
-  useEffect(() => {
-    setItems([])
-    setItem([])
-    setNutrientVals([])
-    setInput({})
-    inputElement.current.focus()
-  }, [id])
+  // useEffect(() => {
+  //   setItems([])
+  //   setItem([])
+  //   setNutrientVals([])
+  //   setInput({})
+  //   inputElement.current.focus()
+  // }, [id])
 
   useEffect(() => {
     if (id !== "new") {
       const item = props.recipes.find((recipe) => recipe._id === id)
       const getItem = async () => {
-        const resp = await axios(`${api}/recipes/${id}`)
-        setItems(resp.data.ingredients)
-        setNutrientVals(resp.data.nutrientVals[0])
-        setItem(resp.data)
+        const resp = await getRecipeById(id)
+        console.log(resp)
+        setItems(resp.ingredients)
+        setNutrientVals(resp.nutrientVals[0])
+        setItem(resp)
         setInput({ ...input, ...resp.data })
       }
       console.log(inputElement)
@@ -134,12 +136,16 @@ const RecipeDetail = (props) => {
     console.log('userid', user.id)
     let resp =
       id !== "new"
-        ? await axios.put(`${api}/recipes/${item._id}`, body)
-        : await axios.post(`${api}/recipes`, body)
+       
+        ? await updateRecipe(id, body)
+        : await createRecipe(body)
     console.log(resp.data)
     setItem(resp.data)
-  }
-
+    
+    setUserRecipes(...userRecipes => (
+      [...userRecipes, resp.data])
+    )
+    }
   return (
     <div className={`recipe-detail ${fadeOut}`}>
       <section className="item-info-wrapper">

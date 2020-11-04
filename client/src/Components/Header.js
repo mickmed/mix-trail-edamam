@@ -19,7 +19,7 @@ const Header = (props) => {
         {/* <p className="attribution">Powered by Nutritionix</p> */}
       </Link>
 
-      {console.log("appWidth", appWidth)}
+     {console.log("appWidth", appWidth)}
      {<Nav user={user} sidebar={sidebar} setSidebar={setSidebar} />}
 
       <Search handleChange={handleChange} searchString={searchString}></Search>

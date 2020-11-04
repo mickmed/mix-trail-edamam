@@ -88,12 +88,16 @@ function App(props) {
               handleChange={handleChange}
               searchString={searchString}
               filteredRecipes={filteredRecipes}
+              
             />
           </Route>
           <Route exact path="/recipes">
             <Recipes
               recipes={recipes}
+              
               userRecipes={userRecipes}
+              setUserRecipes={setUserRecipes}
+
               handleChange={handleChange}
               searchString={searchString}
               filteredRecipes={filteredRecipes}
@@ -104,6 +108,8 @@ function App(props) {
             <RecipeDetail
               recipes={recipes}
               sidebar={sidebar}
+              userRecipes={userRecipes}
+              setUserRecipes={setUserRecipes}
               user={user}
               filteredRecipes={filteredRecipes}
             />

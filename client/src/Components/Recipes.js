@@ -7,8 +7,10 @@ import apiUrl from "./apiConfig"
 import { deleteRecipe } from "../Services/recipes"
 
 const Recipes = (props) => {
-  const { recipes, userRecipes, filteredRecipes, searchString } = props
+
+  const { recipes, userRecipes, filteredRecipes, searchString, setUserRecipes } = props
   const history = useHistory()
+  console.log(recipes, userRecipes, filteredRecipes)
 
   console.log(history)
 
@@ -17,6 +19,12 @@ const Recipes = (props) => {
     alert(`are you sure you want to delete ${name}`)
     const resp = await deleteRecipe(id)
     console.log(resp)
+    const r = userRecipes.filter((rec, idx)=> (
+      rec._id !== id
+
+    ))
+    console.log(r)
+    setUserRecipes(r)
   }
 
   const mapRecipes = (array) => {
@@ -24,39 +32,21 @@ const Recipes = (props) => {
       <div className="recipe-list" key={idx}>
         <Link to={`/recipes/${recipe._id}`}>
           <div className="recipe-name">{recipe.name}</div>
-          <div className="recipe-name">{recipe.name}</div>
-          
         </Link>
-        <div onClick={() => deleteRecipeMsg(recipe._id, recipe.name)}>
-          X
-        </div>
+        <div onClick={() => deleteRecipeMsg(recipe._id, recipe.name)}>X</div>
       </div>
     ))
-
-
   }
 
   return !recipes ? (
     <div>...loading</div>
   ) : (
     <div className="recipes">
-      {searchString.length > 2 ? (
-         <div>
-         searched recipes
-         {mapRecipes(filteredRecipes)}
-       </div>
-      ) : (
-        userRecipes ?
-        <div>
-          your recipes
-          {mapRecipes(userRecipes)}
-        </div>
-        :
-        <div>
-          sample recipes
-          {mapRecipes(recipes)}
-        </div>
-      )}
+      {searchString.length > 2
+        ? mapRecipes(filteredRecipes)
+        : userRecipes
+        ? mapRecipes(userRecipes)
+        : mapRecipes(recipes)}
     </div>
   )
 }

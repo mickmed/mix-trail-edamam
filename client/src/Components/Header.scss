@@ -148,10 +148,19 @@ header {
 		a {
 			h4 {
 				transform: translate(0%, 400%) rotate(-10deg);
+				font-size: 5vw;
+				span{
+					font-size:5.5vw;
+				}
 			}
 			p.attribution {
 				font-size: 1vw;
 			}
 		}
+		.username{
+			font-size:1vw;
+		}
 	}
+
+
 }

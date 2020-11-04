@@ -10,9 +10,9 @@ const router = Router()
 router.get("/recipes", controllers.getRecipes)
 router.get("/recipes/:id", controllers.getRecipe)
 router.post("/recipes", controllers.createRecipe)
-router.put("/recipes/:id", restrict, controllers.updateRecipe)
+router.put("/recipes/:id", controllers.updateRecipe)
 
-router.delete("/recipes/:id", restrict, controllers.deleteRecipe)
+router.delete("/recipes/:id", controllers.deleteRecipe)
 
 
 router.get('/users/:id/recipes', controllers.getRecipesByUser)

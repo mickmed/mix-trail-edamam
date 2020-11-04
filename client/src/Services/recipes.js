@@ -12,7 +12,8 @@ export const getRecipes = async () => {
 export const getRecipeById = async id => {
     try {
         const resp = await api.get(`/recipes/${id}`)
-        return resp.data.recipe
+        
+        return resp.data
     } catch (error) {
         throw error
     }
