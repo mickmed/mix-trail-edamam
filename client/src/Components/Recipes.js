@@ -7,8 +7,13 @@ import apiUrl from "./apiConfig"
 import { deleteRecipe } from "../Services/recipes"
 
 const Recipes = (props) => {
-
-  const { recipes, userRecipes, filteredRecipes, searchString, setUserRecipes } = props
+  const {
+    recipes,
+    userRecipes,
+    filteredRecipes,
+    searchString,
+    setUserRecipes,
+  } = props
   const history = useHistory()
   console.log(recipes, userRecipes, filteredRecipes)
 
@@ -16,26 +21,42 @@ const Recipes = (props) => {
 
   const deleteRecipeMsg = async (id, name) => {
     console.log(id)
-    alert(`are you sure you want to delete ${name}`)
-    const resp = await deleteRecipe(id)
+    let confirm = prompt(`are you sure you want to delete ${name}`)
+    const resp = confirm && (await deleteRecipe(id))
     console.log(resp)
-    const r = userRecipes.filter((rec, idx)=> (
-      rec._id !== id
+    const newUserRecipes = userRecipes.filter((rec, idx) => rec._id !== id)
 
-    ))
-    console.log(r)
-    setUserRecipes(r)
+    setUserRecipes(newUserRecipes)
   }
 
   const mapRecipes = (array) => {
-    return array.map((recipe, idx) => (
-      <div className="recipe-list" key={idx}>
-        <Link to={`/recipes/${recipe._id}`}>
-          <div className="recipe-name">{recipe.name}</div>
-        </Link>
-        <div onClick={() => deleteRecipeMsg(recipe._id, recipe.name)}>X</div>
+    return (
+      <div className="recipe-list">
+        <div className="recipe-list-title">
+          <div>Recipe</div>
+          <div>Kl</div>
+
+          <div>Category</div>
+        </div>
+        <div className='recipe-list-results'>
+          {array.map((recipe, idx) => (
+            <div className="recipe-details" key={idx}>
+              <Link to={`/recipes/${recipe._id}`}>
+                <div className="recipe-name">{recipe.name}</div>
+                <div className="calories">
+                  {Math.round(recipe.nutrientVals[0].nf_calories)}
+                </div>
+                <div className="category">{recipe.category}</div>
+
+              </Link>
+              <div onClick={() => deleteRecipeMsg(recipe._id, recipe.name)}>
+                X
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    ))
+    )
   }
 
   return !recipes ? (

@@ -142,7 +142,7 @@ const RecipeDetail = (props) => {
     console.log(resp.data)
     setItem(resp.data)
     
-    setUserRecipes(...userRecipes => (
+    setUserRecipes(userRecipes => (
       [...userRecipes, resp.data])
     )
     }
