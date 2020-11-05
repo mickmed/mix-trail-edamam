@@ -32,6 +32,7 @@ const Recipes = (props) => {
   const mapRecipes = (array) => {
     return (
       <div className="recipe-list">
+        <>your recipes</>
         <div className="recipe-list-title">
           <div>Recipe</div>
           <div>Kl</div>
