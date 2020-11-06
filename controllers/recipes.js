@@ -1,61 +1,63 @@
-const Recipe = require('../models/recipe')
-const db = require('../db/connection')
+const Recipe = require("../models/recipe")
+const db = require("../db/connection")
 
-db.on('error', console.error.bind(console, 'MongoDB connection error:'))
+db.on("error", console.error.bind(console, "MongoDB connection error:"))
 
 const getRecipes = async (req, res) => {
-  try{
-    const recipes = await Recipe.find()
+  try {
+    const recipes = await Recipe.find().populate("user", "username -_id")
+
     res.json(recipes)
-  }catch(error){
-    res.status(500).json({error: error.message})
+  } catch (error) {
+    res.status(500).json({ error: error.message })
   }
 }
 
 const getRecipe = async (req, res) => {
-  try{
-    const {id} = req.params
-    const recipe = await Recipe.findById(id)
-    if(recipe){
+  try {
+    const { id } = req.params
+    const recipe = await Recipe.findById(id).populate("user", "username -_id")
+
+    if (recipe) {
       return res.json(recipe)
     }
-    res.status(404).json({message: 'Product not found'})
-  }catch(error){
-    res.status(500).json({error: error.message})
+    res.status(404).json({ message: "Product not found" })
+  } catch (error) {
+    res.status(500).json({ error: error.message })
   }
 }
 
-const createRecipe = async(req, res) => {
-  try{
-    const recipe = await new Recipe(req.body)
+const createRecipe = async (req, res) => {
+  try {
+    const recipe = await new Recipe(req.body).populate("user", "username -_id")
+
     await recipe.save()
 
-    console.log('recipeeeee', req.body)
     res.status(201).json(recipe)
-  }catch(error){
+  } catch (error) {
     console.log(error)
-    res.status(500).json({error: error.message})
+    res.status(500).json({ error: error.message })
   }
 }
-
-
 
 const updateRecipe = async (req, res) => {
   const { id } = req.params
+
   await Recipe.findByIdAndUpdate(
     id,
     req.body,
     { new: true },
-    (error, product) => {
+    (error, recipe) => {
+      console.log(recipe)
       if (error) {
         return res.status(500).json({ error: error.message })
       }
-      if (!product) {
+      if (!recipe) {
         return res.status(404).json({ message: "Product not found!" })
       }
-      res.status(200).json(product)
+      res.status(200).json(recipe)
     }
-  )
+  ).populate("user", "username -_id")
 }
 
 const deleteRecipe = async (req, res) => {
@@ -71,32 +73,26 @@ const deleteRecipe = async (req, res) => {
   }
 }
 
-
 getRecipesByUser = async (req, res) => {
-  console.log('params_id', req.params.id)
-  try{
-    
-    const recipes = await Recipe.find({ user: req.params.id})
-    .populate('user', 'username -_id')
-    // .select("ingredients")
-    console.log('recipes', recipes)
+  console.log("params_id", req.params.id)
+  try {
+    const recipes = await Recipe.find({ user: req.params.id }).populate(
+      "user",
+      "username -_id"
+    )
+
     return res.json(recipes)
-  }catch (error) {
+  } catch (error) {
     res.status(500).json({ error: error.message })
   }
 }
 
-
-
-
-
 module.exports = {
-
   getRecipes,
   getRecipe,
   createRecipe,
   updateRecipe,
   deleteRecipe,
 
-  getRecipesByUser
+  getRecipesByUser,
 }

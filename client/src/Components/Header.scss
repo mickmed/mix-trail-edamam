@@ -1,118 +1,106 @@
 header {
-	display: flex;
-	// justify-content: center;
-	// background: linear-gradient(green, (#f5f9fc));
-	background: linear-gradient(green, (#3d9ae0));
-	justify-content: space-around;
-	// padding: 0 5vw;
-	height: 8vh;
-	font-family: "Southland";
-	position: fixed;
-	margin: 0 auto;
-	padding: 0 3vw;
 	box-sizing: border-box;
+	display: flex;
+	position: fixed;
+	align-items: center;
+	justify-content: space-around;
 	z-index: 7;
+	margin: 0 auto;
+	background: linear-gradient(green, (#3d9ae0));
+	padding: 0 3vw;
 	width: inherit;
 	max-width: 1440px;
-	font-size:120%;
-	align-items: center;
-
-
-
+	height: 8vh;
+	font-family: "Southland";
+	font-size: 120%;
+	// justify-content: center;
+	// background: linear-gradient(green, (#f5f9fc));
+	// padding: 0 5vw;
 	a {
 		display: flex;
 		align-items: center;
-		text-decoration: none;
 		cursor: pointer;
-		
-		// transform:translate(0, 0);
-
+		text-decoration: none;
+		// transform: translate(0, 0);
 		h4 {
 			transform: translate(0%, 350%) rotate(-10deg);
 			z-index: 1;
-			// position:relative;
-			line-height: 1px;
 			margin: 0;
-			text-shadow: 1px 1px green;
+			text-shadow: 10px 5px 10px rgb(0, 0, 0), 10px 5px 10px rgb(0, 0, 0);
+			line-height: 1px;
 			color: white;
+			font-family: "Southland";
 			font-size: 10vw;
 			font-weight: 600;
-			text-shadow: 10px 5px 10px rgb(0, 0, 0), 10px 5px 10px rgb(0, 0, 0);
-			font-family: "Southland";
-
+			// position: relative;
 			span {
 				font-size: 13vw;
 			}
 		}
 		p {
 			margin: 0;
+			margin-left: 2vw;
+			color: rgb(61, 71, 161);
 			font-family: arial;
 			font-size: 2vw;
-			color: rgb(201, 25, 177);
-			color: rgb(61, 71, 161);
-			margin-left: 2vw;
 		}
 	}
-	nav{display:none}
-
-	.search-form{
-		padding:0 3%;
-		flex:.2;
-				
-
+	nav {
+	}
+	.search-form {
+		flex: .2;
+		padding: 0 3%;
 	}
 	.burger {
-		font-size: 8vw;
-		color: white;
-		cursor: pointer;
-		height:100%;
-		display:flex;
+		display: flex;
 		align-items: center;
+		cursor: pointer;
+		height: 100%;
+		color: white;
+		font-size: 8vw;
 	}
-	.username{
-		font-family:'Vegan';
-		font-size:3vw;
-		padding:1%;
-		border:1.5px solid;
-		border-radius:50%;
+	.username {
 		transform: scaleX(1.2);
-		background:blue;
-		color:white;
+		border: 1.5px solid;
+		border-radius: 50%;
+		background: blue;
+		padding: 1%;
+		color: white;
+		font-family: 'Arial';
+		font-size: 2vw;
+		min-width: 3%;
+		max-width:3%;
+		min-height:10%;
+		text-align:center;
+		text-transform:uppercase;
 	}
 }
-
-.menu-items{
-  padding: 3%;
-  color: rgb(255, 255, 255);
-  font-size: 2vw;
-
-  font-family: Arial;
-  cursor: pointer;
-
-	ion-icon{
-		font-size:3vw;
-			border:1.5px solid;
-			border-radius:50%;
-			padding:30%;
-			// transform:translateY(12%);
-			
+.menu-items {
+	cursor: pointer;
+	padding: 3%;
+	color: rgb(255, 255, 255);
+	font-family: Arial;
+	font-size: 2vw;
+	ion-icon {
+		border: 1.5px solid;
+		border-radius: 50%;
+		padding: 30%;
+		font-size: 3vw;
+		// transform: translateY(12%);
 	}
-  nav {
-    display: flex;
-    align-items: center;
-
-    a {
-      padding: 0 3vw;
-    }
-  }
+	nav {
+		display: flex;
+		align-items: center;
+		a {
+			padding: 0 3vw;
+		}
+	}
 }
-
-
 @media only screen and (min-width: 600px) {
 	header {
-		.menu-items{
-			ion-icon{
-				font-size:2vw;
+		.menu-items {
+			ion-icon {
+				font-size: 2vw;
 			}
 		}
 		a {
@@ -125,7 +113,6 @@ header {
 		}
 	}
 }
-
 @media only screen and (min-width: 900px) {
 	header {
 		a {
@@ -136,31 +123,29 @@ header {
 				font-size: 1vw;
 			}
 		}
-		nav{display:flex}
+		nav {
+		}
 	}
 	.menu-items {
-    font-size: 1.2vw;
-  }
+		font-size: 1.2vw;
+	}
 }
-
 @media only screen and (min-width: 1200px) {
 	header {
 		a {
 			h4 {
 				transform: translate(0%, 400%) rotate(-10deg);
 				font-size: 5vw;
-				span{
-					font-size:5.5vw;
+				span {
+					font-size: 5.5vw;
 				}
 			}
 			p.attribution {
 				font-size: 1vw;
 			}
 		}
-		.username{
-			font-size:1vw;
+		.username {
+			font-size: 1vw;
 		}
 	}
-
-
 }

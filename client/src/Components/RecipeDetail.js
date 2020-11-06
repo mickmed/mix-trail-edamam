@@ -8,8 +8,7 @@ import CreateRecipeModal from "./CreateRecipeModal"
 import api from "./apiConfig"
 import { foods } from "./data.js"
 import axios from "axios"
-import { getRecipeById, createRecipe, updateRecipe, } from '../Services/recipes'
-
+import { getRecipeById, createRecipe, updateRecipe } from "../Services/recipes"
 
 const RecipeDetail = (props) => {
   const [item, setItem] = useState([])
@@ -24,7 +23,14 @@ const RecipeDetail = (props) => {
   // const inputRef = useRef(null)
   const { id } = useParams()
 
-  const { user, recipes, userRecipes, setUserRecipes, sidebar } = props
+  const {
+    user,
+    recipes,
+    setRecipes,
+    userRecipes,
+    setUserRecipes,
+    sidebar,
+  } = props
 
   // useEffect(() => {
   //   setItems([])
@@ -132,20 +138,50 @@ const RecipeDetail = (props) => {
 
   const saveRecipe = async () => {
     setRenderModal(false)
-    const body = { ...input, ingredients: items, nutrientVals: nutrientVals, user: user.id }
-    console.log('userid', user.id)
-    let resp =
-      id !== "new"
-       
-        ? await updateRecipe(id, body)
-        : await createRecipe(body)
-    console.log(resp.data)
-    setItem(resp.data)
-    
-    setUserRecipes(userRecipes => (
-      [...userRecipes, resp.data])
-    )
+    const body = {
+      ...input,
+      ingredients: items,
+      nutrientVals: nutrientVals,
+      user: user.id,
     }
+    // console.log("userid", user.id)
+
+    if (id === "new") {
+      const resp = await createRecipe(body)
+      setUserRecipes((userRecipes) => [...userRecipes, resp.data]) &&
+        setRecipes((recipes) => [...recipes, resp.data])
+    } else {
+      const resp = await updateRecipe(id, body)
+      console.log(resp)
+      const recipesIndex = recipes.findIndex((recipe) => {
+        if (recipe._id === id) {
+          return true
+        }
+      })
+      const userRecipesIndex = userRecipes.findIndex((recipe) => {
+        if (recipe._id === id) {
+          return true
+        }
+      })
+
+
+      recipes.splice(recipesIndex, 1, resp)
+      userRecipes.splice(userRecipesIndex, 1, resp)
+      setRecipes(recipes)
+      setUserRecipes(userRecipes)
+    }
+    // let resp =
+    //   id !== "new"
+    //     ? await updateRecipe(id, body)
+    //     : (await createRecipe(body)) &&
+    //       setUserRecipes((userRecipes) => [...userRecipes, resp.data]) &&
+    //       setRecipes((recipes) => [...recipes, resp.data])
+    // console.log(resp.data)
+    // setItem(resp.data)
+
+    // setUserRecipes((userRecipes) => [...userRecipes, resp.data])
+    // setRecipes((recipes) => [...recipes, resp.data])
+  }
   return (
     <div className={`recipe-detail ${fadeOut}`}>
       <section className="item-info-wrapper">

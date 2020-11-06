@@ -8,8 +8,6 @@ const Header = (props) => {
   const appWidth = props.appWidth.current && props.appWidth.current.clientWidth
   const { user, sidebar, setSidebar, handleChange, searchString } = props
 
-  // const style = appWidth < 600 ? { position: "relative", top: "100%" } : {}
-  console.log("appWidth", appWidth)
   return (
     <header>
       <Link to="/">
@@ -19,13 +17,13 @@ const Header = (props) => {
         {/* <p className="attribution">Powered by Nutritionix</p> */}
       </Link>
 
-     {console.log("appWidth", appWidth)}
+  
      {<Nav user={user} sidebar={sidebar} setSidebar={setSidebar} />}
 
       <Search handleChange={handleChange} searchString={searchString}></Search>
       {user ? (
         <div className="username" onClick={() => setSidebar(!sidebar)}>
-          {console.log(user)}
+         
           {user.username.charAt(0)}
         </div>
       ) : appWidth < 900 ? (

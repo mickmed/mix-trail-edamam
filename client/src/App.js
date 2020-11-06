@@ -112,6 +112,7 @@ function App(props) {
               setUserRecipes={setUserRecipes}
               user={user}
               filteredRecipes={filteredRecipes}
+              setRecipes={setRecipes}
             />
           </Route>
           <Route exact path="/about">
