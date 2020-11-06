@@ -17,6 +17,8 @@ router.delete("/recipes/:id", controllers.deleteRecipe)
 
 router.get('/users/:id/recipes', controllers.getRecipesByUser)
 
+// router.get('/fix', controllers.fixNutrientVals)
+
 
 
 router.post('/sign-up', authControllers.signUp)

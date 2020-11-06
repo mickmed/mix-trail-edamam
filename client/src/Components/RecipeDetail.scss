@@ -34,9 +34,9 @@
     margin:0 auto;
 
     .save-button {
-      display: flex;
-      justify-content: flex-end;
-      margin: 0 4vw;
+     
+      // margin: 0 4vw;
+      width:100%;
 
       input.recipe-name {
         border: 0;
@@ -44,8 +44,7 @@
         // border-bottom:solid 1px;
         height: 6vh;
         outline: none;
-        width: 200%;
-        font-size: 3vw;
+        // width: 200%;
        
         // transform: translate(-2vw, 0.25vh);
         background-color:#f5f9fc;
@@ -57,7 +56,7 @@
 
       button.save-recipe {
         color: blue;
-        transform: scale(0.8);
+        transform: scale(.9);
         margin-bottom: 3vh;
         // background: transparent;
         // border: 1px solid blue;
@@ -88,14 +87,18 @@
       }
       form.edit-item-form{
         // width:120%;
-        margin:0 auto;
+        margin:0 10% 0 0;
         background-color:#f5f9fc;
 
         input{
           padding:0;
-          width:100%;
+          width:85%;
           background-color:#f5f9fc;
 
+        }
+        button{
+          border:none;
+          background:transparent;
         }
         
       }

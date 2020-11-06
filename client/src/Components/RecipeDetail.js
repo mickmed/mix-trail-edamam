@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useHistory } from "react-router-dom"
 import "./RecipeDetail.scss"
 import NutritionLabel from "./NutritionLabel"
 import Form from "./Form.js"
@@ -13,13 +13,15 @@ import { getRecipeById, createRecipe, updateRecipe } from "../Services/recipes"
 const RecipeDetail = (props) => {
   const [item, setItem] = useState([])
   const [items, setItems] = useState([])
-  const [nutrientVals, setNutrientVals] = useState([])
+  const [nutrientVals, setNutrientVals] = useState({})
   const [input, setInput] = useState({})
   const [selectedId, setSelectedId] = useState(null)
   const [search, setSearch] = useState("")
   const [renderModal, setRenderModal] = useState(false)
   const [fadeOut, setFadeOut] = useState([])
+  const [verifyRecipeUser, setVerifyRecipeUser] = useState(false)
   const inputElement = useRef(null)
+  const history = useHistory()
   // const inputRef = useRef(null)
   const { id } = useParams()
 
@@ -32,30 +34,34 @@ const RecipeDetail = (props) => {
     sidebar,
   } = props
 
-  // useEffect(() => {
-  //   setItems([])
-  //   setItem([])
-  //   setNutrientVals([])
-  //   setInput({})
-  //   inputElement.current.focus()
-  // }, [id])
-
   useEffect(() => {
     if (id !== "new") {
       const item = props.recipes.find((recipe) => recipe._id === id)
       const getItem = async () => {
         const resp = await getRecipeById(id)
-        console.log(resp)
+
         setItems(resp.ingredients)
-        setNutrientVals(resp.nutrientVals[0])
+        setNutrientVals(resp.nutrientVals)
         setItem(resp)
-        setInput({ ...input, ...resp.data })
+        setInput({ ...input, ...resp })
+
+        if (user && Object.keys(resp).length > 0) {
+          console.log(user, resp)
+          if(user.username === resp.user.username){
+            setVerifyRecipeUser(true)
+          }
+        }
       }
-      console.log(inputElement)
 
       getItem()
     }
-  }, [])
+
+    setItems([])
+    setNutrientVals({})
+    setItem([])
+    setInput({})
+    //   inputElement.current.focus()
+  }, [id, user])
 
   const itemHandleChange = (e) => {
     setSearch(e.target.value)
@@ -77,8 +83,8 @@ const RecipeDetail = (props) => {
           nutVals[key] = resp[key]
         }
       }
-      nutrientVals.length === 0 && setNutrientVals(nutVals)
-      nutrientVals.length !== 0 &&
+      Object.keys(nutrientVals).length === 0 && setNutrientVals(nutVals)
+      Object.keys(nutrientVals).length !== 0 &&
         setNutrientVals((prevState) => {
           let prev = { ...prevState }
           let newState = {}
@@ -95,7 +101,7 @@ const RecipeDetail = (props) => {
   const removeItem = async (index) => {
     let newItems = [...items]
     let removed = newItems.splice(index, 1)
-    nutrientVals.length !== 0 &&
+    Object.keys(nutrientVals).length !== 0 &&
       setNutrientVals((prevState) => {
         let prev = { ...prevState }
         let newState = {}
@@ -115,7 +121,7 @@ const RecipeDetail = (props) => {
     // })
     let newItems = [...items]
     let removed = newItems.splice(selectedId, 1, resp.foods[0])
-    nutrientVals.length !== 0 &&
+    Object.keys(nutrientVals).length !== 0 &&
       setNutrientVals((prevState) => {
         let prev = { ...prevState }
         let newState = {}
@@ -164,11 +170,11 @@ const RecipeDetail = (props) => {
         }
       })
 
-
       recipes.splice(recipesIndex, 1, resp)
       userRecipes.splice(userRecipesIndex, 1, resp)
       setRecipes(recipes)
       setUserRecipes(userRecipes)
+      history.push("/recipes")
     }
     // let resp =
     //   id !== "new"
@@ -206,11 +212,11 @@ const RecipeDetail = (props) => {
             className="recipe-name"
             value={input.name || ""}
             placeholder="...add recipe name"
-            onChange={onChange}
+            onChange={verifyRecipeUser && onChange}
             ref={inputElement}
             autoComplete="off"
           />
-          {items.length > 1 && (
+          {verifyRecipeUser && items.length > 1 && (
             <>
               <button
                 className="save-recipe"
@@ -239,32 +245,32 @@ const RecipeDetail = (props) => {
                       input[idx] ||
                       `${item.serving_qty}  ${item.serving_unit} ${item.food_name}`
                     }
-                    onClick={setSelectedId}
-                    onChange={onChange}
+                    onClick={verifyRecipeUser && setSelectedId}
+                    onChange={verifyRecipeUser && onChange}
                     onSubmit={updateItem}
                     // refo={inputElement}
                   />
                 ) : (
-                  <div type="text" onClick={() => setSelectedId(idx)}>
+                  <div type="text" onClick={() => verifyRecipeUser && setSelectedId(idx)}>
                     <span>{item.serving_qty}</span>
                     <span>{item.serving_unit}</span>
                     <span>{item.food_name}</span>
                   </div>
                 )}
-                <div className="remove-X" onClick={() => removeItem(idx)}>
+                {verifyRecipeUser && <div className="remove-X" onClick={() => removeItem(idx)}>
                   X
-                </div>
+                </div>}
               </div>
             )
           })}
 
-        {!renderModal && (
+        {verifyRecipeUser && !renderModal && (
           <Form
             className="add-item-form"
             idx={items.length}
             value={"" || input[items.length]}
-            onClick={setSelectedId}
-            onChange={itemHandleChange}
+            onClick={verifyRecipeUser && setSelectedId}
+            onChange={verifyRecipeUser && itemHandleChange}
             onSubmit={addItem}
             // refo={inputElement}
             origin="addItem"

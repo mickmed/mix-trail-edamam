@@ -8,6 +8,7 @@ import { deleteRecipe } from "../Services/recipes"
 
 const Recipes = (props) => {
   const [recipeOrder, setRecipeOrder] = useState(true)
+  const [appWidth, setAppWidth] = useState(0)
   const {
     recipes,
     userRecipes,
@@ -15,14 +16,20 @@ const Recipes = (props) => {
     searchString,
     setUserRecipes,
   } = props
+
+  useEffect(()=>{
+    setAppWidth(props.appWidth.current && props.appWidth.current.clientWidth)
+
+  }, [])
+
+
   const history = useHistory()
 
   // console.log(recipes, userRecipes)
   const deleteRecipeMsg = async (id, name) => {
-    
     let confirm = prompt(`are you sure you want to delete ${name}`)
     const resp = confirm && (await deleteRecipe(id))
-    
+
     const newUserRecipes = userRecipes.filter((rec, idx) => rec._id !== id)
 
     setUserRecipes(newUserRecipes)
@@ -30,20 +37,37 @@ const Recipes = (props) => {
 
   const sortRecipes = (array, title) => {
     console.log(title, array)
+
+
+  
     title =
       title === "Recipe"
         ? "name"
         : title === "Kl"
-        ? "nutrientVals[0].nf_calories"
+        ? 'nutrientVals[0].nf_calories'
         : title === "Category" && "category"
 
-        console.log('title', title)
+
+    title = title.split('.')
+    console.log("title", title)
+
+   
+
     array.sort((a, b) => {
-      console.log(a[title])
-      if (a[title] < b[title]) {
+      let i=0
+      // console.log(a, b)
+      while(i<title.length){
+        console.log(title[i])
+        a = a[title[i]]
+        b = b[title[i]]
+        i++
+      }
+      console.log(a, b)
+
+      if (a < b) {
         return -1
       }
-      if (a[title] > b[title]) {
+      if (a > b) {
         return 1
       }
       return 0
@@ -62,9 +86,12 @@ const Recipes = (props) => {
             let display =
               title === "User"
                 ? str !== "my recipes"
-                  ? "flex"
+                  ? appWidth > 600
+                    ? "flex"
+                    : "none"
                   : "none"
                 : "flex"
+
             return (
               <div
                 style={{ display: display }}
@@ -81,16 +108,17 @@ const Recipes = (props) => {
               <Link to={`/recipes/${recipe._id}`}>
                 <div className="recipe-name">{recipe.name}</div>
                 <div className="calories">
-                  {Math.round(recipe.nutrientVals[0].nf_calories)}
+                  {Math.round(recipe.nutrientVals && recipe.nutrientVals.nf_calories)}
                 </div>
                 <div className="category">{recipe.category}</div>
-                {str !== "my recipes" && (
+                {str !== "my recipes" && recipe.user && appWidth > 600 && (
                   <div className="username">{recipe.user.username}</div>
                 )}
               </Link>
+              {str === 'my recipes' &&
               <div onClick={() => deleteRecipeMsg(recipe._id, recipe.name)}>
                 X
-              </div>
+              </div>}
             </div>
           ))}
         </div>

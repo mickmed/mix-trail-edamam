@@ -18,7 +18,7 @@ const Header = (props) => {
       </Link>
 
   
-     {<Nav user={user} sidebar={sidebar} setSidebar={setSidebar} />}
+     {appWidth > 900 && <Nav user={user} sidebar={sidebar} setSidebar={setSidebar} />}
 
       <Search handleChange={handleChange} searchString={searchString}></Search>
       {user ? (

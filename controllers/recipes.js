@@ -87,6 +87,38 @@ getRecipesByUser = async (req, res) => {
   }
 }
 
+// fixNutrientVals = async (req, res) => {
+//   try {
+//     const recipes = await Recipe.find()
+
+//     const updatedRecipes = recipes.map((rec, idx) => {
+//       rec.nutrientVals = rec.nutrientVals[0]
+//       return rec
+//     })
+
+//     const newest = updatedRecipes.map(async(rec, idx) => {
+//       await Recipe.findByIdAndUpdate(
+//         rec._id,
+//         rec,
+//         { new: true },
+//         (error, recipe) => {
+//           console.log(recipe)
+//           if (error) {
+//             return res.status(500).json({ error: error.message })
+//           }
+//           if (!recipe) {
+//             return res.status(404).json({ message: "Product not found!" })
+//           }
+          
+//         }
+//       )
+//     })
+//     res.status(200).json(newest)
+//   } catch (error) {
+//     res.status(500).json({ error: error.message })
+//   }
+// }
+
 module.exports = {
   getRecipes,
   getRecipe,
@@ -95,4 +127,5 @@ module.exports = {
   deleteRecipe,
 
   getRecipesByUser,
+  // fixNutrientVals,
 }

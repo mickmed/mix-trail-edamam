@@ -1,54 +1,55 @@
 .signup {
-  padding:5%;
+  padding: 5%;
   margin-top: 10vh;
- min-height:150vh;
+  min-height: 150vh;
   // display:flex;
   // align-items: center;
-  h3{
-    text-align:right;
-    font-size:4vw;
-  }
-  h6{
-    text-align:right;
-    font-size:1vw;
+  h3 {
+    text-align: right;
+    font-size: 4vw;
   }
 
   .signup-form {
     // margin:3% 0 0;
-    width:50%;
+    width: 60%;
     display: flex;
     flex-wrap: wrap;
-    border:1px solid;
-    position:relative;
-    border-radius:5px;
-    padding:5%;
-    padding-bottom:15%;
+    border: 1px solid;
+    position: relative;
+    border-radius: 5px;
+    padding: 5%;
+    padding-bottom: 15%;
     background-color: rgb(240, 245, 245);
-    label{
-      display:none;
-     
+    a {
+      h6 {
+        text-align: right;
+        font-size: 3vw;
+        margin: 7% 0;
+      }
     }
-    input{
-      margin:5%;
-      transform:scale(1.1);
-      width:80%;
+    div {
+      label {
+        display: none;
+      }
+      input {
+        margin:10% 5%;
+        transform: scale(1.1);
+        width: 80%;
+      }
     }
-    button{
-      position:absolute;
-      right:5%;
-      bottom:10%;
+    button {
+      position: absolute;
+      right: 5%;
+      bottom: 5%;
     }
-  
   }
 }
 
-@media only screen and (min-width:600px){
-
-
-  .signup{
-    .signup-form{
-      input{
-        width:70%;
+@media only screen and (min-width: 600px) {
+  .signup {
+    .signup-form {
+      input {
+        width: 70%;
       }
     }
   }

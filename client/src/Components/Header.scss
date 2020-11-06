@@ -34,7 +34,7 @@ header {
 			font-weight: 600;
 			// position: relative;
 			span {
-				font-size: 13vw;
+				font-size: 12vw;
 			}
 		}
 		p {
@@ -48,8 +48,15 @@ header {
 	nav {
 	}
 	.search-form {
-		flex: .2;
+		flex: 1;
 		padding: 0 3%;
+		width:100%;
+		form{
+			width:100%;
+			input{
+				width:80%;
+			}
+		}
 	}
 	.burger {
 		display: flex;

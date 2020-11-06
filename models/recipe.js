@@ -9,7 +9,7 @@ const Recipe = new Schema(
     description: { type: String, required: false },
     category: { type: String, required: false },
     ingredients: [],
-    nutrientVals:[],
+    nutrientVals:{},
     
     user:{
       type: mongoose.Schema.Types.ObjectId,
