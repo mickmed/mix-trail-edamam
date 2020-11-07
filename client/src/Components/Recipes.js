@@ -44,7 +44,7 @@ const Recipes = (props) => {
       title === "Recipe"
         ? "name"
         : title === "Kl"
-        ? 'nutrientVals[0].nf_calories'
+        ? 'nutrientVals.nf_calories'
         : title === "Category" && "category"
 
 
@@ -52,7 +52,9 @@ const Recipes = (props) => {
     console.log("title", title)
 
    
-
+    if(title === 'category'){
+      array.sort()
+    }else{
     array.sort((a, b) => {
       let i=0
       // console.log(a, b)
@@ -72,6 +74,7 @@ const Recipes = (props) => {
       }
       return 0
     })
+  }
     !recipeOrder && array.reverse()
     setRecipeOrder(!recipeOrder)
   }
@@ -94,6 +97,7 @@ const Recipes = (props) => {
 
             return (
               <div
+              
                 style={{ display: display }}
                 onClick={() => sortRecipes(array, title)}
               >

@@ -1,24 +1,46 @@
 import React, { useState, useEffect } from "react"
 import "./NutritionLabel.scss"
 
-const NutritionalLabel = ({ nutrientVals }) => {
+const NutritionalLabel = ({
+  nutrientVals,
+  itemNutrientVals,
+  servingSize,
+  setServingSize,
+}) => {
   const [scroll, setScroll] = useState(false)
   const [btnTxt, setBtnTxt] = useState("down")
   const [style, setStyle] = useState({})
   const labelRef = React.createRef()
- 
+  const [vals, setVals] = useState({})
+  const [background, setBackground] = useState("rgba(251,251,245,1)")
 
   useEffect(() => {
     if (labelRef.current.clientHeight >= labelRef.current.scrollHeight - 50) {
-     
       setStyle({ display: "none" })
     }
   }, [scroll])
 
-  const vals = {}
-  for (let key in nutrientVals) {
-    vals[key] = Math.round(nutrientVals[key])
-  }
+  useEffect(() => {
+    const values = {}
+    if (Object.keys(itemNutrientVals).length > 0) {
+      for (let key in itemNutrientVals) {
+        values[key] = Math.round(itemNutrientVals[key])
+      }
+      setBackground("rgba(241,255,245,1)")
+    } else {
+      for (let key in nutrientVals) {
+        values[key] = Math.round(nutrientVals[key])
+        setBackground("rgba(251,251,245,1)")
+      }
+    }
+
+    setVals(values)
+  }, [nutrientVals, itemNutrientVals])
+
+  // const values = {}
+  // for (let key in nutrientVals) {
+  //   vals[key] = Math.round(nutrientVals[key])
+  // }
 
   const handleClick = (e) => {
     e.preventDefault()
@@ -39,34 +61,45 @@ const NutritionalLabel = ({ nutrientVals }) => {
   }
 
   const rVals = (val) => {
-  
-    return isNaN(val) ? "" : Math.round((val * 100))
+    return isNaN(val) ? "" : Math.round(val * 100)
   }
-    // this nutrition label was originaly part of my final project at PerScholas, Nov 2018
+  // this nutrition label was originaly part of my final project at PerScholas, Nov 2018
 
   return (
-
     <section className="nutrition-label">
-      <div className="nutrition-facts" ref={labelRef}>
+      <div
+        className="nutrition-facts"
+        style={{ background: background }}
+        ref={labelRef}
+      >
         {/* <!-- TOP SECTION --> */}
 
         <h1>Nutrition Facts</h1>
         <div className="serving">
-          <span>
+          <span >
             <h6>Serving Size</h6>
-            <h6>1</h6>
+            <h6>
+             1
+            </h6>
           </span>
-          <span>
+          <span className="serving-per-container-wrapper">
             <h6>Servings Per Container</h6>
-            <h6>1</h6>
+            <h6>
+            <input
+                className="serving-per-container"
+                type="number"
+                min="1"
+                onChange={(e)=> setServingSize(e.target.value)}
+                value={servingSize}
+              ></input></h6>
           </span>
         </div>
         {/* <!-- TOP SUB HEADING --> */}
         <p className="amnt-per-serving">Amount Per Serving</p>
         <div className="primary">
-          <h3>Calories {vals.nf_calories}</h3>
+          <h3>Calories {Math.round(vals.nf_calories/servingSize)}</h3>
 
-          <h3>Calories from Fat {vals.nf_total_fat * 9 || ''}</h3>
+          <h3>Calories from Fat {vals.nf_total_fat * 9 || ""}</h3>
         </div>
 
         <p className="perc-daily-val">% Daily Value*</p>
@@ -135,7 +168,8 @@ const NutritionalLabel = ({ nutrientVals }) => {
         </div> */}
         <div className="potassium">
           <h3>Potassium {vals.nf_potassium}</h3>
-      <h3>{Math.round(4700/vals.nf_potassium) || ''}%</h3>
+          {console.log((vals.nf_potassium / 4700) * 100)}
+          <h3>{Math.round((vals.nf_potassium / 4700) * 100) || ""}%</h3>
         </div>
         <div>
           <h6>*Percent Daily Values are based on a 2,000 calorie diet.</h6>

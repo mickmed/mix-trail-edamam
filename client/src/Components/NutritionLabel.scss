@@ -41,12 +41,31 @@
             justify-content: space-between;
             border-bottom: 7px solid;
             padding: 0.5vh 0;
+            .serving-per-container-wrapper {
+                max-width: 50%;
+                display: flex;
+                justify-content: space-between;
+            }
             span {
                 display: flex;
                 justify-content: flex-start;
                 padding: 0;
+                flex: 1;
+                max-width: 50%;
                 h6 {
                     font-size: 3vw;
+                    max-width: 50%;
+                    // flex:1;
+                    .serving-per-container {
+                        max-width: 50%;
+                    }
+                }
+                h6 {
+                    &:nth-child(2) {
+                        display: flex;
+                        justify-content: flex-end;
+                        height:50%;
+                    }
                 }
             }
         }

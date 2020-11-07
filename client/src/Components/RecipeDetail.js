@@ -14,12 +14,15 @@ const RecipeDetail = (props) => {
   const [item, setItem] = useState([])
   const [items, setItems] = useState([])
   const [nutrientVals, setNutrientVals] = useState({})
+  const [itemNutrientVals, setItemNutrientVals] = useState({})
+  const [servingSize, setServingSize] = useState(1)
   const [input, setInput] = useState({})
   const [selectedId, setSelectedId] = useState(null)
   const [search, setSearch] = useState("")
   const [renderModal, setRenderModal] = useState(false)
   const [fadeOut, setFadeOut] = useState([])
   const [verifyRecipeUser, setVerifyRecipeUser] = useState(false)
+  const [toggle, setToggle] = useState(false)
   const inputElement = useRef(null)
   const history = useHistory()
   // const inputRef = useRef(null)
@@ -47,13 +50,16 @@ const RecipeDetail = (props) => {
 
         if (user && Object.keys(resp).length > 0) {
           console.log(user, resp)
-          if(user.username === resp.user.username){
+          if (user.username === resp.user.username) {
             setVerifyRecipeUser(true)
           }
         }
       }
 
       getItem()
+    }
+    if (user && id === "new") {
+      setVerifyRecipeUser(true)
     }
 
     setItems([])
@@ -174,19 +180,25 @@ const RecipeDetail = (props) => {
       userRecipes.splice(userRecipesIndex, 1, resp)
       setRecipes(recipes)
       setUserRecipes(userRecipes)
-      history.push("/recipes")
     }
-    // let resp =
-    //   id !== "new"
-    //     ? await updateRecipe(id, body)
-    //     : (await createRecipe(body)) &&
-    //       setUserRecipes((userRecipes) => [...userRecipes, resp.data]) &&
-    //       setRecipes((recipes) => [...recipes, resp.data])
-    // console.log(resp.data)
-    // setItem(resp.data)
+    history.push("/recipes")
 
-    // setUserRecipes((userRecipes) => [...userRecipes, resp.data])
-    // setRecipes((recipes) => [...recipes, resp.data])
+  }
+  const showValues = (item) => {
+    let nutVals = {}
+    for (let key in item) {
+      if (key.substring(0, 3) === "nf_") {
+        nutVals[key] = item[key]
+      }
+    }
+    console.log(toggle)
+    if (!toggle) {
+      setItemNutrientVals(nutVals)
+    } else {
+      setItemNutrientVals({})
+    }
+
+    setToggle(!toggle)
   }
   return (
     <div className={`recipe-detail ${fadeOut}`}>
@@ -251,15 +263,22 @@ const RecipeDetail = (props) => {
                     // refo={inputElement}
                   />
                 ) : (
-                  <div type="text" onClick={() => verifyRecipeUser && setSelectedId(idx)}>
+                  <div
+                    type="text"
+                    onClick={verifyRecipeUser && (() => setSelectedId(idx))}
+                    onMouseOver={() => showValues(item)}
+                    onMouseLeave={() => showValues(item)}
+                  >
                     <span>{item.serving_qty}</span>
                     <span>{item.serving_unit}</span>
                     <span>{item.food_name}</span>
                   </div>
                 )}
-                {verifyRecipeUser && <div className="remove-X" onClick={() => removeItem(idx)}>
-                  X
-                </div>}
+                {verifyRecipeUser && (
+                  <div className="remove-X" onClick={() => removeItem(idx)}>
+                    X
+                  </div>
+                )}
               </div>
             )
           })}
@@ -277,7 +296,12 @@ const RecipeDetail = (props) => {
           />
         )}
       </section>
-      <NutritionLabel nutrientVals={nutrientVals} />
+      <NutritionLabel
+        nutrientVals={nutrientVals}
+        itemNutrientVals={itemNutrientVals}
+        servingSize={servingSize}
+        setServingSize={setServingSize}
+      />
     </div>
   )
 }
