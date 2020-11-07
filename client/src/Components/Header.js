@@ -1,17 +1,21 @@
-import React, { useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { useHistory, Link } from "react-router-dom"
 import "./Header.scss"
 import Nav from "./Nav"
 import Search from "./Search"
 
 const Header = (props) => {
-  const appWidth = props.appWidth.current && props.appWidth.current.clientWidth
-  const { user, sidebar, setSidebar, handleChange, searchString } = props
+  // const appWidth = props.appWidth.current && props.appWidth.current.clientWidth
+
+  const [width, setWidth] = useState(0)
+  const { user, sidebar, setSidebar, handleChange, searchString, appWidth } = props
   useEffect(() => {
-    console.log(appWidth, "appwidth")
+    console.log(appWidth.current.clientWidth, "appwidth")
+    setWidth(appWidth.current.clientWidth)
+
   }, [appWidth])
 
-  
+
   return (
     <header>
       <Link to="/">
@@ -21,7 +25,7 @@ const Header = (props) => {
         {/* <p className="attribution">Powered by Nutritionix</p> */}
       </Link>
 
-      {appWidth > 900 && (
+      {width > 900 && (
         <Nav user={user} sidebar={sidebar} setSidebar={setSidebar} />
       )}
 
