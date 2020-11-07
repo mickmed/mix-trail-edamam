@@ -8,10 +8,17 @@ const Header = (props) => {
   // const appWidth = props.appWidth.current && props.appWidth.current.clientWidth
 
   const [width, setWidth] = useState(0)
+  const [navStyle, setNavStyle] = useState()
+  const [display, setDisplay] = useState()
   const { user, sidebar, setSidebar, handleChange, searchString, appWidth } = props
   useEffect(() => {
     console.log(appWidth.current.clientWidth, "appwidth")
-    setWidth(appWidth.current.clientWidth)
+    let width = appWidth.current.clientWidth
+    setWidth(width)
+
+    setDisplay(width > 900 ? 'flex' : 'none')
+
+    
 
   }, [appWidth])
 
@@ -26,7 +33,7 @@ const Header = (props) => {
       </Link>
 
       {width > 900 && (
-        <Nav user={user} sidebar={sidebar} setSidebar={setSidebar} />
+        <Nav style={{display:display}} user={user} sidebar={sidebar} setSidebar={setSidebar} />
       )}
 
       <Search handleChange={handleChange} searchString={searchString}></Search>
@@ -34,7 +41,7 @@ const Header = (props) => {
         <div className="username" onClick={() => setSidebar(!sidebar)}>
           {user.username.charAt(0)}
         </div>
-      ) : appWidth < 900 ? (
+      ) : width < 900 ? (
         <div className="burger" onClick={() => props.setSidebar(!sidebar)}>
           {console.log("less than no user")}
           <ion-icon name="menu-outline"></ion-icon>
