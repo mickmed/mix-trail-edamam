@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useLayoutEffect, useRef } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { useParams, useHistory } from "react-router-dom"
 import "./RecipeDetail.scss"
 import NutritionLabel from "./NutritionLabel"
 import Form from "./Form.js"
 import { getItem } from "./ApiHelper"
 import CreateRecipeModal from "./CreateRecipeModal"
-import api from "./apiConfig"
-import { foods } from "./data.js"
-import axios from "axios"
+
 import {
   getRecipeById,
   createRecipe,
@@ -215,7 +213,7 @@ const RecipeDetail = (props) => {
             className="recipe-name"
             value={input.name || ""}
             placeholder="...add recipe name"
-            onChange={verifyRecipeUser && onChange}
+            onChange={verifyRecipeUser ? onChange: ()=>(null)}
             ref={inputElement}
             autoComplete="off"
           />
@@ -240,6 +238,7 @@ const RecipeDetail = (props) => {
           ingredients.map((item, idx) => {
             return (
               <div key={idx} className="menu-item">
+                {console.log(input[idx])}
                 {selectedId === idx ? (
                   <Form
                     className="edit-item-form"

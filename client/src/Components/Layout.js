@@ -1,11 +1,8 @@
-import React, { useState } from "react"
-import { useHistory } from "react-router-dom"
+import React, { } from "react"
 import "./Layout.scss"
-// import Nav from "./Nav"
 import Footer from "./Footer"
 import Header from "./Header"
 import Sidebar from "./SideBar"
-import Search from "./Search"
 
 const Layout = (props) => {
   const {
@@ -15,11 +12,11 @@ const Layout = (props) => {
     sidebar,
     setSidebar,
     children,
-    recipes,
+   
     handleChange,
     searchString
   } = props
-  const history = useHistory()
+
 
   
 

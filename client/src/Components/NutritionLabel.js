@@ -8,7 +8,7 @@ const NutritionalLabel = ({
   setServingsPerContainer,
 }) => {
   const [scroll, setScroll] = useState(false)
-  const [btnTxt, setBtnTxt] = useState("down")
+  // const [btnTxt, setBtnTxt] = useState("down")
   const [style, setStyle] = useState({})
   const labelRef = React.createRef()
   const [vals, setVals] = useState({})
@@ -68,7 +68,7 @@ const NutritionalLabel = ({
   }
 
   const divideByServingSize = (value) => {
-console.log(value, servingsPerContainer)
+
     return value && (Math.round(value/servingsPerContainer))
     
 
