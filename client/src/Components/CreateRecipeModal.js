@@ -8,7 +8,7 @@ import apiUrl from "./apiConfig"
 const CreateRecipeModal = (props) => {
   const {
  id,
-    item,
+    recipe,
     onChange,
     input
   } = props

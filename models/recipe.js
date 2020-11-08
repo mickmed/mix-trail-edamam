@@ -10,6 +10,7 @@ const Recipe = new Schema(
     category: { type: String, required: false },
     ingredients: [],
     nutrientVals:{},
+    servingsPerContainer:{type: Number, required: false },
     
     user:{
       type: mongoose.Schema.Types.ObjectId,

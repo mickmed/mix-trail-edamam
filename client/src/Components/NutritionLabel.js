@@ -3,9 +3,9 @@ import "./NutritionLabel.scss"
 
 const NutritionalLabel = ({
   nutrientVals,
-  itemNutrientVals,
-  servingSize,
-  setServingSize,
+  ingredientNutrientVals,
+  servingsPerContainer,
+  setServingsPerContainer,
 }) => {
   const [scroll, setScroll] = useState(false)
   const [btnTxt, setBtnTxt] = useState("down")
@@ -21,12 +21,14 @@ const NutritionalLabel = ({
   }, [scroll])
 
   useEffect(() => {
+   
     const values = {}
-    if (Object.keys(itemNutrientVals).length > 0) {
-      for (let key in itemNutrientVals) {
-        values[key] = Math.round(itemNutrientVals[key])
+    if (Object.keys(ingredientNutrientVals).length > 0) {
+      for (let key in ingredientNutrientVals) {
+        values[key] = Math.round(ingredientNutrientVals[key])
+        setBackground("rgba(241,255,245,1)")
       }
-      setBackground("rgba(241,255,245,1)")
+      
     } else {
       for (let key in nutrientVals) {
         values[key] = Math.round(nutrientVals[key])
@@ -35,7 +37,8 @@ const NutritionalLabel = ({
     }
 
     setVals(values)
-  }, [nutrientVals, itemNutrientVals])
+    
+  }, [nutrientVals, ingredientNutrientVals])
 
   // const values = {}
   // for (let key in nutrientVals) {
@@ -63,6 +66,13 @@ const NutritionalLabel = ({
   const rVals = (val) => {
     return isNaN(val) ? "" : Math.round(val * 100)
   }
+
+  const divideByServingSize = (value) => {
+console.log(value, servingsPerContainer)
+    return value && (Math.round(value/servingsPerContainer))
+    
+
+  }
   // this nutrition label was originaly part of my final project at PerScholas, Nov 2018
 
   return (
@@ -89,15 +99,15 @@ const NutritionalLabel = ({
                 className="serving-per-container"
                 type="number"
                 min="1"
-                onChange={(e)=> setServingSize(e.target.value)}
-                value={servingSize}
+                onChange={(e)=> setServingsPerContainer(e.target.value)}
+                value={servingsPerContainer}
               ></input></h6>
           </span>
         </div>
         {/* <!-- TOP SUB HEADING --> */}
         <p className="amnt-per-serving">Amount Per Serving</p>
         <div className="primary">
-          <h3>Calories {Math.round(vals.nf_calories/servingSize)}</h3>
+          <h3>Calories {(divideByServingSize(vals.nf_calories))}</h3>
 
           <h3>Calories from Fat {vals.nf_total_fat * 9 || ""}</h3>
         </div>
@@ -105,7 +115,7 @@ const NutritionalLabel = ({
         <p className="perc-daily-val">% Daily Value*</p>
 
         <div className="primary">
-          <h4>Total Fat {vals.nf_total_fat}g</h4>
+          <h4>Total Fat {vals.nf_total_fat/servingsPerContainer}g</h4>
 
           <div>
             <h3>{rVals(vals.nf_total_fat / 78)}%</h3>
@@ -113,7 +123,7 @@ const NutritionalLabel = ({
         </div>
 
         <div className="secondary">
-          <h3>Saturated Fat {vals.nf_saturated_fat}g</h3>
+          <h3>Saturated Fat {vals.nf_saturated_fat/servingsPerContainer}g</h3>
 
           <h3>{rVals(vals.nf_saturated_fat / 20)}%</h3>
         </div>
@@ -123,27 +133,27 @@ const NutritionalLabel = ({
         </div>
         {/* </div> */}
         <div className="primary chol">
-          <h4>Cholesterol {vals.nf_cholesterol}mg</h4>
+          <h4>Cholesterol {vals.nf_cholesterol/servingsPerContainer}mg</h4>
           <h3>{rVals(vals.nf_cholesterol / 300)}%</h3>
         </div>
 
         <div className="primary">
-          <h4>Sodium {vals.nf_sodium}mg</h4>
+          <h4>Sodium {vals.nf_sodium/servingsPerContainer}mg</h4>
           <h3>{rVals(vals.nf_sodium / 2300)}%</h3>
         </div>
 
         <div className="primary">
-          <h4>Total Carbohydrate {vals.nf_total_carbohydrate}g</h4>
+          <h4>Total Carbohydrate {vals.nf_total_carbohydrate/servingsPerContainer}g</h4>
           <h3>{rVals(vals.nf_total_fat / 78)}%</h3>
         </div>
 
         <div className="secondary">
-          <h3>Dietary Fiber {vals.nf_dietary_fiber}g</h3>
+          <h3>Dietary Fiber {vals.nf_dietary_fiber/servingsPerContainer}g</h3>
           <h3>{rVals(vals.nf_total_carbohydrate / 275)}%</h3>
         </div>
 
         <div className="secondary">
-          <h3>Sugars {vals.nf_sugars}g</h3>
+          <h3>Sugars {vals.nf_sugars/servingsPerContainer}g</h3>
         </div>
         <div className="protein">
           <h4>Protein {vals.nf_protein}g</h4>
@@ -168,7 +178,7 @@ const NutritionalLabel = ({
         </div> */}
         <div className="potassium">
           <h3>Potassium {vals.nf_potassium}</h3>
-          {console.log((vals.nf_potassium / 4700) * 100)}
+          {/* {console.log((vals.nf_potassium / 4700) * 100)} */}
           <h3>{Math.round((vals.nf_potassium / 4700) * 100) || ""}%</h3>
         </div>
         <div>

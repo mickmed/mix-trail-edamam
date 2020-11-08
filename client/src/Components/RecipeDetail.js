@@ -8,14 +8,24 @@ import CreateRecipeModal from "./CreateRecipeModal"
 import api from "./apiConfig"
 import { foods } from "./data.js"
 import axios from "axios"
-import { getRecipeById, createRecipe, updateRecipe } from "../Services/recipes"
+import {
+  getRecipeById,
+  createRecipe,
+  updateRecipe,
+  getUserRecipes,
+} from "../Services/recipes"
 
 const RecipeDetail = (props) => {
-  const [item, setItem] = useState([])
-  const [items, setItems] = useState([])
+  const [recipe, setRecipe] = useState([])
+  const [ingredients, setIngredients] = useState([])
   const [nutrientVals, setNutrientVals] = useState({})
-  const [itemNutrientVals, setItemNutrientVals] = useState({})
-  const [servingSize, setServingSize] = useState(1)
+  const [ingredientNutrientVals, setIngredientNutrientVals] = useState({})
+  const [servingsPerContainer, setServingsPerContainer] = useState(1)
+ 
+ 
+  const [userRecipes, setUserRecipes] = useState([])
+
+  
   const [input, setInput] = useState({})
   const [selectedId, setSelectedId] = useState(null)
   const [search, setSearch] = useState("")
@@ -27,27 +37,18 @@ const RecipeDetail = (props) => {
   const history = useHistory()
   // const inputRef = useRef(null)
   const { id } = useParams()
-
-  const {
-    user,
-    recipes,
-    setRecipes,
-    userRecipes,
-    setUserRecipes,
-    sidebar,
-  } = props
-
+  const { user, recipes, setRecipes, sidebar } = props
   useEffect(() => {
     if (id !== "new") {
-      const item = props.recipes.find((recipe) => recipe._id === id)
+      // const item = props.recipes.find((recipe) => recipe._id === id)
       const getItem = async () => {
         const resp = await getRecipeById(id)
-
-        setItems(resp.ingredients)
+        setRecipe(resp)
+        setIngredients(resp.ingredients)
         setNutrientVals(resp.nutrientVals)
-        setItem(resp)
-        setInput({ ...input, ...resp })
 
+        setInput({ ...input, ...resp })
+        setServingsPerContainer(resp.servingsPerContainer)
         if (user && Object.keys(resp).length > 0) {
           console.log(user, resp)
           if (user.username === resp.user.username) {
@@ -55,24 +56,21 @@ const RecipeDetail = (props) => {
           }
         }
       }
-
       getItem()
     }
     if (user && id === "new") {
       setVerifyRecipeUser(true)
     }
-
-    setItems([])
+ 
+    setIngredients([])
     setNutrientVals({})
-    setItem([])
+    setRecipe([])
     setInput({})
     //   inputElement.current.focus()
   }, [id, user])
-
   const itemHandleChange = (e) => {
     setSearch(e.target.value)
   }
-
   const addItem = async (e) => {
     e.preventDefault()
     // let res = foods.find((food) => {
@@ -99,13 +97,12 @@ const RecipeDetail = (props) => {
           }
           return newState
         })
-      setItems((prevState) => [...prevState, resp])
+      setIngredients((prevState) => [...prevState, resp])
       setSelectedId(selectedId + 1)
     }
   }
-
   const removeItem = async (index) => {
-    let newItems = [...items]
+    let newItems = [...ingredients]
     let removed = newItems.splice(index, 1)
     Object.keys(nutrientVals).length !== 0 &&
       setNutrientVals((prevState) => {
@@ -116,16 +113,15 @@ const RecipeDetail = (props) => {
         }
         return newState
       })
-    setItems(newItems)
+    setIngredients(newItems)
   }
-
   const updateItem = async (e) => {
     e.preventDefault()
     const resp = await getItem(input[selectedId], 1)
     // let resp = foods.find((food) => {
     //   return food.foods[0].food_name === input[selectedId]
     // })
-    let newItems = [...items]
+    let newItems = [...ingredients]
     let removed = newItems.splice(selectedId, 1, resp.foods[0])
     Object.keys(nutrientVals).length !== 0 &&
       setNutrientVals((prevState) => {
@@ -136,10 +132,9 @@ const RecipeDetail = (props) => {
         }
         return newState
       })
-    await setSelectedId(items.length)
-    await setItems(newItems)
+    await setSelectedId(ingredients.length)
+    await setIngredients(newItems)
   }
-
   const onChange = (e) => {
     const { name, value } = e.target
     setInput({
@@ -147,17 +142,16 @@ const RecipeDetail = (props) => {
       [name]: value,
     })
   }
-
   const saveRecipe = async () => {
     setRenderModal(false)
     const body = {
       ...input,
-      ingredients: items,
+      ingredients: ingredients,
       nutrientVals: nutrientVals,
+      servingsPerContainer: servingsPerContainer,
       user: user.id,
     }
     // console.log("userid", user.id)
-
     if (id === "new") {
       const resp = await createRecipe(body)
       setUserRecipes((userRecipes) => [...userRecipes, resp.data]) &&
@@ -175,14 +169,12 @@ const RecipeDetail = (props) => {
           return true
         }
       })
-
       recipes.splice(recipesIndex, 1, resp)
       userRecipes.splice(userRecipesIndex, 1, resp)
       setRecipes(recipes)
       setUserRecipes(userRecipes)
     }
     history.push("/recipes")
-
   }
   const showValues = (item) => {
     let nutVals = {}
@@ -193,11 +185,10 @@ const RecipeDetail = (props) => {
     }
     console.log(toggle)
     if (!toggle) {
-      setItemNutrientVals(nutVals)
+      setIngredientNutrientVals(nutVals)
     } else {
-      setItemNutrientVals({})
+      setIngredientNutrientVals({})
     }
-
     setToggle(!toggle)
   }
   return (
@@ -206,12 +197,12 @@ const RecipeDetail = (props) => {
         {renderModal && (
           <CreateRecipeModal
             renderModal={renderModal}
-            setItem={setItem}
+            setRecipe={setRecipe}
             setRenderModal={setRenderModal}
-            items={items}
-            setItems={setItems}
+            items={ingredients}
+            setIngredients={setIngredients}
             nutrientVals={nutrientVals}
-            item={item}
+            item={recipe}
             input={input}
             onChange={onChange}
             id={id}
@@ -228,7 +219,7 @@ const RecipeDetail = (props) => {
             ref={inputElement}
             autoComplete="off"
           />
-          {verifyRecipeUser && items.length > 1 && (
+          {verifyRecipeUser && ingredients.length > 1 && (
             <>
               <button
                 className="save-recipe"
@@ -246,7 +237,7 @@ const RecipeDetail = (props) => {
           )}
         </div>
         {!renderModal &&
-          items.map((item, idx) => {
+          ingredients.map((item, idx) => {
             return (
               <div key={idx} className="menu-item">
                 {selectedId === idx ? (
@@ -282,12 +273,11 @@ const RecipeDetail = (props) => {
               </div>
             )
           })}
-
         {verifyRecipeUser && !renderModal && (
           <Form
             className="add-item-form"
-            idx={items.length}
-            value={"" || input[items.length]}
+            idx={ingredients.length}
+            value={"" || input[ingredients.length]}
             onClick={verifyRecipeUser && setSelectedId}
             onChange={verifyRecipeUser && itemHandleChange}
             onSubmit={addItem}
@@ -298,9 +288,9 @@ const RecipeDetail = (props) => {
       </section>
       <NutritionLabel
         nutrientVals={nutrientVals}
-        itemNutrientVals={itemNutrientVals}
-        servingSize={servingSize}
-        setServingSize={setServingSize}
+        ingredientNutrientVals={ingredientNutrientVals}
+        servingsPerContainer={servingsPerContainer}
+        setServingsPerContainer={setServingsPerContainer}
       />
     </div>
   )
