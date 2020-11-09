@@ -109,7 +109,7 @@ const Recipes = (props) => {
                 <div className="recipe-name">{recipe.name}</div>
                 <div className="calories">
                   {Math.round(
-                    recipe.nutrientVals && recipe.nutrientVals.nf_calories
+                    recipe.nutrientVals && recipe.nutrientVals.nf_calories/recipe.servingsPerContainer
                   )}
                 </div>
                 <div className="category">{recipe.category}</div>

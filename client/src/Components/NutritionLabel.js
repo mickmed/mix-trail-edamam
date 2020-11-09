@@ -18,7 +18,7 @@ const NutritionalLabel = ({
     if (labelRef.current.clientHeight >= labelRef.current.scrollHeight - 50) {
       setStyle({ display: "none" })
     }
-  }, [scroll, labelRef])
+  }, [scroll])
 
   useEffect(() => {
    

@@ -55,17 +55,19 @@ const RecipeDetail = (props) => {
         }
       }
       getItem()
+    }else{
+      setIngredients([])
+    setNutrientVals({})
+    setRecipe([])
+    setInput({})
     }
     if (user && id === "new") {
       setVerifyRecipeUser(true)
     }
  
-    setIngredients([])
-    setNutrientVals({})
-    setRecipe([])
-    setInput({})
+    
     //   inputElement.current.focus()
-  }, [id, user, input])
+  }, [id, user])
 
   
 
@@ -224,7 +226,7 @@ const RecipeDetail = (props) => {
             className="recipe-name"
             value={input.name || ""}
             placeholder="...add recipe name"
-            onChange={verifyRecipeUser ? onChange: ()=>(null)}
+            onChange={verifyRecipeUser && onChange}
             ref={inputElement}
             autoComplete="off"
           />
