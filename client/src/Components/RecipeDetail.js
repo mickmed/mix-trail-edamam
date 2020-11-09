@@ -85,6 +85,7 @@ const RecipeDetail = (props) => {
           nutVals[key] = resp[key]
         }
       }
+      console.log(nutrientVals)
       Object.keys(nutrientVals).length === 0 && setNutrientVals(nutVals)
       Object.keys(nutrientVals).length !== 0 &&
         setNutrientVals((prevState) => {
