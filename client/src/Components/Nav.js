@@ -1,4 +1,4 @@
-import React, { } from "react"
+import React from "react"
 import { useHistory, Link } from "react-router-dom"
 import "./Nav.scss"
 
@@ -19,12 +19,13 @@ const Nav = (props) => {
           ? "recipes/new"
           : "signin"
         : link === "about" && "about"
-console.log(link)
+    console.log(link)
     history.push(`/${link}`)
   }
 
   return (
     <nav>
+      console.log(links)
       {links.map((link, idx) => (
         // link = link === 'account' && <ion-icon name="person-outline"></ion-icon>
         <a className="menu-items" key={idx} onClick={() => closeModal(link)}>
