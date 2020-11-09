@@ -49,7 +49,6 @@ const RecipeDetail = (props) => {
         setInput({ ...input, ...resp })
         setServingsPerContainer(resp.servingsPerContainer)
         if (user && Object.keys(resp).length > 0) {
-          console.log(user, resp)
           if (user.username === resp.user.username) {
             setVerifyRecipeUser(true)
           }
@@ -90,7 +89,6 @@ const RecipeDetail = (props) => {
           nutVals[key] = resp[key]
         }
       }
-      console.log(nutrientVals)
       Object.keys(nutrientVals).length === 0 && setNutrientVals(nutVals)
       Object.keys(nutrientVals).length !== 0 &&
         setNutrientVals((prevState) => {
@@ -249,7 +247,7 @@ const RecipeDetail = (props) => {
           ingredients.map((item, idx) => {
             return (
               <div key={idx} className="menu-item">
-                {console.log(input[idx])}
+                
                 {selectedId === idx ? (
                   <Form
                     className="edit-item-form"

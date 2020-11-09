@@ -32,9 +32,9 @@ const Header = (props) => {
         {/* <p className="attribution">Powered by Nutritionix</p> */}
       </Link>
 
-      {width > 900 && (
+      {
         <Nav style={{display:display}} user={user} sidebar={sidebar} setSidebar={setSidebar} />
-      )}
+      }
 
       <Search handleChange={handleChange} searchString={searchString}></Search>
       {user ? (
