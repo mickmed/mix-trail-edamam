@@ -32,7 +32,7 @@ const Header = (props) => {
       </Link>
 
       {
-        <Nav style={{display:display}} user={user} sidebar={sidebar} setSidebar={setSidebar} />
+        width > 900 && <Nav style={{display:display}} user={user} sidebar={sidebar} setSidebar={setSidebar} />
       }
 
       <Search handleChange={handleChange} searchString={searchString}></Search>
