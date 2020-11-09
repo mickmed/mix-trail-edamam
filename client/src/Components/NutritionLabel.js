@@ -109,23 +109,23 @@ const NutritionalLabel = ({
         <div className="primary">
           <h3>Calories {(divideByServingSize(vals.nf_calories))}</h3>
 
-          <h3>Calories from Fat {vals.nf_total_fat * 9 || ""}</h3>
+          <h3>Calories from Fat {divideByServingSize(vals.nf_total_fat * 9 || "")}</h3>
         </div>
 
         <p className="perc-daily-val">% Daily Value*</p>
 
         <div className="primary">
-          <h4>Total Fat {vals.nf_total_fat/servingsPerContainer}g</h4>
+          <h4>Total Fat {divideByServingSize(vals.nf_total_fat)}g</h4>
 
           <div>
-            <h3>{rVals(vals.nf_total_fat / 78)}%</h3>
+            <h3>{divideByServingSize(rVals(vals.nf_total_fat / 78))}%</h3>
           </div>
         </div>
 
         <div className="secondary">
-          <h3>Saturated Fat {vals.nf_saturated_fat/servingsPerContainer}g</h3>
+          <h3>Saturated Fat {divideByServingSize(vals.nf_saturated_fat)}g</h3>
 
-          <h3>{rVals(vals.nf_saturated_fat / 20)}%</h3>
+          <h3>{divideByServingSize(rVals(vals.nf_saturated_fat / 20))}%</h3>
         </div>
 
         <div className="secondary">
@@ -133,30 +133,30 @@ const NutritionalLabel = ({
         </div>
         {/* </div> */}
         <div className="primary chol">
-          <h4>Cholesterol {vals.nf_cholesterol/servingsPerContainer}mg</h4>
-          <h3>{rVals(vals.nf_cholesterol / 300)}%</h3>
+          <h4>Cholesterol {divideByServingSize(vals.nf_cholesterol)}mg</h4>
+          <h3>{divideByServingSize(rVals(vals.nf_cholesterol / 300))}%</h3>
         </div>
 
         <div className="primary">
-          <h4>Sodium {vals.nf_sodium/servingsPerContainer}mg</h4>
-          <h3>{rVals(vals.nf_sodium / 2300)}%</h3>
+          <h4>Sodium {divideByServingSize(vals.nf_sodium)}mg</h4>
+          <h3>{divideByServingSize(rVals(vals.nf_sodium / 2300))}%</h3>
         </div>
 
         <div className="primary">
-          <h4>Total Carbohydrate {vals.nf_total_carbohydrate/servingsPerContainer}g</h4>
-          <h3>{rVals(vals.nf_total_fat / 78)}%</h3>
+          <h4>Total Carbohydrate {divideByServingSize(vals.nf_total_carbohydrate)}g</h4>
+          <h3>{divideByServingSize(rVals(vals.nf_total_fat / 78))}%</h3>
         </div>
 
         <div className="secondary">
-          <h3>Dietary Fiber {vals.nf_dietary_fiber/servingsPerContainer}g</h3>
-          <h3>{rVals(vals.nf_total_carbohydrate / 275)}%</h3>
+          <h3>Dietary Fiber {divideByServingSize(vals.nf_dietary_fiber)}g</h3>
+          <h3>{divideByServingSize(rVals(vals.nf_total_carbohydrate / 275))}%</h3>
         </div>
 
         <div className="secondary">
-          <h3>Sugars {vals.nf_sugars/servingsPerContainer}g</h3>
+          <h3>Sugars {divideByServingSize(vals.nf_sugars/servingsPerContainer)}g</h3>
         </div>
         <div className="protein">
-          <h4>Protein {vals.nf_protein}g</h4>
+          <h4>Protein {divideByServingSize(vals.nf_protein)}g</h4>
           <h4 id="protein"> </h4>
         </div>
         {/* <!-- BOTTOM SECTION --> */}
@@ -177,9 +177,9 @@ const NutritionalLabel = ({
           <h3>%</h3>
         </div> */}
         <div className="potassium">
-          <h3>Potassium {vals.nf_potassium}</h3>
+          <h3>Potassium {divideByServingSize(vals.nf_potassium)}</h3>
           {/* {console.log((vals.nf_potassium / 4700) * 100)} */}
-          <h3>{Math.round((vals.nf_potassium / 4700) * 100) || ""}%</h3>
+          <h3>{divideByServingSize(Math.round((vals.nf_potassium / 4700) * 100) || "")}%</h3>
         </div>
         <div>
           <h6>*Percent Daily Values are based on a 2,000 calorie diet.</h6>
