@@ -42,20 +42,20 @@ const createRecipe = async (req, res) => {
 
 const updateRecipe = async (req, res) => {
   const { id } = req.params
-
+console.log('here')
   await Recipe.findByIdAndUpdate(
     id,
     req.body,
     { new: true },
     (error, recipe) => {
       console.log('you got this far')
-      if (error) {
-        return res.status(500).json({ error: error.message })
-      }
-      if (!recipe) {
-        return res.status(404).json({ message: "Product not found!" })
-      }
-      res.status(200).json(recipe)
+      // if (error) {
+      //   return res.status(500).json({ error: error.message })
+      // }
+      // if (!recipe) {
+      //   return res.status(404).json({ message: "Product not found!" })
+      // }
+      res.status(200).json(recipe)her
     }
   ).populate("user", "username -_id")
 }
