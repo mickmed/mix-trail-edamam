@@ -22,7 +22,7 @@ const api = Axios.create({
     baseURL: apiUrl,
     headers: {
         Authorization: `Bearer ${JwtToken}`,
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': 'https://mix-trail.herokuapp.com/'
     }
 })
 
