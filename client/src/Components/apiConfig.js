@@ -1,6 +1,8 @@
 
 
 import Axios from 'axios'
+
+console.log(localStorage)
 const JwtToken = localStorage.getItem('token') || null
 
 let apiUrl
