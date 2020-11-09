@@ -55,7 +55,7 @@ console.log('here')
       // if (!recipe) {
       //   return res.status(404).json({ message: "Product not found!" })
       // }
-      res.status(200).json(recipe)her
+      res.status(200).json(recipe)
     }
   ).populate("user", "username -_id")
 }
