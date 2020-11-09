@@ -11,27 +11,28 @@ const Nav = (props) => {
   const closeModal = (link) => {
     origin === "sidebar" && setSidebar(!sidebar)
 
-    link =
-      link === "recipes"
-        ? "recipes"
-        : link === "calculate"
-        ? user
-          ? "recipes/new"
-          : "signin"
-        : link === "about" && "about"
-    
     history.push(`/${link}`)
   }
 
   return (
-    <nav>
+    <nav onClick={closeModal}>
       {console.log(links)}
-      {links.map((link, idx) => (
+      {links.map((link, idx) => {
         // link = link === 'account' && <ion-icon name="person-outline"></ion-icon>
-        <a className="menu-items" key={idx} onClick={() => closeModal(link)}>
-          {link}
-        </a>
-      ))}
+        let route =
+          link === "recipes"
+            ? "recipes"
+            : link === "calculate"
+            ? user
+              ? "recipes/new"
+              : "signin"
+            : link === "about" && "about"
+        return (
+          <Link to={route} key={idx} className='menu-items'>
+            {link}
+          </Link>
+        )
+      })}
     </nav>
   )
 }

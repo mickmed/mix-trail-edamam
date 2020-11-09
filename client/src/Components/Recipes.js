@@ -93,6 +93,7 @@ const Recipes = (props) => {
 
             return (
               <div
+              key={idx}
                 style={{ display: display }}
                 onClick={() => sortRecipes(array, title)}
               >

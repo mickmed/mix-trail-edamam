@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { useHistory, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 import "./Header.scss"
 import Nav from "./Nav"
 import Search from "./Search"
@@ -8,7 +8,6 @@ const Header = (props) => {
   // const appWidth = props.appWidth.current && props.appWidth.current.clientWidth
 
   const [width, setWidth] = useState(0)
-  const [navStyle, setNavStyle] = useState()
   const [display, setDisplay] = useState()
   const { user, sidebar, setSidebar, handleChange, searchString, appWidth } = props
   useEffect(() => {

@@ -10,9 +10,9 @@ import {
   getRecipeById,
   createRecipe,
   updateRecipe,
-  getUserRecipes,
+
 } from "../Services/recipes"
-import { set } from "mongoose"
+
 
 const RecipeDetail = (props) => {
   const [recipe, setRecipe] = useState([])
@@ -31,7 +31,7 @@ const RecipeDetail = (props) => {
   const [fadeOut, setFadeOut] = useState([])
   const [verifyRecipeUser, setVerifyRecipeUser] = useState(false)
   const [toggle, setToggle] = useState(false)
-  const [redirect, setRedirect] = useState(false)
+
   const inputElement = useRef(null)
   const history = useHistory()
   // const inputRef = useRef(null)
@@ -65,7 +65,7 @@ const RecipeDetail = (props) => {
     setRecipe([])
     setInput({})
     //   inputElement.current.focus()
-  }, [id, user])
+  }, [id, user, input])
 
   
 
@@ -82,7 +82,7 @@ const RecipeDetail = (props) => {
     const rest = await getItem(search, 1)
     let resp = rest !== undefined && rest.foods[0]
     if (resp) {
-      let foodKeys = Object.keys(resp)
+      // let foodKeys = Object.keys(resp)
       let nutVals = {}
       for (let key in resp) {
         if (key.substring(0, 3) === "nf_") {
@@ -159,7 +159,7 @@ const RecipeDetail = (props) => {
       const resp = await createRecipe(body)
       await setUserRecipes((userRecipes) => [...userRecipes, resp.data]) 
         await setRecipes((recipes) => [...recipes, resp.data])
-    setRedirect(true)
+  
 
     } else {
 
@@ -169,11 +169,13 @@ const RecipeDetail = (props) => {
         if (recipe._id === id) {
           return true
         }
+        return false
       })
       const userRecipesIndex = userRecipes.findIndex((recipe) => {
         if (recipe._id === id) {
           return true
         }
+        return false
       })
       recipes.splice(recipesIndex, 1, resp)
       userRecipes.splice(userRecipesIndex, 1, resp)
