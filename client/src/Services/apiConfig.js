@@ -6,7 +6,8 @@ let apiUrl
 
 const apiUrls = {
     production: 'https://mix-trail.herokuapp.com/api',
-    development: 'http://localhost:3000/api'
+    development: 'https://mix-trail.herokuapp.com/api'
+    // development: 'http://localhost:3000/api'
 }
 
 if (window.location.hostname === 'localhost') {
@@ -24,3 +25,4 @@ const api = Axios.create({
 })
 
 export default api
+

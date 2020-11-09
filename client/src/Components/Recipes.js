@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react"
 
-import axios from "axios"
 import "./Recipes.scss"
 import { Link, useHistory } from "react-router-dom"
-import apiUrl from "./apiConfig"
 import { deleteRecipe } from "../Services/recipes"
 
 const Recipes = (props) => {

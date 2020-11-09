@@ -29,12 +29,14 @@ function App(props) {
     const getData = async () => {
 
       const user = await verifyUser()
+      console.log('user', user)
       user && setUser(user.user)
 
       const recipes = await getRecipes()
       setRecipes(recipes)
-
+console.log('user2', user)
       const userRecipes = user && await getUserRecipes(user.user.id)
+      console.log('userReci', userRecipes)
       setUserRecipes(userRecipes)
     }
     getData()

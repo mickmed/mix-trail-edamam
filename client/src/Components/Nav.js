@@ -16,7 +16,7 @@ const Nav = (props) => {
 
   return (
     <nav onClick={closeModal}>
-      {console.log(links)}
+     
       {links.map((link, idx) => {
         // link = link === 'account' && <ion-icon name="person-outline"></ion-icon>
         let routeName =
@@ -28,7 +28,7 @@ const Nav = (props) => {
               : "signin"
             : link === "about" && "about"
 
-            console.log(routeName)
+           
         return (
           <Link to={`/${routeName}`} key={idx} className='menu-items'>
             {link}
