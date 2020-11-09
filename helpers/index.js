@@ -1,5 +1,7 @@
 module.exports = (req, res, next) => {
-  require("../.env")
+  // require("../.env")
+require('dotenv').config()
+
   const jwt = require("jsonwebtoken")
   const TOKEN_KEY = process.env.SECRET_KEY
 
