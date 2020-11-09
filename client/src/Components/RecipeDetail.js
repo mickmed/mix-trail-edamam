@@ -12,6 +12,7 @@ import {
   updateRecipe,
   getUserRecipes,
 } from "../Services/recipes"
+import { set } from "mongoose"
 
 const RecipeDetail = (props) => {
   const [recipe, setRecipe] = useState([])
@@ -21,7 +22,6 @@ const RecipeDetail = (props) => {
   const [servingsPerContainer, setServingsPerContainer] = useState(1)
  
  
-  const [userRecipes, setUserRecipes] = useState([])
 
   
   const [input, setInput] = useState({})
@@ -31,11 +31,12 @@ const RecipeDetail = (props) => {
   const [fadeOut, setFadeOut] = useState([])
   const [verifyRecipeUser, setVerifyRecipeUser] = useState(false)
   const [toggle, setToggle] = useState(false)
+  const [redirect, setRedirect] = useState(false)
   const inputElement = useRef(null)
   const history = useHistory()
   // const inputRef = useRef(null)
   const { id } = useParams()
-  const { user, recipes, setRecipes, sidebar } = props
+  const { user, recipes, setRecipes, userRecipes, setUserRecipes } = props
   useEffect(() => {
     if (id !== "new") {
       // const item = props.recipes.find((recipe) => recipe._id === id)
@@ -66,6 +67,10 @@ const RecipeDetail = (props) => {
     setInput({})
     //   inputElement.current.focus()
   }, [id, user])
+
+  
+
+
   const itemHandleChange = (e) => {
     setSearch(e.target.value)
   }
@@ -154,17 +159,14 @@ const RecipeDetail = (props) => {
     // console.log("userid", user.id)
     if (id === "new") {
       const resp = await createRecipe(body)
-      setUserRecipes((userRecipes) => [...userRecipes, resp.data]) &&
-        setRecipes((recipes) => [...recipes, resp.data])
-    console.log('save recipe')
+      await setUserRecipes((userRecipes) => [...userRecipes, resp.data]) 
+        await setRecipes((recipes) => [...recipes, resp.data])
+    setRedirect(true)
 
     } else {
-    console.log('save recipe', body)
 
       const resp = await updateRecipe(id, body)
-    console.log('save recipe', resp)
 
-      console.log(resp)
       const recipesIndex = recipes.findIndex((recipe) => {
         if (recipe._id === id) {
           return true
@@ -179,8 +181,9 @@ const RecipeDetail = (props) => {
       userRecipes.splice(userRecipesIndex, 1, resp)
       setRecipes(recipes)
       setUserRecipes(userRecipes)
+
     }
-    history.push("/recipes")
+    history.push('/recipes')
   }
   const showValues = (item) => {
     let nutVals = {}
@@ -189,7 +192,7 @@ const RecipeDetail = (props) => {
         nutVals[key] = item[key]
       }
     }
-    console.log(toggle)
+   
     if (!toggle) {
       setIngredientNutrientVals(nutVals)
     } else {
