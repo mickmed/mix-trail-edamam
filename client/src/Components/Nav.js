@@ -11,7 +11,7 @@ const Nav = (props) => {
   const closeModal = (link) => {
     origin === "sidebar" && setSidebar(!sidebar)
 
-    history.push(`/${link}`)
+
   }
 
   return (
@@ -30,7 +30,7 @@ const Nav = (props) => {
 
             console.log(routeName)
         return (
-          <Link to={routeName} key={idx} className='menu-items'>
+          <Link to={`/${routeName}`} key={idx} className='menu-items'>
             {link}
           </Link>
         )
