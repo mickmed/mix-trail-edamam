@@ -48,7 +48,7 @@ const updateRecipe = async (req, res) => {
     req.body,
     { new: true },
     (error, recipe) => {
-      console.log(recipe)
+      console.log('you got this far')
       if (error) {
         return res.status(500).json({ error: error.message })
       }
