@@ -142,7 +142,6 @@ const RecipeDetail = (props) => {
     })
   }
   const saveRecipe = async () => {
-    console.log('save recipe')
     setRenderModal(false)
     const body = {
       ...input,
@@ -151,7 +150,6 @@ const RecipeDetail = (props) => {
       servingsPerContainer: servingsPerContainer,
       user: user.id,
     }
-    console.log('save recipe')
 
     // console.log("userid", user.id)
     if (id === "new") {
@@ -161,10 +159,10 @@ const RecipeDetail = (props) => {
     console.log('save recipe')
 
     } else {
-    console.log('save recipe')
+    console.log('save recipe', body)
 
       const resp = await updateRecipe(id, body)
-    console.log('save recipe')
+    console.log('save recipe', resp)
 
       console.log(resp)
       const recipesIndex = recipes.findIndex((recipe) => {
