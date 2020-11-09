@@ -42,8 +42,8 @@ const RecipeDetail = (props) => {
       const getItem = async () => {
         const resp = await getRecipeById(id)
         setRecipe(resp)
-        setIngredients(resp.ingredients)
-        setNutrientVals(resp.nutrientVals)
+        setIngredients(resp.ingredients || [])
+        setNutrientVals(resp.nutrientVals || {})
 
         setInput({ ...input, ...resp })
         setServingsPerContainer(resp.servingsPerContainer)
