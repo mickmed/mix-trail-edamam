@@ -22,7 +22,7 @@ const api = Axios.create({
     baseURL: apiUrl,
     headers: {
         Authorization: `Bearer ${JwtToken}`,
-        'Access-Control-Allow-Origin': 'https://mix-trail.herokuapp.com/'
+        'Access-Control-Allow-Origin': 'https://scaled-nutrition-facts.netlify.app'
     }
 })
 
