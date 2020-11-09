@@ -19,13 +19,13 @@ const Nav = (props) => {
           ? "recipes/new"
           : "signin"
         : link === "about" && "about"
-    console.log(link)
+    
     history.push(`/${link}`)
   }
 
   return (
     <nav>
-      console.log(links)
+      {console.log(links)}
       {links.map((link, idx) => (
         // link = link === 'account' && <ion-icon name="person-outline"></ion-icon>
         <a className="menu-items" key={idx} onClick={() => closeModal(link)}>
