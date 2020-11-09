@@ -19,7 +19,7 @@ const Nav = (props) => {
       {console.log(links)}
       {links.map((link, idx) => {
         // link = link === 'account' && <ion-icon name="person-outline"></ion-icon>
-        let route =
+        let routeName =
           link === "recipes"
             ? "recipes"
             : link === "calculate"
@@ -27,8 +27,10 @@ const Nav = (props) => {
               ? "recipes/new"
               : "signin"
             : link === "about" && "about"
+
+            console.log(routeName)
         return (
-          <Link to={route} key={idx} className='menu-items'>
+          <Link to={routeName} key={idx} className='menu-items'>
             {link}
           </Link>
         )
