@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from "react"
 
 import "./Recipes.scss"
-import { Link, useHistory } from "react-router-dom"
-import { deleteRecipe } from "../Services/recipes"
+import { Link } from "react-router-dom"
+import { deleteRecipe, getUserRecipes } from "../Services/recipes"
 
 const Recipes = (props) => {
   const [recipeOrder, setRecipeOrder] = useState(true)
   const [appWidth, setAppWidth] = useState(0)
+
   const {
     recipes,
-    userRecipes,
     filteredRecipes,
     searchString,
+    userRecipes,
     setUserRecipes,
+    user,
   } = props
 
   useEffect(() => {
     setAppWidth(props.appWidth.current && props.appWidth.current.clientWidth)
+
   }, [])
 
-  const history = useHistory()
 
-  // console.log(recipes, userRecipes)
   const deleteRecipeMsg = async (id, name) => {
     let confirmResp = window.confirm(`are you sure you want to delete ${name}`)
     if (confirmResp) {
@@ -34,7 +35,6 @@ const Recipes = (props) => {
   }
 
   const sortRecipes = (array, title) => {
-    console.log(title, array)
 
     title =
       title === "Recipe"
@@ -44,7 +44,6 @@ const Recipes = (props) => {
         : title === "Category" && "category"
 
     title = title.split(".")
-    console.log("title", title)
 
     if (title === "category") {
       array.sort()
@@ -91,7 +90,7 @@ const Recipes = (props) => {
 
             return (
               <div
-              key={idx}
+                key={idx}
                 style={{ display: display }}
                 onClick={() => sortRecipes(array, title)}
               >
@@ -107,7 +106,9 @@ const Recipes = (props) => {
                 <div className="recipe-name">{recipe.name}</div>
                 <div className="calories">
                   {Math.round(
-                    recipe.nutrientVals && recipe.nutrientVals.nf_calories/recipe.servingsPerContainer
+                    recipe.nutrientVals &&
+                      recipe.nutrientVals.nf_calories /
+                        recipe.servingsPerContainer
                   )}
                 </div>
                 <div className="category">{recipe.category}</div>

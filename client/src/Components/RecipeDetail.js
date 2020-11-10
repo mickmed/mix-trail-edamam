@@ -28,7 +28,6 @@ const RecipeDetail = (props) => {
   const [selectedId, setSelectedId] = useState(null)
   const [search, setSearch] = useState("")
   const [renderModal, setRenderModal] = useState(false)
-  const [fadeOut, setFadeOut] = useState([])
   const [verifyRecipeUser, setVerifyRecipeUser] = useState(false)
   const [toggle, setToggle] = useState(false)
 
@@ -156,7 +155,6 @@ const RecipeDetail = (props) => {
       user: user.id,
     }
 
-    // console.log("userid", user.id)
     if (id === "new") {
       const resp = await createRecipe(body)
       await setUserRecipes((userRecipes) => [...userRecipes, resp.data]) 
@@ -203,7 +201,7 @@ const RecipeDetail = (props) => {
     setToggle(!toggle)
   }
   return (
-    <div className={`recipe-detail ${fadeOut}`}>
+    <div className={`recipe-detail`}>
       <section className="item-info-wrapper">
         {renderModal && (
           <CreateRecipeModal
@@ -226,7 +224,7 @@ const RecipeDetail = (props) => {
             className="recipe-name"
             value={input.name || ""}
             placeholder="...add recipe name"
-            onChange={verifyRecipeUser && onChange}
+            onChange={verifyRecipeUser ?  onChange : ()=>(false)}
             ref={inputElement}
             autoComplete="off"
           />

@@ -26,21 +26,27 @@ function App(props) {
   const appWidth = useRef(null)
 
   useEffect(() => {
+    console.log("use effect")
     const getData = async () => {
-
       const user = await verifyUser()
-      console.log('user', user)
       user && setUser(user.user)
 
       const recipes = await getRecipes()
       setRecipes(recipes)
-console.log('user2', user)
-      const userRecipes = user && await getUserRecipes(user.user.id)
-      console.log('userReci', userRecipes)
+      const userRecipes = user && (await getUserRecipes(user.user.id))
       setUserRecipes(userRecipes)
     }
     getData()
   }, [])
+
+  useEffect(() => {
+    const getUserRecs = async () => {
+      const resp = user && (await getUserRecipes(user._id || user.id))
+
+      setUserRecipes(resp)
+    }
+    getUserRecs()
+  }, [user])
 
   const handleLogout = () => {
     setSidebar(!sidebar)
@@ -96,10 +102,8 @@ console.log('user2', user)
           <Route exact path="/recipes">
             <Recipes
               recipes={recipes}
-              
               userRecipes={userRecipes}
               setUserRecipes={setUserRecipes}
-
               handleChange={handleChange}
               searchString={searchString}
               filteredRecipes={filteredRecipes}

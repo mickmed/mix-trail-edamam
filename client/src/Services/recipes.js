@@ -22,7 +22,6 @@ export const getRecipeById = async id => {
 export const createRecipe = async item => {
     try {
         const resp = await api.post('/recipes', item)
-        console.log(resp.data)
         return resp
     } catch (error) {
         throw error
@@ -48,7 +47,6 @@ export const deleteRecipe = async id => {
 }
 
 export const getUserRecipes = async id => {
-    console.log(id)
     try{
         const resp = await api.get(`/users/${id}/recipes`)
         return resp.data

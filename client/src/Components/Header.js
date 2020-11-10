@@ -11,7 +11,6 @@ const Header = (props) => {
   const [display, setDisplay] = useState()
   const { user, sidebar, setSidebar, handleChange, searchString, appWidth } = props
   useEffect(() => {
-    console.log(appWidth.current.clientWidth, "appwidth")
     let width = appWidth.current.clientWidth
     setWidth(width)
 
@@ -42,7 +41,6 @@ const Header = (props) => {
         </div>
       ) : width < 900 ? (
         <div className="burger" onClick={() => props.setSidebar(!sidebar)}>
-          {console.log("less than no user")}
           <ion-icon name="menu-outline"></ion-icon>
         </div>
       ) : (
