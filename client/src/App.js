@@ -86,7 +86,7 @@ function App(props) {
       >
         <Switch>
           <Route exact path="/">
-            <Splash />
+            <Splash user={user}/>
           </Route>
 
           <Route exact path="/recipes/search">
