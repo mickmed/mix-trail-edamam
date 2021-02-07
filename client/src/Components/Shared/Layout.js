@@ -2,7 +2,7 @@ import React, { } from "react"
 import "./Layout.scss"
 import Footer from "./Footer"
 import Header from "./Header"
-import Sidebar from "./SideBar"
+import Sidebar from "../Shared/SideBar"
 
 const Layout = (props) => {
   const {

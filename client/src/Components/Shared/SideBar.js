@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import "./SideBar.scss"
-import Nav from "./Nav"
+import Nav from "./Nav.js"
 
 const SideBar = (props) => {
   const { sidebar, setSidebar, user, handleLogout, appWidth } = props

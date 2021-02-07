@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from "react"
 import { useParams, useHistory } from "react-router-dom"
 import "./RecipeDetail.scss"
 import NutritionLabel from "./NutritionLabel"
-import Form from "./Form.js"
-import { getItem } from "./ApiHelper"
+import Form from "./Shared/Form.js"
+import { getItem } from "../Services/ApiHelper"
 import CreateRecipeModal from "./CreateRecipeModal"
 
 import {
@@ -21,9 +21,6 @@ const RecipeDetail = (props) => {
   const [ingredientNutrientVals, setIngredientNutrientVals] = useState({})
   const [servingsPerContainer, setServingsPerContainer] = useState(1)
  
- 
-
-  
   const [input, setInput] = useState({})
   const [selectedId, setSelectedId] = useState(null)
   const [search, setSearch] = useState("")

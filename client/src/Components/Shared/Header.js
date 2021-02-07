@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import "./Header.scss"
-import Nav from "./Nav"
+import Nav from "./Nav.js"
 import Search from "./Search"
 
 const Header = (props) => {

@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import AsyncSelect from 'react-select/async'
-import { getItem } from './ApiHelper'
+import { getItem } from './'
 // import Search from "./Search"
 
 class SearchBar extends Component {

@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { signUp, signInUser } from "../Services/auth"
+import { signUp, signInUser } from "../../Services/auth"
 import "./SignUp.scss"
 class SignUp extends Component {
   constructor() {
