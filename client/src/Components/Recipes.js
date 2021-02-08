@@ -42,17 +42,22 @@ const Recipes = (props) => {
         : title === "Kl"
         ? "nutrientVals.nf_calories"
         : title === "Category" && "category"
+        console.log(title)
 
     title = title.split(".")
+    console.log(title)
 
     if (title === "category") {
+      console.log(array)
       array.sort()
     } else {
+      console.log(array, title)
+
       array.sort((a, b) => {
         let i = 0
         // console.log(a, b)
         while (i < title.length) {
-          console.log(title[i])
+          // console.log(title[i])
           a = a[title[i]]
           b = b[title[i]]
           i++
@@ -79,19 +84,19 @@ const Recipes = (props) => {
         <div className="recipe-list-title">{str}</div>
         <div className="recipe-list-header">
           {headerTitles.map((title, idx) => {
-            let display =
-              title === "User"
-                ? str !== "my recipes"
-                  ? appWidth > 600
-                    ? "flex"
-                    : "none"
-                  : "none"
-                : "flex"
+            // let display =
+            //   title === "User"
+            //     ? str !== "my recipes"
+            //       ? appWidth > 600
+            //         ? "flex"
+            //         : "none"
+            //       : "none"
+            //     : "flex"
 
             return (
               <div
                 key={idx}
-                style={{ display: display }}
+                // style={{ display: display }}
                 onClick={() => sortRecipes(array, title)}
               >
                 {title}
@@ -107,14 +112,16 @@ const Recipes = (props) => {
                 <div className="calories">
                   {Math.round(
                     recipe.nutrientVals &&
-                      recipe.nutrientVals.nf_calories /
-                        recipe.servingsPerContainer
+                      recipe.nutrientVals.nf_calories 
+                      // /
+                        // recipe.servingsPerContainer
                   )}
                 </div>
                 <div className="category">{recipe.category}</div>
                 {str !== "my recipes" && recipe.user && appWidth > 600 && (
                   <div className="username">{recipe.user.username}</div>
                 )}
+                {/* <img src = {recipe.imgURL}/> */}
               </Link>
               {str === "my recipes" && (
                 <div onClick={() => deleteRecipeMsg(recipe._id, recipe.name)}>
