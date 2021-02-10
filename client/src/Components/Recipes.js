@@ -75,22 +75,36 @@ const Recipes = (props) => {
   };
 
   const mapRecipes = (array, str) => {
-    const headerTitles = ["Recipe", "Kl", "Category", "User"];
+    const headerTitles = ["Recipe", "Kl", "Category"];
     return (
       <div className="recipe-list">
         <div className="recipe-list-title">
-          <div className="title">{str}</div>
+          <div className="title">
+            <h3>Recipes   </h3> <p>&nbsp;&nbsp;for { user && user.username }</p>
+          </div>
           <div className="controls">
             <select>
-              {headerTitles.map(title => <option>{title}</option>)}
+              {headerTitles.map((title) => (
+                <option>{title}</option>
+              ))}
             </select>
-            {!renderType && (
-              <ion-icon className='list-type-icon' name="list-outline" onClick={changeView}></ion-icon>
+            {!renderType ? (
+              <ion-icon
+                className="list-type-icon"
+                name="list-outline"
+                onClick={changeView}
+              ></ion-icon>
+            ) : (
+              <ion-icon
+                className="list-type-icon"
+                name="grid-outline"
+                onClick={changeView}
+              ></ion-icon>
             )}
           </div>
         </div>
 
-        <div className="recipe-list-header">
+        {/* <div className="recipe-list-header">
           {headerTitles.map((title, idx) => {
             return (
               <div
@@ -102,7 +116,7 @@ const Recipes = (props) => {
               </div>
             );
           })}
-        </div>
+        </div> */}
         <div
           className={`${
             renderType ? "recipe-grid-results" : "recipe-list-results"
@@ -145,13 +159,18 @@ const Recipes = (props) => {
             )}
           </div>
           <div className="category">{recipe.category}</div>
-          {str !== "my recipes" && recipe.user && appWidth > 600 && (
+          {str !== "Recipes" && recipe.user && appWidth > 600 && (
             <div className="username">{recipe.user.username}</div>
           )}
           {/* <img src = {recipe.imgURL}/> */}
         </Link>
-        {str === "my recipes" && (
-          <div onClick={() => deleteRecipeMsg(recipe._id, recipe.name)}>X</div>
+        {str === "Recipes" && (
+          <div
+            className="delete-x"
+            onClick={() => deleteRecipeMsg(recipe._id, recipe.name)}
+          >
+            X
+          </div>
         )}
       </>
     );
@@ -172,7 +191,7 @@ const Recipes = (props) => {
       {searchString.length > 2
         ? mapRecipes(filteredRecipes, "searched recipes")
         : userRecipes
-        ? mapRecipes(userRecipes, "my recipes")
+        ? mapRecipes(userRecipes, "Recipes")
         : mapRecipes(recipes, "all recipes")}
     </div>
   );

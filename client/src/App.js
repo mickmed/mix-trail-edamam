@@ -108,6 +108,7 @@ function App(props) {
               searchString={searchString}
               filteredRecipes={filteredRecipes}
               appWidth={appWidth}
+              user={user}
             />
           </Route>
 
