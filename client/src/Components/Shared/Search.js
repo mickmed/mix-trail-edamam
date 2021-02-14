@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Search = (props) => {
-  const { handleChange, handleSubmit, searchString } = props
+  const { handleChange, searchString } = props
   return(
     <div className='search-form'>
       <form>

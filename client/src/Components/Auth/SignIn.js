@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { signUp, signInUser } from "../../Services/auth.js"
+import { signInUser } from "../../Services/auth.js"
 import "./SignUp.scss"
 
 class SignIn extends Component {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import "./Recipes.scss";
 import { Link } from "react-router-dom";
-import { deleteRecipe, getUserRecipes } from "../Services/recipes";
+// import { deleteRecipe } from "../Services/recipes";
 
 const Recipes = (props) => {
   const [recipeOrder, setRecipeOrder] = useState(true);
@@ -13,30 +13,31 @@ const Recipes = (props) => {
     filteredRecipes,
     searchString,
     userRecipes,
-    setUserRecipes,
+    
     user,
   } = props;
 
   useEffect(() => {
     setAppWidth(props.appWidth.current && props.appWidth.current.clientWidth);
-  }, []);
+  },[props.appWidth, props.setAppWidth]);
 
-  const deleteRecipeMsg = async (id, name) => {
-    let confirmResp = window.confirm(`are you sure you want to delete ${name}`);
-    if (confirmResp) {
-      await deleteRecipe(id);
 
-      const newUserRecipes = userRecipes.filter((rec, idx) => rec._id !== id);
+  // const deleteRecipeMsg = async (id, name) => {
+  //   let confirmResp = window.confirm(`are you sure you want to delete ${name}`);
+  //   if (confirmResp) {
+  //     await deleteRecipe(id);
 
-      setUserRecipes(newUserRecipes);
-    }
-  };
+  //     const newUserRecipes = userRecipes.filter((rec, idx) => rec._id !== id);
+
+  //     setUserRecipes(newUserRecipes);
+  //   }
+  // };
 
   const sortRecipes = (array, title) => {
     title =
       title === "Recipe"
         ? "name"
-        : title === "Kl"
+        : title === "Calories"
         ? "nutrientVals.nf_calories"
         : title === "Category" && "category";
     console.log(title);
@@ -75,17 +76,19 @@ const Recipes = (props) => {
   };
 
   const mapRecipes = (array, str) => {
-    const headerTitles = ["Recipe", "Kl", "Category"];
+    const headerTitles = ['Recipe', 'Calories', 'Category', 'user'];
     return (
       <div className="recipe-list">
+  
+        {console.log('recipes')}
         <div className="recipe-list-title">
           <div className="title">
-            <h3>Recipes   </h3> <p>&nbsp;&nbsp;for { user && user.username }</p>
+            <h3>{str}</h3> 
           </div>
           <div className="controls">
             <select>
-              {headerTitles.map((title) => (
-                <option>{title}</option>
+              {headerTitles.map((title, index) => (
+                <option key={index}>{title}</option>
               ))}
             </select>
             {!renderType ? (
@@ -104,7 +107,7 @@ const Recipes = (props) => {
           </div>
         </div>
 
-        {/* <div className="recipe-list-header">
+        <div className="recipe-list-header">
           {headerTitles.map((title, idx) => {
             return (
               <div
@@ -112,11 +115,11 @@ const Recipes = (props) => {
                 // style={{ display: display }}
                 onClick={() => sortRecipes(array, title)}
               >
-                {title}
+                {str !== 'searched recipes' && title === 'user' ?  '' : title}
               </div>
             );
           })}
-        </div> */}
+        </div>
         <div
           className={`${
             renderType ? "recipe-grid-results" : "recipe-list-results"
@@ -141,7 +144,7 @@ const Recipes = (props) => {
   const renderGrid = (recipe, idx, str) => {
     return (
       <>
-        <img className="recipe-pic" src={recipe.imgURL} />
+        <img className="recipe-pic" src={recipe.imgURL} alt='pic'/>
         <div className="recipe-name">{recipe.name}</div>
       </>
     );
@@ -150,6 +153,8 @@ const Recipes = (props) => {
   const renderList = (recipe, idx, str) => {
     return (
       <>
+      {/* {console.log(str)} */}
+
         <Link to={`/recipes/${recipe._id}`}>
           <div className="recipe-name">{recipe.name}</div>
           <div className="calories">
@@ -160,39 +165,43 @@ const Recipes = (props) => {
           </div>
           <div className="category">{recipe.category}</div>
           {str !== "Recipes" && recipe.user && appWidth > 600 && (
-            <div className="username">{recipe.user.username}</div>
+            <div className="username">{str === 'searched recipes' ? recipe.user.username : ''}</div>
           )}
           {/* <img src = {recipe.imgURL}/> */}
         </Link>
-        {str === "Recipes" && (
+        {/* {console.log(str)} */}
+        {/* {str === `${user && user.username}'s recipes` && (
           <div
             className="delete-x"
             onClick={() => deleteRecipeMsg(recipe._id, recipe.name)}
           >
             X
           </div>
-        )}
+        )} */}
       </>
     );
   };
 
-  const listView = (recipe, idx, str) => {
-    return <img className="recipe-img" src={recipe.imgURL} />;
-  };
+  // const listView = (recipe, idx, str) => {
+  //   return <img className="recipe-img" src={recipe.imgURL} />;
+  // };
 
   const changeView = () => {
     setRenderType(!renderType);
   };
 
   return !recipes ? (
-    <div>...loading</div>
+    
+    <div>{console.log('here', userRecipes)}...loading</div>
   ) : (
     <div className="recipes">
-      {searchString.length > 2
+      
+    {console.log('here', userRecipes)}
+      {/* {searchString.length > 2
         ? mapRecipes(filteredRecipes, "searched recipes")
         : userRecipes
-        ? mapRecipes(userRecipes, "Recipes")
-        : mapRecipes(recipes, "all recipes")}
+        ? mapRecipes(userRecipes, `${user && user.username}'s recipes`)
+        : mapRecipes(recipes, "all recipes")} */}
     </div>
   );
 };

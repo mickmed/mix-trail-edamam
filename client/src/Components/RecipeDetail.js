@@ -63,7 +63,7 @@ const RecipeDetail = (props) => {
  
     
     //   inputElement.current.focus()
-  }, [id, user])
+  }, [id, user, input])
 
   
 

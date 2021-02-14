@@ -1,22 +1,18 @@
-import React from "react"
-import { useHistory, Link } from "react-router-dom"
-import "./Nav.scss"
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Nav.scss";
 
 const Nav = (props) => {
-  const history = useHistory()
-  const { sidebar, setSidebar, origin, user } = props
+  const { sidebar, setSidebar, origin, user } = props;
 
-  let links = ["recipes", "calculate", "about"]
+  let links = ["recipes", "calculate", "about"];
 
   const closeModal = (link) => {
-    origin === "sidebar" && setSidebar(!sidebar)
-
-
-  }
+    origin === "sidebar" && setSidebar(!sidebar);
+  };
 
   return (
     <nav onClick={closeModal}>
-     
       {links.map((link, idx) => {
         // link = link === 'account' && <ion-icon name="person-outline"></ion-icon>
         let routeName =
@@ -26,17 +22,16 @@ const Nav = (props) => {
             ? user
               ? "recipes/new"
               : "signin"
-            : link === "about" && "about"
+            : link === "about" && "about";
 
-           
         return (
-          <Link to={`/${routeName}`} key={idx} className='menu-items'>
+          <Link to={`/${routeName}`} key={idx} className="menu-items">
             {link}
           </Link>
-        )
+        );
       })}
     </nav>
-  )
-}
+  );
+};
 
-export default Nav
+export default Nav;

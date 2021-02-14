@@ -5,8 +5,7 @@ import "./CreateRecipeModal.scss"
 
 const CreateRecipeModal = (props) => {
   const {
- id,
-    recipe,
+
     onChange,
     input
   } = props
