@@ -7,23 +7,23 @@ const restrict = require('../helpers')
 
 const router = Router()
 
-router.get("/recipes", controllers.getRecipes)
-router.get("/recipes/:id", controllers.getRecipe)
-router.post("/recipes", restrict, controllers.createRecipe)
-router.put("/recipes/:id", controllers.updateRecipe)
+router.get("/", controllers.getRecipes)
+router.get("/:id", controllers.getRecipe)
+router.post("/", restrict, controllers.createRecipe)
+router.put("/:id", controllers.updateRecipe)
 
-router.delete("/recipes/:id", restrict, controllers.deleteRecipe)
+router.delete("/:id", restrict, controllers.deleteRecipe)
 
 
-router.get('/users/:id/recipes', controllers.getRecipesByUser)
+router.get('/users/:id', controllers.getRecipesByUser)
 
 // router.get('/fix', controllers.fixNutrientVals)
 
 
 
-router.post('/sign-up', authControllers.signUp)
-router.post('/sign-in', authControllers.signIn)
-router.get('/verify', authControllers.verifyUser)
-router.post('/change-password', authControllers.changePassword)
+// router.post('/sign-up', authControllers.signUp)
+// router.post('/sign-in', authControllers.signIn)
+// router.get('/verify', authControllers.verifyUser)
+// router.post('/change-password', authControllers.changePassword)
 
 module.exports = router

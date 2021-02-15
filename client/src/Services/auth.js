@@ -2,7 +2,7 @@ import api from './apiConfig'
 
 export const signUp = async credentials => {
     try {
-        const resp = await api.post('/sign-up', credentials)
+        const resp = await api.post('auth/sign-up', credentials)
         localStorage.setItem('token', resp.data.token)
         return resp.data
     } catch (error) {
@@ -42,7 +42,7 @@ export const verifyUser = async () => {
     const token = localStorage.getItem('token')
     // console.log(token)
     if (token) {
-        const res = await api.get('/verify')
+        const res = await api.get('/auth/verify')
         return res.data
     }
     return false

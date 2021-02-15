@@ -11,7 +11,7 @@ export const getRecipes = async () => {
 
 export const getRecipeById = async id => {
     try {
-        const resp = await api.get(`/recipes/${id}`)
+        const resp = await api.get(`recipes/${id}`)
         
         return resp.data
     } catch (error) {
@@ -48,9 +48,19 @@ export const deleteRecipe = async id => {
 
 export const getUserRecipes = async id => {
     try{
-        const resp = await api.get(`/users/${id}/recipes`)
+        const resp = await api.get(`/recipes/users/${id}`)
         return resp.data
     }catch (error) {
+        throw error
+    }
+}
+
+export const searchRecipes = async name => {
+    console.log(name)
+    try{
+        const resp = await api.get(`/recipes/search/${name}`)
+        return resp.data
+    }catch (error){
         throw error
     }
 }

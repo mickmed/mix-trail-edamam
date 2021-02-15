@@ -4,6 +4,7 @@ const db = require("../db/connection")
 db.on("error", console.error.bind(console, "MongoDB connection error:"))
 
 const getRecipes = async (req, res) => {
+  
   try {
     const recipes = await Recipe.find().populate("user", "username -_id")
 
@@ -87,6 +88,24 @@ getRecipesByUser = async (req, res) => {
   }
 }
 
+getHighestProtien = async(req,res) => {
+
+}
+searchRecipes = async (req, res) => {
+  console.log('here', req.params)
+  try{
+    let regex = new RegExp(QUERY, req.params.name)
+    const recipes = await Recipe.find({name: regex }).populate(
+      'user',
+      'username -_id'
+    )
+    return res.json(recipes)
+
+  }catch(error){
+    res.status(500).json({ error: error.message })
+  }
+}
+
 // fixNutrientVals = async (req, res) => {
 //   try {
 //     const recipes = await Recipe.find()
@@ -127,5 +146,6 @@ module.exports = {
   deleteRecipe,
 
   getRecipesByUser,
-  // fixNutrientVals,
+  searchRecipes
+  
 }

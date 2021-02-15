@@ -10,9 +10,9 @@ import Layout from "./Components/Shared/Layout";
 import About from "./Components/About";
 import SignUp from "./Components/Auth/SignUp";
 import SignIn from "./Components/Auth/SignIn";
+import { getRecipes } from './Services/recipes'
 
 import { verifyUser } from "./Services/auth";
-import { getRecipes, getUserRecipes } from "./Services/recipes";
 
 function App(props) {
   const [recipes, setRecipes] = useState([]);
@@ -33,18 +33,13 @@ function App(props) {
     getUser();
   }, []);
 
-  // useEffect(() => {
-  //   const userRecipes = async () => {
-  //     const resp = (await user) && getUserRecipes(user._id || user.id);
-  //     setUserRecipes(resp);
-  //   };
-  //   userRecipes();
-  // }, [user]);
+ 
 
-  const getRecipes = async () => {
-    const recipes = await getRecipes();
-    setRecipes(recipes);
-  };
+  // const getRecipes = async () => {
+  //   const recipes = await getRecipes();
+
+  //   setRecipes(recipes);
+  // };
 
   const handleLogout = () => {
     setSidebar(!sidebar);
@@ -55,16 +50,17 @@ function App(props) {
   };
   const handleChange = (e) => {
     if (e.target.value.length > 2) {
-      const matchingRecipes = recipes.filter((recipe, idx) => {
-        return recipe.name.includes(e.target.value);
-      });
+    //   const matchingRecipes = recipes.filter((recipe, idx) => {
+    //     return recipe.name.includes(e.target.value);
+    //   });
 
-      if (matchingRecipes.length > 0) {
-        history.push("/recipes/search");
-      }
-      setFilteredRecipes(matchingRecipes);
-    } else {
-      history.push("/recipes");
+    //   if (matchingRecipes.length > 0) {
+    //     history.push({path:"/recipes", search: e.target.value});
+    //   }
+    //   setFilteredRecipes(matchingRecipes);
+    // } else {
+      console.log('here')
+      history.push({pathname:'/recipes', state:e.target.value});
       setFilteredRecipes([]);
     }
     setSearchString(e.target.value);
