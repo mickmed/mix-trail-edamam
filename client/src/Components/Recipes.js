@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-
+import RecipesList from "./RecipesList";
 import "./Recipes.scss";
 import { Link, useLocation } from "react-router-dom";
 import { getRecipes, getUserRecipes, searchRecipes } from "../Services/recipes";
-import { set } from "mongoose";
+import { sortRecipes } from "./Helpers";
 
 // import { deleteRecipe } from "../Services/recipes";
 
@@ -57,44 +57,8 @@ const Recipes = (props) => {
   //   }
   // };
 
-  const sortRecipes = (array, title) => {
-    title =
-      title === "Recipe"
-        ? "name"
-        : title === "Calories"
-        ? "nutrientVals.nf_calories"
-        : title === "Category" && "category";
-    console.log(title);
-
-    title = title.split(".");
-    console.log(title);
-
-    if (title === "category") {
-      console.log(array);
-      array.sort();
-    } else {
-      console.log(array, title);
-
-      array.sort((a, b) => {
-        let i = 0;
-        // console.log(a, b)
-        while (i < title.length) {
-          // console.log(title[i])
-          a = a[title[i]];
-          b = b[title[i]];
-          i++;
-        }
-        console.log(a, b);
-
-        if (a < b) {
-          return -1;
-        }
-        if (a > b) {
-          return 1;
-        }
-        return 0;
-      });
-    }
+  const sortRecipeOrder = (array, title) => {
+    sortRecipes(array, title);
     !recipeOrder && array.reverse();
     setRecipeOrder(!recipeOrder);
   };
@@ -136,7 +100,7 @@ const Recipes = (props) => {
               <div
                 key={idx}
                 // style={{ display: display }}
-                onClick={() => sortRecipes(array, title)}
+                onClick={() => sortRecipeOrder(array, title)}
               >
                 {str !== "searched recipes" && title === "user" ? "" : title}
               </div>
@@ -148,7 +112,6 @@ const Recipes = (props) => {
             renderType ? "recipe-grid-results" : "recipe-list-results"
           }`}
         >
-          {" "}
           {array.map((recipe, idx) => (
             <div
               className={`${
@@ -157,53 +120,18 @@ const Recipes = (props) => {
               key={idx}
             >
               {console.log(renderType)}
-              {renderType === false
-                ? renderList(recipe, idx, str)
-                : renderGrid(recipe, idx, str)}
+
+              <RecipesList
+                type={renderType === false ? "list" : "grid"}
+                recipe={recipe}
+                idx={idx}
+                str={str}
+                appWidth={appWidth}
+              />
             </div>
           ))}
         </div>
       </div>
-    );
-  };
-  const renderGrid = (recipe, idx, str) => {
-    return (
-      <>
-        <img className="recipe-pic" src={recipe.imgURL} alt="pic" />
-        <div className="recipe-name">{recipe.name}</div>
-      </>
-    );
-  };
-
-  const renderList = (recipe, idx, str) => {
-    return (
-      <>
-        <Link to={`/recipes/${recipe._id}`}>
-          <div className="recipe-name">{recipe.name}</div>
-          <div className="calories">
-            {Math.round(
-              recipe.nutrientVals && recipe.nutrientVals.nf_calories
-              // /recipe.servingsPerContainer
-            )}
-          </div>
-          <div className="category">{recipe.category}</div>
-          {str !== "Recipes" && recipe.user && appWidth > 600 && (
-            <div className="username">
-              {str === "searched recipes" ? recipe.user.username : ""}
-            </div>
-          )}
-          {/* <img src = {recipe.imgURL}/> */}
-        </Link>
-        {/* {console.log(str)} */}
-        {/* {str === `${user && user.username}'s recipes` && (
-          <div
-            className="delete-x"
-            onClick={() => deleteRecipeMsg(recipe._id, recipe.name)}
-          >
-            X
-          </div>
-        )} */}
-      </>
     );
   };
 
@@ -220,11 +148,10 @@ const Recipes = (props) => {
   ) : (
     <div className="recipes">
       {/* {console.log('here', searchRecipes(searchString))} */}
-      {searchedRecipes.length !== 0 ?
-      mapRecipes(searchedRecipes, "searched recipes")
+      {searchedRecipes.length !== 0
+        ? mapRecipes(searchedRecipes, "searched recipes")
         : mapRecipes(userRecipes, `${user && user.username}'s recipes`)}
-        {/* // : mapRecipes(recipes, "all recipes")}{" "} */}
-      
+      {/* // : mapRecipes(recipes, "all recipes")}{" "} */}
     </div>
   );
 };
