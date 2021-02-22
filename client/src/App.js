@@ -10,7 +10,7 @@ import Layout from "./Components/Shared/Layout";
 import About from "./Components/About";
 import SignUp from "./Components/Auth/SignUp";
 import SignIn from "./Components/Auth/SignIn";
-import { getRecipes } from './Services/recipes'
+// import { getRecipes } from './Services/recipes'
 
 import { verifyUser } from "./Services/auth";
 
@@ -33,15 +33,7 @@ function App(props) {
     getUser();
   }, []);
 
- 
-
-  // const getRecipes = async () => {
-  //   const recipes = await getRecipes();
-
-  //   setRecipes(recipes);
-  // };
-
-  const handleLogout = () => {
+   const handleLogout = () => {
     setSidebar(!sidebar);
     setUser(null);
     localStorage.removeItem("token");

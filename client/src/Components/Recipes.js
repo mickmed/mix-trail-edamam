@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import RecipesList from "./RecipesList";
 import "./Recipes.scss";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { getRecipes, getUserRecipes, searchRecipes } from "../Services/recipes";
 import { sortRecipes } from "./Helpers";
 
@@ -150,7 +150,7 @@ const Recipes = (props) => {
       {/* {console.log('here', searchRecipes(searchString))} */}
       {searchedRecipes.length !== 0
         ? mapRecipes(searchedRecipes, "searched recipes")
-        : mapRecipes(userRecipes, `${user && user.username}'s recipes`)}
+        : user ? mapRecipes(userRecipes, `${user && user.username}'s recipes`) : mapRecipes(recipes)}
       {/* // : mapRecipes(recipes, "all recipes")}{" "} */}
     </div>
   );
