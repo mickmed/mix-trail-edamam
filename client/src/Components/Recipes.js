@@ -14,6 +14,7 @@ const Recipes = (props) => {
   const [userRecipes, setUserRecipes] = useState([]);
   const [recipes, setRecipes] = useState([]);
   const [searchedRecipes, setSearchedRecipes] = useState([]);
+  const [select, setSelect] = useState();
   const { searchString, user } = props;
   const location = useLocation();
 
@@ -73,9 +74,11 @@ const Recipes = (props) => {
             <h3>{str}</h3>
           </div>
           <div className="controls">
-            <select>
+            <select onChange={(e) => setSelect(e.target.value)}>
               {headerTitles.map((title, index) => (
-                <option key={index}>{title}</option>
+                <option key={index} value={title}>
+                  {title}
+                </option>
               ))}
             </select>
             {!renderType ? (
@@ -150,7 +153,9 @@ const Recipes = (props) => {
       {/* {console.log('here', searchRecipes(searchString))} */}
       {searchedRecipes.length !== 0
         ? mapRecipes(searchedRecipes, "searched recipes")
-        : user ? mapRecipes(userRecipes, `${user && user.username}'s recipes`) : mapRecipes(recipes)}
+        : user
+        ? mapRecipes(userRecipes, `${user && user.username}'s recipes`)
+        : mapRecipes(recipes)}
       {/* // : mapRecipes(recipes, "all recipes")}{" "} */}
     </div>
   );
