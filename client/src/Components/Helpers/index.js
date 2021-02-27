@@ -1,42 +1,35 @@
-
-
 export const sortRecipes = (array, title) => {
-    title =
-      title === "Recipe"
-        ? "name"
-        : title === "Calories"
-        ? "nutrientVals.nf_calories"
-        : title === "Category" && "category";
-    console.log(title);
+  title =
+    title === "Recipe"
+      ? "name"
+      : title === "Calories"
+      ? "nutrientVals.nf_calories"
+      : title === "Category" && "category";
 
-    title = title.split(".");
-    console.log(title);
+  title = title.split(".");
 
-    if (title === "category") {
-      console.log(array);
-      array.sort();
+  array.sort((a, b) => {
+    let i = 0;
+
+    if (title[0] !== "nutrientVals") {
+      a = a[title[title.length - 1]] && a[title[title.length - 1]].toLowerCase();
+      b = b[title[title.length - 1]] && b[title[title.length - 1]].toLowerCase();
     } else {
-      console.log(array, title);
-
-      array.sort((a, b) => {
-        let i = 0;
-        // console.log(a, b)
-        while (i < title.length) {
-          // console.log(title[i])
-          a = a[title[i]];
-          b = b[title[i]];
-          i++;
-        }
-        console.log(a, b);
-
-        if (a < b) {
-          return -1;
-        }
-        if (a > b) {
-          return 1;
-        }
-        return 0;
-      });
+      let i = 0;
+      while (i < title.length) {
+        console.log("here", a);
+        a = a[title[i]];
+        b = b[title[i]];
+        i++;
+      }
     }
-    
-  };
+
+    if (a < b) {
+      return -1;
+    }
+    if (a > b) {
+      return 1;
+    }
+    return 0;
+  });
+};

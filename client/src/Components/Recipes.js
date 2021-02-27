@@ -59,6 +59,7 @@ const Recipes = (props) => {
   // };
 
   const sortRecipeOrder = (array, title) => {
+    console.log(array, title);
     sortRecipes(array, title);
     !recipeOrder && array.reverse();
     setRecipeOrder(!recipeOrder);
@@ -66,7 +67,7 @@ const Recipes = (props) => {
 
   const mapRecipes = (array, str) => {
     console.log(array);
-    const headerTitles = ["Recipe", "Calories", "Category", "user"];
+    const headerTitles = ["Recipe", "Calories", "Category"];
     return (
       <div className="recipe-list">
         <div className="recipe-list-title">
@@ -74,7 +75,7 @@ const Recipes = (props) => {
             <h3>{str}</h3>
           </div>
           <div className="controls">
-            <select onChange={(e) => setSelect(e.target.value)}>
+            <select onChange={(e) => sortRecipeOrder(array, e.target.value)}>
               {headerTitles.map((title, index) => (
                 <option key={index} value={title}>
                   {title}
@@ -97,19 +98,22 @@ const Recipes = (props) => {
           </div>
         </div>
 
-        <div className="recipe-list-header">
-          {headerTitles.map((title, idx) => {
-            return (
-              <div
-                key={idx}
-                // style={{ display: display }}
-                onClick={() => sortRecipeOrder(array, title)}
-              >
-                {str !== "searched recipes" && title === "user" ? "" : title}
-              </div>
-            );
-          })}
-        </div>
+        {!renderType && (
+          <div className="recipe-list-header">
+            {headerTitles.map((title, idx) => {
+              return (
+                <div
+                  key={idx}
+                  // style={{ display: display }}
+                  onClick={() => sortRecipeOrder(array, title)}
+                >
+                  {str !== "searched recipes" && title === "user" ? "" : title}
+                </div>
+              );
+            })}
+          </div>
+        )}
+
         <div
           className={`${
             renderType ? "recipe-grid-results" : "recipe-list-results"

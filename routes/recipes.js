@@ -20,10 +20,4 @@ router.get('/users/:id', controllers.getRecipesByUser)
 // router.get('/fix', controllers.fixNutrientVals)
 
 
-
-// router.post('/sign-up', authControllers.signUp)
-// router.post('/sign-in', authControllers.signIn)
-// router.get('/verify', authControllers.verifyUser)
-// router.post('/change-password', authControllers.changePassword)
-
 module.exports = router

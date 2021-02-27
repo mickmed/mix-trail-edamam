@@ -130,9 +130,13 @@
 			.recipe-detail-grid {
 				display: flex;
 				flex-direction: column;
+				background:#fffaf0;
+				margin:1vw;
+			
+
 				.recipe-pic {
-					width: 20vw;
-					height: 20vh;
+					width: 18vw;
+					height: 18vh;
 					object-fit: cover;
 				}
 			}
