@@ -3,4 +3,4 @@
 .DS_Store
 .env.js
 .env
-/seed/
+# /seed/
