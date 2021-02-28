@@ -65,8 +65,14 @@ const Recipes = (props) => {
     setRecipeOrder(!recipeOrder);
   };
 
+  const getAllRecipes = async () => {
+    console.log(recipes);
+    setSearchedRecipes([])
+    setUserRecipes([])
+  };
+
   const mapRecipes = (array, str) => {
-    console.log(array);
+    console.log(array, str);
     const headerTitles = ["Recipe", "Calories", "Category"];
     return (
       <div className="recipe-list">
@@ -74,6 +80,8 @@ const Recipes = (props) => {
           <div className="title">
             <h3>{str}</h3>
           </div>
+          <button onClick={() => getAllRecipes()}>all recipes</button>
+
           <div className="controls">
             <select onChange={(e) => sortRecipeOrder(array, e.target.value)}>
               {headerTitles.map((title, index) => (
@@ -113,7 +121,7 @@ const Recipes = (props) => {
             })}
           </div>
         )}
-
+        {console.log(array)}
         <div
           className={`${
             renderType ? "recipe-grid-results" : "recipe-list-results"
@@ -126,8 +134,7 @@ const Recipes = (props) => {
               }`}
               key={idx}
             >
-              {console.log(renderType)}
-
+              {console.log(recipe)}
               <RecipesList
                 type={renderType === false ? "list" : "grid"}
                 recipe={recipe}
@@ -154,12 +161,12 @@ const Recipes = (props) => {
     <div>{console.log("here", userRecipes)}...loading</div>
   ) : (
     <div className="recipes">
-      {/* {console.log('here', searchRecipes(searchString))} */}
+      {console.log('here', searchedRecipes, user, userRecipes, recipes)}
       {searchedRecipes.length !== 0
         ? mapRecipes(searchedRecipes, "searched recipes")
         : user
-        ? mapRecipes(userRecipes, `${user && user.username}'s recipes`)
-        : mapRecipes(recipes)}
+        ? userRecipes.length !== 0 ? mapRecipes(userRecipes, `${user && user.username}'s recipes`) : mapRecipes(recipes, 'all')
+        : mapRecipes(recipes, 'all')}
       {/* // : mapRecipes(recipes, "all recipes")}{" "} */}
     </div>
   );

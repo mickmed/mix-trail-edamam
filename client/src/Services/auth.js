@@ -12,7 +12,7 @@ export const signUp = async credentials => {
 
 export const signInUser = async credentials => {
     try {
-        const resp = await api.post('/sign-in', credentials)
+        const resp = await api.post('/auth/sign-in', credentials)
         localStorage.setItem('token', resp.data.token)
         return resp.data
     } catch (error) {
