@@ -15,37 +15,39 @@ const Recipes = (props) => {
   const [recipes, setRecipes] = useState([]);
   const [searchedRecipes, setSearchedRecipes] = useState([]);
   const [select, setSelect] = useState();
+  const [buttonStatus, setButtonStatus] = useState('all recipes')
   const { searchString, user } = props;
   const location = useLocation();
 
   useEffect(() => {
     setAppWidth(props.appWidth.current && props.appWidth.current.clientWidth);
     const getAllRecipes = async () => {
+      console.log('?')
       const resp = await getRecipes();
       setRecipes(resp);
     };
     getAllRecipes();
   }, [props.appWidth, props.setAppWidth]);
 
-  useEffect(() => {
-    const userRecipes = async () => {
-      // const resp = (await user) && getUserRecipes(user._id || user.id);
-      // setUserRecipes(resp);
-    };
-    userRecipes();
-  }, [user]);
+  // useEffect(() => {
+  //   const userRecipes = async () => {
+  //     // const resp = (await user) && getUserRecipes(user._id || user.id);
+  //     // setUserRecipes(resp);
+  //   };
+  //   userRecipes();
+  // }, [user]);
 
-  useEffect(() => {
-    const matchingRecipes =
-      recipes.length &&
-      setSearchedRecipes(
-        recipes.filter((recipe, idx) => {
-          return recipe.name
-            .toLowerCase()
-            .includes(location.state.toLowerCase());
-        })
-      );
-  }, [location]);
+  // useEffect(() => {
+  //   const matchingRecipes =
+  //     recipes.length &&
+  //     setSearchedRecipes(
+  //       recipes.filter((recipe, idx) => {
+  //         return recipe.name
+  //           .toLowerCase()
+  //           .includes(location.state.toLowerCase());
+  //       })
+  //     );
+  // }, [location]);
 
   // const deleteRecipeMsg = async (id, name) => {
   //   let confirmResp = window.confirm(`are you sure you want to delete ${name}`);
@@ -67,12 +69,16 @@ const Recipes = (props) => {
 
   const getAllRecipes = async () => {
     console.log(recipes);
+    const recs = await getRecipes()
+    console.log(recs)
+    setRecipes(await getRecipes())
     setSearchedRecipes([])
     setUserRecipes([])
+    setButtonStatus(buttonStatus === 'all recipes' ? `${user.username} recipes` : 'all recipes')
   };
 
   const mapRecipes = (array, str) => {
-    console.log(array, str);
+    // console.log(array, str);
     const headerTitles = ["Recipe", "Calories", "Category"];
     return (
       <div className="recipe-list">
@@ -80,7 +86,7 @@ const Recipes = (props) => {
           <div className="title">
             <h3>{str}</h3>
           </div>
-          <button onClick={() => getAllRecipes()}>all recipes</button>
+          <button onClick={() => getAllRecipes()}>{buttonStatus === 'all recipes' ? 'all recipes' : `${user.username}'s recipes`}</button>
 
           <div className="controls">
             <select onChange={(e) => sortRecipeOrder(array, e.target.value)}>
@@ -121,7 +127,7 @@ const Recipes = (props) => {
             })}
           </div>
         )}
-        {console.log(array)}
+        {/* {console.log(array)} */}
         <div
           className={`${
             renderType ? "recipe-grid-results" : "recipe-list-results"
@@ -146,7 +152,7 @@ const Recipes = (props) => {
           ))}
         </div>
       </div>
-    );
+    )
   };
 
   // const listView = (recipe, idx, str) => {
@@ -158,7 +164,7 @@ const Recipes = (props) => {
   };
 
   return !recipes ? (
-    <div>{console.log("here", userRecipes)}...loading</div>
+    <div>{}...loading</div>
   ) : (
     <div className="recipes">
       {console.log('here', searchedRecipes, user, userRecipes, recipes)}

@@ -10,7 +10,7 @@ import Layout from "./Components/Shared/Layout";
 import About from "./Components/About";
 import SignUp from "./Components/Auth/SignUp";
 import SignIn from "./Components/Auth/SignIn";
-// import { getRecipes } from './Services/recipes'
+import { getRecipes } from './Services/recipes'
 
 import { verifyUser } from "./Services/auth";
 
@@ -29,6 +29,8 @@ function App(props) {
     const getUser = async () => {
       const user = await verifyUser();
       setUser(user.user);
+      const recipes = await getRecipes()
+      setRecipes(recipes)
     };
     getUser();
   }, []);
@@ -71,10 +73,10 @@ function App(props) {
         handleChange={handleChange}
         searchString={searchString}
       >
-        <Switch>
+        {/* <Switch>
           <Route exact path="/">
             <Splash user={user} />
-          </Route>
+          </Route> */}
 
           <Route exact path="/recipes/search">
             <Recipes
@@ -124,7 +126,7 @@ function App(props) {
             path="/signup"
             render={(props) => <SignUp {...props} setUser={setUser} />}
           />
-        </Switch>
+        {/* </Switch> */}
       </Layout>
     </div>
   );

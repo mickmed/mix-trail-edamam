@@ -1,13 +1,15 @@
 const { Router } = require("express");
 const authControllers = require("../controllers/auth");
-const restrict = require("../helpers");
 
 console.log("routes");
-const router = Router();
+const authRouter = Router();
 
-router.post("/sign-up", authControllers.signUp);
-router.post("/sign-in", authControllers.signIn);
-router.get("/verify", authControllers.verifyUser);
-router.post("/change-password", authControllers.changePassword);
+authRouter.post("/sign-up", authControllers.signUp);
+authRouter.post("/sign-in", authControllers.signIn);
+authRouter.get("/verify", authControllers.verifyUser);
+authRouter.post("/change-password", authControllers.changePassword);
 
-module.exports = router;
+// authRouter.get("/rec", authControllers.getRecipes);
+
+
+module.exports = authRouter;

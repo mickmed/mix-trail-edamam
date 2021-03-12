@@ -3,7 +3,7 @@ require('dotenv').config()
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const User = require('../models/user')
-// const Item = require('../models/item')
+const Recipe = require('../models/recipe')
 const db = require('../db/connection')
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
@@ -142,6 +142,17 @@ const deleteItem = async (req, res) => {
     }
 }
 
+const getRecipes = async (req, res) => {
+    console.log('??')
+    try {
+      const recipes = await Recipe.find().populate("user", "username -_id")
+  
+      res.json(recipes)
+    } catch (error) {
+      res.status(500).json({ error: error.message })
+    }
+  }
+
 module.exports = {
     signUp,
     signIn,
@@ -151,5 +162,6 @@ module.exports = {
     getAllItems,
     getItemById,
     updateItem,
-    deleteItem
+    deleteItem,
+    getRecipes
 }

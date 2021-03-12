@@ -5,6 +5,8 @@ const restrict = require("../helpers");
 
 const router = Router();
 
+console.log('routes')
+
 router.get("/", controllers.getRecipes);
 router.get("/:id", controllers.getRecipe);
 router.post("/", restrict, controllers.createRecipe);

@@ -14,8 +14,12 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(logger('dev'))
 
-app.use('/api/recipes', recipesRoutes)
+
+console.log('server')
+// app.use('/api/recipes', recipesRoutes)
 app.use('/api/auth', authRoutes)
+
+app.use('/api/recipes', recipesRoutes)
 
 
 
@@ -23,4 +27,3 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}`))
 
-//hmmm
