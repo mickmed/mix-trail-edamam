@@ -29,13 +29,15 @@ const Recipes = (props) => {
     getAllRecipes();
   }, [props.appWidth, props.setAppWidth]);
 
-  // useEffect(() => {
-  //   const userRecipes = async () => {
-  //     // const resp = (await user) && getUserRecipes(user._id || user.id);
-  //     // setUserRecipes(resp);
-  //   };
-  //   userRecipes();
-  // }, [user]);
+  useEffect(() => {
+    const userRecipes = async () => {
+      console.log(user)
+      const resp = user && await getUserRecipes(user._id || user.id);
+      console.log(resp)
+      setUserRecipes(resp);
+    };
+    userRecipes();
+  }, [user]);
 
   // useEffect(() => {
   //   const matchingRecipes =
@@ -140,7 +142,7 @@ const Recipes = (props) => {
               }`}
               key={idx}
             >
-              {console.log(recipe)}
+              {/* {console.log(recipe)} */}
               <RecipesList
                 type={renderType === false ? "list" : "grid"}
                 recipe={recipe}
@@ -167,11 +169,11 @@ const Recipes = (props) => {
     <div>{}...loading</div>
   ) : (
     <div className="recipes">
-      {console.log('here', searchedRecipes, user, userRecipes, recipes)}
+      {console.log('here', searchedRecipes, user, userRecipes && userRecipes, recipes)}
       {searchedRecipes.length !== 0
         ? mapRecipes(searchedRecipes, "searched recipes")
         : user
-        ? userRecipes.length !== 0 ? mapRecipes(userRecipes, `${user && user.username}'s recipes`) : mapRecipes(recipes, 'all')
+        ? userRecipes && userRecipes.length ? mapRecipes(userRecipes, `${user && user.username}'s recipes`) : mapRecipes(recipes, 'all')
         : mapRecipes(recipes, 'all')}
       {/* // : mapRecipes(recipes, "all recipes")}{" "} */}
     </div>

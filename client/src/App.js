@@ -78,7 +78,7 @@ function App(props) {
             <Splash user={user} />
           </Route> */}
 
-          <Route exact path="/recipes/search">
+          {/* <Route exact path="/recipes/search">
             <Recipes
               recipes={recipes}
               userRecipes={userRecipes}
@@ -87,7 +87,7 @@ function App(props) {
               filteredRecipes={filteredRecipes}
               appWidth={appWidth}
             />
-          </Route>
+          </Route> */}
           <Route exact path="/recipes">
             <Recipes
               recipes={recipes}
