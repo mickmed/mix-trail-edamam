@@ -73,10 +73,10 @@ function App(props) {
         handleChange={handleChange}
         searchString={searchString}
       >
-        {/* <Switch>
+        <Switch>
           <Route exact path="/">
             <Splash user={user} />
-          </Route> */}
+          </Route>
 
           {/* <Route exact path="/recipes/search">
             <Recipes
@@ -126,7 +126,7 @@ function App(props) {
             path="/signup"
             render={(props) => <SignUp {...props} setUser={setUser} />}
           />
-        {/* </Switch> */}
+        </Switch>
       </Layout>
     </div>
   );

@@ -22,7 +22,7 @@ const Recipes = (props) => {
   useEffect(() => {
     setAppWidth(props.appWidth.current && props.appWidth.current.clientWidth);
     const getAllRecipes = async () => {
-      console.log('?')
+      console.log('user')
       const resp = await getRecipes();
       setRecipes(resp);
     };
@@ -76,7 +76,7 @@ const Recipes = (props) => {
     setRecipes(await getRecipes())
     setSearchedRecipes([])
     setUserRecipes([])
-    setButtonStatus(buttonStatus === 'all recipes' ? `${user.username} recipes` : 'all recipes')
+    setButtonStatus(buttonStatus === 'all recipes' ? `${user.username} recipes` : buttonStatus === `${user.username} recipes` && 'all recipes')
   };
 
   const mapRecipes = (array, str) => {
