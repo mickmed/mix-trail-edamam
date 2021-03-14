@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom'
 const RecipesList = (props) => {
 
     const {type, recipe, idx, str, appWidth} = props
-    console.log(props)
-console.log(props)
+
     if(type === 'list'){
 
         return (

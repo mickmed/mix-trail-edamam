@@ -37,6 +37,7 @@ const RecipeDetail = (props) => {
         setNutrientVals(resp.nutrientVals || {});
 
         setInput({ ...input, ...resp });
+        console.log(resp)
         setServingsPerContainer(resp.servingsPerContainer);
         if (user && Object.keys(resp).length > 0) {
           if (user.username === resp.user.username) {
@@ -56,7 +57,7 @@ const RecipeDetail = (props) => {
     }
 
     //   inputElement.current.focus()
-  }, [id, user]);
+  }, []);
 
   const itemHandleChange = (e) => {
     setSearch(e.target.value);

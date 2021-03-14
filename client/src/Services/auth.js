@@ -11,7 +11,7 @@ export const signUp = async credentials => {
 }
 
 export const signInUser = async credentials => {
-    console.log('hi')
+    
     try {
         const resp = await api.post('/auth/sign-in', credentials)
         localStorage.setItem('token', resp.data.token)

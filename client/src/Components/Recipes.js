@@ -15,14 +15,14 @@ const Recipes = (props) => {
   const [recipes, setRecipes] = useState([]);
   const [searchedRecipes, setSearchedRecipes] = useState([]);
   const [select, setSelect] = useState();
-  const [buttonStatus, setButtonStatus] = useState('all recipes')
+  const [buttonStatus, setButtonStatus] = useState('all')
   const { searchString, user } = props;
   const location = useLocation();
 
   useEffect(() => {
     setAppWidth(props.appWidth.current && props.appWidth.current.clientWidth);
     const getAllRecipes = async () => {
-      console.log('user')
+      // console.log('user')
       const resp = await getRecipes();
       setRecipes(resp);
     };
@@ -31,9 +31,9 @@ const Recipes = (props) => {
 
   useEffect(() => {
     const userRecipes = async () => {
-      console.log(user)
+      // console.log(user)
       const resp = user && await getUserRecipes(user._id || user.id);
-      console.log(resp)
+      // console.log(resp)
       setUserRecipes(resp);
     };
     userRecipes();
@@ -76,7 +76,7 @@ const Recipes = (props) => {
     setRecipes(await getRecipes())
     setSearchedRecipes([])
     setUserRecipes([])
-    setButtonStatus(buttonStatus === 'all recipes' ? `${user.username} recipes` : buttonStatus === `${user.username} recipes` && 'all recipes')
+    setButtonStatus(buttonStatus === 'all' ? `user` : buttonStatus === `user` && 'all')
   };
 
   const mapRecipes = (array, str) => {
@@ -88,7 +88,7 @@ const Recipes = (props) => {
           <div className="title">
             <h3>{str}</h3>
           </div>
-          <button onClick={() => getAllRecipes()}>{buttonStatus === 'all recipes' ? 'all recipes' : `${user.username}'s recipes`}</button>
+          <button onClick={() => getAllRecipes()}>{buttonStatus === 'all' ? `user` : buttonStatus === `user` && 'all'}</button>
 
           <div className="controls">
             <select onChange={(e) => sortRecipeOrder(array, e.target.value)}>
@@ -169,7 +169,7 @@ const Recipes = (props) => {
     <div>{}...loading</div>
   ) : (
     <div className="recipes">
-      {console.log('here', searchedRecipes, user, userRecipes && userRecipes, recipes)}
+      {/* {console.log('here', searchedRecipes, user, userRecipes && userRecipes, recipes)} */}
       {searchedRecipes.length !== 0
         ? mapRecipes(searchedRecipes, "searched recipes")
         : user
