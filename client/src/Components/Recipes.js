@@ -15,7 +15,7 @@ const Recipes = (props) => {
   const [recipes, setRecipes] = useState([]);
   const [searchedRecipes, setSearchedRecipes] = useState([]);
   const [select, setSelect] = useState();
-  const [buttonStatus, setButtonStatus] = useState('all')
+  const [buttonStatus, setButtonStatus] = useState('all recipes');
   const { searchString, user } = props;
   const location = useLocation();
 
@@ -32,7 +32,7 @@ const Recipes = (props) => {
   useEffect(() => {
     const userRecipes = async () => {
       // console.log(user)
-      const resp = user && await getUserRecipes(user._id || user.id);
+      const resp = user && (await getUserRecipes(user._id || user.id));
       // console.log(resp)
       setUserRecipes(resp);
     };
@@ -70,13 +70,19 @@ const Recipes = (props) => {
   };
 
   const getAllRecipes = async () => {
-    console.log(recipes);
-    const recs = await getRecipes()
-    console.log(recs)
-    setRecipes(await getRecipes())
-    setSearchedRecipes([])
-    setUserRecipes([])
-    setButtonStatus(buttonStatus === 'all' ? `user` : buttonStatus === `user` && 'all')
+    if (buttonStatus === 'all recipes') {
+      const recs = await getRecipes();
+      setRecipes(await getRecipes());
+      setSearchedRecipes([]);
+      setUserRecipes([]);
+      setButtonStatus('my recipes');
+    } else {
+      const resp = user && (await getUserRecipes(user._id || user.id));
+      setUserRecipes(resp);
+
+      setButtonStatus("all recipes");
+    }
+
   };
 
   const mapRecipes = (array, str) => {
@@ -88,7 +94,6 @@ const Recipes = (props) => {
           <div className="title">
             <h3>{str}</h3>
           </div>
-          <button onClick={() => getAllRecipes()}>{buttonStatus === 'all' ? `user` : buttonStatus === `user` && 'all'}</button>
 
           <div className="controls">
             <select onChange={(e) => sortRecipeOrder(array, e.target.value)}>
@@ -127,7 +132,10 @@ const Recipes = (props) => {
                 </div>
               );
             })}
+          <button className='list-type' onClick={() => getAllRecipes()}>{buttonStatus}</button>
+
           </div>
+
         )}
         {/* {console.log(array)} */}
         <div
@@ -135,6 +143,7 @@ const Recipes = (props) => {
             renderType ? "recipe-grid-results" : "recipe-list-results"
           }`}
         >
+
           {array.map((recipe, idx) => (
             <div
               className={`${
@@ -154,7 +163,7 @@ const Recipes = (props) => {
           ))}
         </div>
       </div>
-    )
+    );
   };
 
   // const listView = (recipe, idx, str) => {
@@ -173,8 +182,10 @@ const Recipes = (props) => {
       {searchedRecipes.length !== 0
         ? mapRecipes(searchedRecipes, "searched recipes")
         : user
-        ? userRecipes && userRecipes.length ? mapRecipes(userRecipes, `${user && user.username}'s recipes`) : mapRecipes(recipes, 'all')
-        : mapRecipes(recipes, 'all')}
+        ? userRecipes && userRecipes.length
+          ? mapRecipes(userRecipes, `${user && user.username}'s recipes`)
+          : mapRecipes(recipes, "all recipes")
+        : mapRecipes(recipes, "all recipes")}
       {/* // : mapRecipes(recipes, "all recipes")}{" "} */}
     </div>
   );
